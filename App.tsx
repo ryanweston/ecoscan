@@ -7,25 +7,25 @@
  */
 
 import React, {useState} from 'react';
-import type {Node} from 'react';
 
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RNCamera} from 'react-native-camera';
 
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 
-const App: () => Node = () => {
+const App = () => {
   const [barcode, setBarcode] = useState('');
 
   const takePicture = async () => {
+    //@ts-ignore
     if (this.camera) {
       const options = {quality: 0.5, base64: true};
+      //@ts-ignore
       const data = await this.camera.takePictureAsync(options);
       console.log(data.uri);
     }
   };
 
-  const onBarcodeRead = async scanResult => {
+  const onBarcodeRead = async (scanResult: any) => {
     if (scanResult.data && scanResult.type) {
       setBarcode(scanResult.data);
       console.log('Cool');
@@ -38,6 +38,7 @@ const App: () => Node = () => {
     <View style={styles.container}>
       <RNCamera
         ref={ref => {
+          //@ts-ignore
           this.camera = ref;
         }}
         style={styles.preview}
