@@ -13,8 +13,8 @@ target 'Netscapes' do
   )
 
   pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
-  'BarcodeDetectorMLKit'
-]
+    'BarcodeDetectorMLKit'
+  ]
 
   target 'NetscapesTests' do
     inherit! :complete
