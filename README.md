@@ -30,3 +30,7 @@ open xcode, build
 Project settings > Build Settings > Excluded Architecture > Set both emulator values to ARM64
 
 Pod settings > Build Settings > Excluded Architecture > Set both emulator values to ARM64
+
+## Run simulator on external device
+
+XCode > Accounts > Add personal account
