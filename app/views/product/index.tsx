@@ -1,17 +1,17 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
-import Home from './home';
-import ItemPage from './item';
+import BarcodeReader from './scan';
+import ProductPage from './product';
 
-const HomeStack = () => {
+const Product = () => {
   return (
     //@ts-ignore
     <Stack.Navigator screenOptions={{headerMode: 'none'}}>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="BUNDA" component={ItemPage} />
+      <Stack.Screen name="Scan" component={BarcodeReader} />
+      <Stack.Screen name="ProductPage" component={ProductPage} />
     </Stack.Navigator>
   );
 };
 
-export default HomeStack;
+export default Product;

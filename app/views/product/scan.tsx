@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {RNCamera} from 'react-native-camera';
-import {ThemeContext} from '../styles/theme-context';
+import {ThemeContext} from '../../styles/theme-context';
 
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 
-const BarcodeReader = () => {
+const BarcodeReader = ({navigation}: any) => {
   const {currentTheme} = React.useContext(ThemeContext);
   const [barcode, setBarcode] = useState('');
 
@@ -21,8 +21,7 @@ const BarcodeReader = () => {
   const onBarcodeRead = async (scanResult: any) => {
     if (scanResult.data && scanResult.type) {
       setBarcode(scanResult.data);
-      console.log('Cool');
-      console.log(barcode);
+      navigation.navgiate('Product');
     }
     return;
   };
@@ -64,7 +63,9 @@ const BarcodeReader = () => {
           buttonNegative: 'Cancel',
         }}
         onGoogleVisionBarcodesDetected={({barcodes}) => {
-          console.log(barcodes);
+          if (barcodes.length) {
+            console.log(barcodes);
+          }
         }}
         onBarCodeRead={onBarcodeRead.bind(this)}
       />
