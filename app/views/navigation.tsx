@@ -1,8 +1,8 @@
 import React from 'react';
 // import {NavigationContainer} from '@react-navigation/native';
-import HomeStack from './home-stack';
-import BarcodeReader from './barcode-reader';
-import ItemPage from './item';
+import HomeStack from './home/index';
+import BarcodeReader from './product/index';
+import ProfilePage from './profile/page'; // Change to index for the navigation
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //@ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -19,14 +19,14 @@ const BottomNavigation = () => {
         header = false;
         size = 30;
         break;
-      case 'Scan':
+      case 'Product':
         icon = 'camera-iris';
         header = false;
         size = 35;
         break;
       case 'Bunda':
         header = true;
-        icon = 'face-man';
+        icon = 'account-cowboy-hat';
         size = 30;
         break;
       default:
@@ -51,10 +51,10 @@ const BottomNavigation = () => {
           title: '',
           tabBarLabelStyle: {height: 0},
         }}
-        name="Scan"
+        name="Product"
         component={BarcodeReader}
       />
-      <Tab.Screen name="Bunda" component={ItemPage} />
+      <Tab.Screen name="Bunda" component={ProfilePage} />
     </Tab.Navigator>
   );
 };
