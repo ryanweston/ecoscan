@@ -1,29 +1,43 @@
-import React from 'react';
-import {Text, View, Button} from 'react-native';
+import React, {useEffect} from 'react';
+import {Text, Image, Button} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {AuthContext} from '../../auth/auth-provider';
+import {Container} from '../../components';
 
 const ProfilePage = () => {
   let data = '';
-  const {setAuthState}: any = React.useContext(AuthContext);
+  const {auth, setAuthState}: any = React.useContext(AuthContext);
 
   const signOut = async () => {
-    const userInfo = await GoogleSignin.signOut();
-    console.log(userInfo);
-    setAuthState('');
+    try {
+      await GoogleSignin.signOut();
+      setAuthState({});
+    } catch (e) {
+      console.log(e);
+    }
   };
 
+  useEffect(() => {
+    console.log(auth);
+  }, [auth]);
+
   return (
-    <View>
+    <Container>
       <Button
         title="Sign out"
         onPress={() => {
           signOut();
         }}
       />
-      <Text>Yo yo yo</Text>
+      <Image
+        style={{borderRadius: 50, width: 100, height: 100}}
+        source={{uri: auth.user.photo}}
+      />
+      <Text>Name: {auth.user.name}</Text>
+      <Text>Email: {auth.user.email}</Text>
+      <Text>Email: {auth.user.email}</Text>
       {data ? <Text>{data}</Text> : null}
-    </View>
+    </Container>
   );
 };
 export default ProfilePage;

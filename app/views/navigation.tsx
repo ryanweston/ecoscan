@@ -14,7 +14,7 @@ const BottomNavigation = () => {
     let icon, header, size;
 
     switch (route.name) {
-      case 'Home':
+      case 'HomePage':
         icon = 'home';
         header = false;
         size = 30;
@@ -24,7 +24,7 @@ const BottomNavigation = () => {
         header = false;
         size = 35;
         break;
-      case 'Bunda':
+      case 'Profile':
         header = true;
         icon = 'account-cowboy-hat';
         size = 30;
@@ -44,7 +44,7 @@ const BottomNavigation = () => {
         tabBarIcon: ({color}) => screenOptions(route, color).icon,
         headerShown: screenOptions(route).header,
       })}>
-      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="HomePage" component={HomeStack} />
       <Tab.Screen
         options={{
           tabBarStyle: {},
@@ -54,7 +54,7 @@ const BottomNavigation = () => {
         name="Product"
         component={BarcodeReader}
       />
-      <Tab.Screen name="Bunda" component={ProfilePage} />
+      <Tab.Screen name="Profile" component={ProfilePage} />
     </Tab.Navigator>
   );
 };

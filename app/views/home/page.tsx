@@ -1,24 +1,18 @@
 import React from 'react';
-import {Button, View} from 'react-native';
-import {Headline} from '../../components';
+import {Headline, Container} from '../../components';
+import ProductItem from '../../components/product-item'; // Move to relevant place later
 
-const Home = ({navigation}: any) => {
+const Home = () => {
+  const headerTitle = 'Featured';
+
   return (
-    <View>
-      <Headline>Headline</Headline>
-      <Button
-        title="Scan barcode"
-        onPress={() => {
-          navigation.navigate('Product');
-        }}
-      />
-      <Button
-        title="Click for big bunda!"
-        onPress={() => {
-          navigation.navigate('BUNDA');
-        }}
-      />
-    </View>
+    <Container>
+      <Headline>{headerTitle}</Headline>
+      <ProductItem />
+      <ProductItem />
+      <ProductItem />
+      <ProductItem />
+    </Container>
   );
 };
 

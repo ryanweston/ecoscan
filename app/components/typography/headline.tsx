@@ -1,16 +1,14 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 
-const Headline = ({prop}: any) => {
-  useEffect(() => {
-    console.log('wow', prop);
-  });
-  return <Text style={styles.text}>{prop}</Text>;
+// @ts-ignore
+const Headline = props => {
+  return <Text style={styles.text}>{props.children}</Text>;
 };
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 24,
+    fontSize: 18,
     lineHeight: 32,
     marginVertical: 2,
     letterSpacing: 0,

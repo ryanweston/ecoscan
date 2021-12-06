@@ -8,9 +8,9 @@ const AuthProvider = ({children}: any) => {
 
   const setAuthState = async (value: any) => {
     try {
-      await AsyncStorage.setItem('token', value);
-      console.log('SETTING TOKEN', value);
-      setAuth(value);
+      await AsyncStorage.setItem('user', JSON.stringify(value));
+      // console.log('SETTING TOKEN', value);
+      setAuth(JSON.stringify(value));
     } catch (e) {
       console.log(e);
     }
@@ -18,20 +18,19 @@ const AuthProvider = ({children}: any) => {
 
   const getAuthState = async () => {
     try {
-      const data = await AsyncStorage.getItem('token');
-      let token = data ? data : '';
-      // console.log(token);
+      const data = await AsyncStorage.getItem('user');
+      // @ts-ignore
+      let token = data ? JSON.parse(data) : {};
+      console.log(token);
       setAuth(token);
-      console.log('auth is now', auth);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    console.log('RENDERING PROVIDER TWICE');
     getAuthState();
-  });
+  }, []);
 
   return (
     <AuthContext.Provider value={{auth, setAuthState}}>
