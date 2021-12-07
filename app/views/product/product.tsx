@@ -1,20 +1,20 @@
-import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Container, Headline} from '../../components';
+import {Text, View, Button} from 'react-native';
 
-const ProductPage = ({barcode}: any) => {
+const ProductPage = ({navigation, route}: any) => {
+  const [item, setItem] = useState({});
+  const {id} = route.params;
+
   useEffect(() => {
-    getProduct(barcode);
-  });
-
-  let productInfo;
+    getProduct(id);
+  }, [id]);
 
   const getProduct = (id: string) => {
-    return fetch('http://localhost:3000/users/' + id)
+    return fetch('http://localhost:3000/products/' + id)
       .then(response => response.json())
       .then(json => {
-        console.log(json);
-        productInfo = json;
-        return json;
+        setItem(json);
       })
       .catch(error => {
         console.error(error);
@@ -22,9 +22,32 @@ const ProductPage = ({barcode}: any) => {
   };
 
   return (
-    <View>
-      <Text>{productInfo ? productInfo : 'loading'}</Text>
-    </View>
+    <Container>
+      {item ? (
+        <View>
+          <Headline>{item.productName}</Headline>
+          <Headline>{item.brandName}</Headline>
+          <Text>Brand: {item.brandRating}</Text>
+          <Text>Quality: {item.productQuality}</Text>
+          <Text>Rating: {item.productRating}</Text>
+          <Headline>Total score: {item.totalScore}</Headline>
+          <Button
+            title="How do we evaluate scores?"
+            onPress={() => {
+              navigation.navigate('How do we score?');
+            }}
+          />
+          <Button
+            title="Add a review"
+            onPress={() => {
+              navigation.navigate('Review');
+            }}
+          />
+        </View>
+      ) : (
+        <Text>Loading</Text>
+      )}
+    </Container>
   );
 };
 

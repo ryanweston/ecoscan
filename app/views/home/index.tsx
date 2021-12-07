@@ -4,6 +4,8 @@ const Stack = createNativeStackNavigator();
 import HomePage from './page';
 import ProductPage from '../product/product';
 import ItemPage from '../profile/page';
+import HowPage from '../product/how';
+import ReviewPage from '../product/add-review';
 
 const HomeStack = () => {
   return (
@@ -12,6 +14,8 @@ const HomeStack = () => {
       <Stack.Screen name="Home" component={HomePage} />
       <Stack.Screen name="Product" component={ProductPage} />
       <Stack.Screen name="Profile" component={ItemPage} />
+      <Stack.Screen name="How do we score?" component={HowPage} />
+      <Stack.Screen name="Review" component={ReviewPage} />
     </Stack.Navigator>
   );
 };
