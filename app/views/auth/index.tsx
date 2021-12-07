@@ -4,15 +4,10 @@ import {
   GoogleSignin,
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
-import {useEffect} from 'react';
 import {AuthContext} from '../../auth/auth-provider';
 
 const Login = () => {
   const {setAuthState}: any = React.useContext(AuthContext);
-
-  useEffect(() => {
-    console.log('LOGIN RENDERED');
-  });
 
   const signIn = async () => {
     try {

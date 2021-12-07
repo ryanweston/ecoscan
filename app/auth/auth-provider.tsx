@@ -10,7 +10,9 @@ const AuthProvider = ({children}: any) => {
     try {
       await AsyncStorage.setItem('user', JSON.stringify(value));
       // console.log('SETTING TOKEN', value);
-      setAuth(JSON.stringify(value));
+      console.log(typeof value);
+      setAuth(value);
+      console.log('AUTH SET AFTER LOGIN', value);
     } catch (e) {
       console.log(e);
     }
@@ -21,7 +23,8 @@ const AuthProvider = ({children}: any) => {
       const data = await AsyncStorage.getItem('user');
       // @ts-ignore
       let token = data ? JSON.parse(data) : {};
-      console.log(token);
+      console.log(typeof token);
+      // console.log(token);
       setAuth(token);
     } catch (e) {
       console.log(e);
