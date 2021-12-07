@@ -9,10 +9,7 @@ const AuthProvider = ({children}: any) => {
   const setAuthState = async (value: any) => {
     try {
       await AsyncStorage.setItem('user', JSON.stringify(value));
-      // console.log('SETTING TOKEN', value);
-      console.log(typeof value);
       setAuth(value);
-      console.log('AUTH SET AFTER LOGIN', value);
     } catch (e) {
       console.log(e);
     }
@@ -24,7 +21,6 @@ const AuthProvider = ({children}: any) => {
       // @ts-ignore
       let token = data ? JSON.parse(data) : {};
       console.log(typeof token);
-      // console.log(token);
       setAuth(token);
     } catch (e) {
       console.log(e);
