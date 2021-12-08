@@ -7,6 +7,20 @@ import Login from './auth';
 const Main = () => {
   const {auth}: any = React.useContext(AuthContext);
 
+  // useEffect(() => {
+  //   console.log('auth log:', auth.idToken);
+  //   signInSilently();
+  // }, [auth]);
+
+  // const signInSilently = async () => {
+  //   try {
+  //     let userInfo = await GoogleSignin.signInSilently();
+  //     setAuthState(userInfo);
+  //   } catch (e) {
+  //     console.log('silent error', e);
+  //   }
+  // };
+
   return auth.idToken ? (
     <NavigationContainer>
       <BottomNavigation />

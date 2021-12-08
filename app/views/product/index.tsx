@@ -1,8 +1,8 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
-import BarcodeReader from './scan';
-import ProductPage from './product';
+import BarcodeReader from './scanner/scan';
+import ProductPage from './product-page';
 
 const Product = () => {
   return (

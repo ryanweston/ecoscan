@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Text, Image, Button} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {AuthContext} from '../../auth/auth-provider';
@@ -16,10 +16,6 @@ const ProfilePage = () => {
       console.log(e);
     }
   };
-
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
 
   return (
     <Container>

@@ -2,10 +2,10 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import HomePage from './page';
-import ProductPage from '../product/product';
+import ProductPage from '../product/product-page';
 import ItemPage from '../profile/page';
-import HowPage from '../product/how';
-import ReviewPage from '../product/add-review';
+import HowPage from '../product/information-page';
+import ReviewPage from '../product/review-page';
 
 const HomeStack = () => {
   return (

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Headline, Container} from '../../components';
 import ProductItem from '../../components/product-item'; // Move to relevant place later
+import {request} from '../../request';
 
 const Home = ({navigation}: any) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    console.log('RENDERING HOME');
     getProducts();
   }, []);
 
@@ -14,14 +14,12 @@ const Home = ({navigation}: any) => {
   const headerTitle1 = 'Featured';
 
   const getProducts = async () => {
-    return fetch('http://localhost:3000/products')
-      .then(response => response.json())
-      .then(json => {
-        setProducts(json);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    try {
+      const response = await request.get('/products');
+      setProducts(response.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

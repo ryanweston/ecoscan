@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {RNCamera} from 'react-native-camera';
-import {ThemeContext} from '../../styles/theme-context';
+import {ThemeContext} from '../../../styles/theme-context';
+// import ProductModal from './product-modal';
 
 import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
 
@@ -69,6 +70,7 @@ const BarcodeReader = ({navigation}: any) => {
         }}
         onBarCodeRead={onBarcodeRead.bind(this)}
       />
+      {/* <ProductModal /> */}
     </View>
   );
 };

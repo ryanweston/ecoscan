@@ -2,6 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {Container, Headline} from '../../components';
 import {Text, View, Button} from 'react-native';
 
+interface Product {
+  productName: string;
+  brandName: string;
+  brandRating: number;
+  productRating: number;
+  productQuality: number;
+  totalScore: number;
+}
+
 const ProductPage = ({navigation, route}: any) => {
   const [item, setItem] = useState({});
   const {id} = route.params;
