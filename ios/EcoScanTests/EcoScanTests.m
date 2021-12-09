@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface NetscapesTests : XCTestCase
+@interface EcoScanTests : XCTestCase
 
 @end
 
-@implementation NetscapesTests
+@implementation EcoScanTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

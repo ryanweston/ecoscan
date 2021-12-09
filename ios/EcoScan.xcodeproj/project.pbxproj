@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* NetscapesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NetscapesTests.m */; };
+		00E356F31AD99517003FC87E /* EcoScanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EcoScanTests.m */; };
+		1088775AFA8FA880FAD2BBB0 /* libPods-EcoScan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E4F8DE6DDC037FBA4345A8 /* libPods-EcoScan.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		5009EF2F639D23B0B71EF5D6 /* libPods-EcoScan-EcoScanTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A129D788EDA22EAAF797C5 /* libPods-EcoScan-EcoScanTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		85DB1D797B6462270081CC9F /* libPods-Netscapes-NetscapesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD9D79B97FE177C970671CA /* libPods-Netscapes-NetscapesTests.a */; };
-		D90ED604478D6E6ED06C4805 /* libPods-Netscapes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EC731E0CA9A9D0F1A9CFAE /* libPods-Netscapes.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,27 +22,27 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = Netscapes;
+			remoteInfo = EcoScan;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* NetscapesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetscapesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* EcoScanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoScanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* NetscapesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetscapesTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Netscapes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Netscapes.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Netscapes/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Netscapes/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Netscapes/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Netscapes/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Netscapes/main.m; sourceTree = "<group>"; };
-		274E40F2385DD453964CB12C /* Pods-Netscapes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netscapes.release.xcconfig"; path = "Target Support Files/Pods-Netscapes/Pods-Netscapes.release.xcconfig"; sourceTree = "<group>"; };
-		528533D20FA5A2DF40967FC0 /* Pods-Netscapes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netscapes.debug.xcconfig"; path = "Target Support Files/Pods-Netscapes/Pods-Netscapes.debug.xcconfig"; sourceTree = "<group>"; };
-		5F687183CB5DDB95BEB2CC35 /* Pods-Netscapes-NetscapesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netscapes-NetscapesTests.debug.xcconfig"; path = "Target Support Files/Pods-Netscapes-NetscapesTests/Pods-Netscapes-NetscapesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		6AD9D79B97FE177C970671CA /* libPods-Netscapes-NetscapesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Netscapes-NetscapesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Netscapes/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C9EC731E0CA9A9D0F1A9CFAE /* libPods-Netscapes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Netscapes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAFE5ABC779E04E213898B34 /* Pods-Netscapes-NetscapesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netscapes-NetscapesTests.release.xcconfig"; path = "Target Support Files/Pods-Netscapes-NetscapesTests/Pods-Netscapes-NetscapesTests.release.xcconfig"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* EcoScanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EcoScanTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* EcoScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EcoScan/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = EcoScan/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EcoScan/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EcoScan/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EcoScan/main.m; sourceTree = "<group>"; };
+		2F03E450CBAF8F02AB9072B9 /* Pods-EcoScan-EcoScanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan-EcoScanTests.debug.xcconfig"; path = "Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests.debug.xcconfig"; sourceTree = "<group>"; };
+		54A129D788EDA22EAAF797C5 /* libPods-EcoScan-EcoScanTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EcoScan-EcoScanTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C0BBBBEEA8DE30826195AAB /* Pods-EcoScan-EcoScanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan-EcoScanTests.release.xcconfig"; path = "Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests.release.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EcoScan/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8E210F2B0ED749433FAD8C7B /* Pods-EcoScan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan.debug.xcconfig"; path = "Target Support Files/Pods-EcoScan/Pods-EcoScan.debug.xcconfig"; sourceTree = "<group>"; };
+		91E4F8DE6DDC037FBA4345A8 /* libPods-EcoScan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EcoScan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A5E71EF22998F79CE046862 /* Pods-EcoScan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan.release.xcconfig"; path = "Target Support Files/Pods-EcoScan/Pods-EcoScan.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85DB1D797B6462270081CC9F /* libPods-Netscapes-NetscapesTests.a in Frameworks */,
+				5009EF2F639D23B0B71EF5D6 /* libPods-EcoScan-EcoScanTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,20 +59,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D90ED604478D6E6ED06C4805 /* libPods-Netscapes.a in Frameworks */,
+				1088775AFA8FA880FAD2BBB0 /* libPods-EcoScan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* NetscapesTests */ = {
+		00E356EF1AD99517003FC87E /* EcoScanTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* NetscapesTests.m */,
+				00E356F21AD99517003FC87E /* EcoScanTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = NetscapesTests;
+			path = EcoScanTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -83,7 +83,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Netscapes */ = {
+		13B07FAE1A68108700A75B9A /* EcoScan */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -93,15 +93,15 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = Netscapes;
+			name = EcoScan;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				C9EC731E0CA9A9D0F1A9CFAE /* libPods-Netscapes.a */,
-				6AD9D79B97FE177C970671CA /* libPods-Netscapes-NetscapesTests.a */,
+				91E4F8DE6DDC037FBA4345A8 /* libPods-EcoScan.a */,
+				54A129D788EDA22EAAF797C5 /* libPods-EcoScan-EcoScanTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,9 +116,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* Netscapes */,
+				13B07FAE1A68108700A75B9A /* EcoScan */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* NetscapesTests */,
+				00E356EF1AD99517003FC87E /* EcoScanTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A434DE3B270BC041E55FF9EF /* Pods */,
@@ -131,8 +131,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Netscapes.app */,
-				00E356EE1AD99517003FC87E /* NetscapesTests.xctest */,
+				13B07F961A680F5B00A75B9A /* EcoScan.app */,
+				00E356EE1AD99517003FC87E /* EcoScanTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		A434DE3B270BC041E55FF9EF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				528533D20FA5A2DF40967FC0 /* Pods-Netscapes.debug.xcconfig */,
-				274E40F2385DD453964CB12C /* Pods-Netscapes.release.xcconfig */,
-				5F687183CB5DDB95BEB2CC35 /* Pods-Netscapes-NetscapesTests.debug.xcconfig */,
-				DAFE5ABC779E04E213898B34 /* Pods-Netscapes-NetscapesTests.release.xcconfig */,
+				8E210F2B0ED749433FAD8C7B /* Pods-EcoScan.debug.xcconfig */,
+				9A5E71EF22998F79CE046862 /* Pods-EcoScan.release.xcconfig */,
+				2F03E450CBAF8F02AB9072B9 /* Pods-EcoScan-EcoScanTests.debug.xcconfig */,
+				7C0BBBBEEA8DE30826195AAB /* Pods-EcoScan-EcoScanTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -151,45 +151,45 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* NetscapesTests */ = {
+		00E356ED1AD99517003FC87E /* EcoScanTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NetscapesTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EcoScanTests" */;
 			buildPhases = (
-				ED02DDA2545BF293B243E7E2 /* [CP] Check Pods Manifest.lock */,
+				4183799D8324F71E98BCBD98 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				670B80EF53408CE7FA5AB5AB /* [CP] Copy Pods Resources */,
+				58635DAB855A11088E034DC1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = NetscapesTests;
-			productName = NetscapesTests;
-			productReference = 00E356EE1AD99517003FC87E /* NetscapesTests.xctest */;
+			name = EcoScanTests;
+			productName = EcoScanTests;
+			productReference = 00E356EE1AD99517003FC87E /* EcoScanTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* Netscapes */ = {
+		13B07F861A680F5B00A75B9A /* EcoScan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Netscapes" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EcoScan" */;
 			buildPhases = (
-				BB718310716C6002D3D5C725 /* [CP] Check Pods Manifest.lock */,
+				98F7B0EC30C4AFB9873D0F4A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				4D19EB2A200AC597CC578CE3 /* [CP] Copy Pods Resources */,
+				25927146B89493C438B5DF08 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Netscapes;
-			productName = Netscapes;
-			productReference = 13B07F961A680F5B00A75B9A /* Netscapes.app */;
+			name = EcoScan;
+			productName = EcoScan;
+			productReference = 13B07F961A680F5B00A75B9A /* EcoScan.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -209,7 +209,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Netscapes" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EcoScan" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -222,8 +222,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Netscapes */,
-				00E356ED1AD99517003FC87E /* NetscapesTests */,
+				13B07F861A680F5B00A75B9A /* EcoScan */,
+				00E356ED1AD99517003FC87E /* EcoScanTests */,
 			);
 		};
 /* End PBXProject section */
@@ -262,41 +262,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		4D19EB2A200AC597CC578CE3 /* [CP] Copy Pods Resources */ = {
+		25927146B89493C438B5DF08 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Netscapes/Pods-Netscapes-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EcoScan/Pods-EcoScan-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Netscapes/Pods-Netscapes-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-EcoScan/Pods-EcoScan-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Netscapes/Pods-Netscapes-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EcoScan/Pods-EcoScan-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		670B80EF53408CE7FA5AB5AB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Netscapes-NetscapesTests/Pods-Netscapes-NetscapesTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Netscapes-NetscapesTests/Pods-Netscapes-NetscapesTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Netscapes-NetscapesTests/Pods-Netscapes-NetscapesTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BB718310716C6002D3D5C725 /* [CP] Check Pods Manifest.lock */ = {
+		4183799D8324F71E98BCBD98 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -311,14 +294,31 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Netscapes-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EcoScan-EcoScanTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ED02DDA2545BF293B243E7E2 /* [CP] Check Pods Manifest.lock */ = {
+		58635DAB855A11088E034DC1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98F7B0EC30C4AFB9873D0F4A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -333,7 +333,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Netscapes-NetscapesTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-EcoScan-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -366,7 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* NetscapesTests.m in Sources */,
+				00E356F31AD99517003FC87E /* EcoScanTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +384,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Netscapes */;
+			target = 13B07F861A680F5B00A75B9A /* EcoScan */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -392,14 +392,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F687183CB5DDB95BEB2CC35 /* Pods-Netscapes-NetscapesTests.debug.xcconfig */;
+			baseConfigurationReference = 2F03E450CBAF8F02AB9072B9 /* Pods-EcoScan-EcoScanTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = NetscapesTests/Info.plist;
+				INFOPLIST_FILE = EcoScanTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -413,17 +413,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netscapes.app/Netscapes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoScan.app/EcoScan";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAFE5ABC779E04E213898B34 /* Pods-Netscapes-NetscapesTests.release.xcconfig */;
+			baseConfigurationReference = 7C0BBBBEEA8DE30826195AAB /* Pods-EcoScan-EcoScanTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = NetscapesTests/Info.plist;
+				INFOPLIST_FILE = EcoScanTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -437,20 +437,20 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netscapes.app/Netscapes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoScan.app/EcoScan";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 528533D20FA5A2DF40967FC0 /* Pods-Netscapes.debug.xcconfig */;
+			baseConfigurationReference = 8E210F2B0ED749433FAD8C7B /* Pods-EcoScan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K6CBHXW5AR;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Netscapes/Info.plist;
+				INFOPLIST_FILE = EcoScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,7 +462,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Netscapes;
+				PRODUCT_NAME = EcoScan;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -471,13 +471,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 274E40F2385DD453964CB12C /* Pods-Netscapes.release.xcconfig */;
+			baseConfigurationReference = 9A5E71EF22998F79CE046862 /* Pods-EcoScan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K6CBHXW5AR;
-				INFOPLIST_FILE = Netscapes/Info.plist;
+				INFOPLIST_FILE = EcoScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -489,7 +489,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Netscapes;
+				PRODUCT_NAME = EcoScan;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -624,7 +624,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NetscapesTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EcoScanTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -633,7 +633,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Netscapes" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EcoScan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -642,7 +642,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Netscapes" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EcoScan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'Netscapes' do
+target 'EcoScan' do
   config = use_native_modules!
 
   use_react_native!(
@@ -20,7 +20,7 @@ target 'Netscapes' do
     'BarcodeDetectorMLKit'
   ]
 
-  target 'NetscapesTests' do
+  target 'EcoScanTests' do
     inherit! :complete
     # Pods for testing
   end
