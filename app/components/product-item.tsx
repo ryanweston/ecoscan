@@ -12,7 +12,7 @@ const ProductItem = ({navigation, info}: any) => {
       }}>
       {info ? (
         <View style={styles.flex}>
-          <Text>{info.brandName}</Text>
+          <Text>{info.productName}</Text>
           <Text style={styles.score}>Score: {info.totalScore}</Text>
         </View>
       ) : (

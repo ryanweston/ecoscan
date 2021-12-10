@@ -1,47 +1,23 @@
 import React, {useState} from 'react';
 import {RNCamera} from 'react-native-camera';
-import {ThemeContext} from '../../../styles/theme-context';
-// import ProductModal from './product-modal';
+import ProductModal from './product-modal';
 
-import {TouchableOpacity, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
-const BarcodeReader = ({navigation}: any) => {
-  const {currentTheme} = React.useContext(ThemeContext);
+const BarcodeReader = () => {
+  // const {currentTheme} = React.useContext(ThemeContext);
   const [barcode, setBarcode] = useState('');
 
-  const takePicture = async () => {
-    //@ts-ignore
-    if (this.camera) {
-      const options = {quality: 0.5, base64: true};
-      //@ts-ignore
-      const data = await this.camera.takePictureAsync(options);
-      console.log(data.uri);
-    }
-  };
-
-  const onBarcodeRead = async (scanResult: any) => {
+  const onBarcodeRead = (scanResult: any) => {
     if (scanResult.data && scanResult.type) {
       setBarcode(scanResult.data);
-      navigation.navgiate('Product');
     }
-    return;
   };
 
   return (
     <View style={styles.container}>
       {barcode ? (
-        <View
-          style={{
-            flex: 0,
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-            onPress={takePicture.bind(this)}
-            style={{...styles.capture, backgroundColor: currentTheme.primary}}>
-            <Text style={{fontSize: 14}}> {barcode} </Text>
-          </TouchableOpacity>
-        </View>
+        <ProductModal setBarcode={setBarcode} barcode={barcode} />
       ) : null}
       <RNCamera
         ref={ref => {
@@ -70,7 +46,6 @@ const BarcodeReader = ({navigation}: any) => {
         }}
         onBarCodeRead={onBarcodeRead.bind(this)}
       />
-      {/* <ProductModal /> */}
     </View>
   );
 };

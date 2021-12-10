@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Container, Headline} from '../../components';
 import {Text, View, Button} from 'react-native';
+import {request} from '../../request';
 
 interface Product {
   productName: string;
@@ -19,15 +20,13 @@ const ProductPage = ({navigation, route}: any) => {
     getProduct(id);
   }, [id]);
 
-  const getProduct = (id: string) => {
-    return fetch('http://localhost:3000/products/' + id)
-      .then(response => response.json())
-      .then(json => {
-        setItem(json);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const getProduct = async (id: string) => {
+    try {
+      const response = await request.get('/products/' + id);
+      setItem(response.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
