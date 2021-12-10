@@ -1,40 +1,52 @@
 import React, {useState, useEffect, createContext} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {request, setTokenHeaders} from '../request';
+import Keychain from 'react-native-keychain';
 
-const AuthContext = createContext({});
+const authDefault = {isSignedIn: false, loading: true};
+const AuthContext = createContext(authDefault);
 
 const AuthProvider = ({children}: any) => {
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(authDefault);
 
-  const setAuthState = async (value: any) => {
+  const getAuthState = async () => {
     try {
-      console.log('idToken:', value.idToken);
-      const body = {token: value.idToken};
-      let response;
-      if (value.idToken) {
-        console.log('SIGNING IN');
-        response = await request.post('/google-authentication', body);
-        // change this in a second to remove authentication
-        setTokenHeaders(response.data.token);
-        console.log('JWT:', response.data.token);
+      const result = await Keychain.getGenericPassword({service: 'netscapes'});
+      if (result.password) {
+        console.log('PASSWORD:', result.password);
+        setTokenHeaders(result.password);
+        setAuth({isSignedIn: true, loading: false});
+        return;
       }
-
-      await AsyncStorage.setItem('user', JSON.stringify(value));
-      setAuth(value);
+      setAuth({isSignedIn: false, loading: false});
     } catch (e) {
       console.log(e);
     }
   };
 
-  const getAuthState = async () => {
+  const signIn = async (value: any) => {
     try {
-      const data = await AsyncStorage.getItem('user');
-      // @ts-ignore
-      let token = data ? JSON.parse(data) : {};
-      setAuth(token);
+      const body = {token: value.idToken};
+      const response = await request.post('/google-authentication', body);
+      await Keychain.setGenericPassword(value.user.id, response.data.token, {
+        service: 'netscapes',
+      });
+      setTokenHeaders(response.data.token);
+      setAuth({isSignedIn: true, loading: false});
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const logOut = async () => {
+    try {
+      Keychain.resetGenericPassword({service: 'netscapes'});
+      setAuth({isSignedIn: false, loading: false});
+    } catch (e) {}
+  };
+
+  const handleUnauthorized = (code: number) => {
+    if (code === 401) {
+      logOut();
     }
   };
 
@@ -43,7 +55,7 @@ const AuthProvider = ({children}: any) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{auth, setAuthState}}>
+    <AuthContext.Provider value={{auth, signIn, logOut, handleUnauthorized}}>
       {children}
     </AuthContext.Provider>
   );

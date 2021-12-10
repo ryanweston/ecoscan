@@ -3,7 +3,7 @@ import axios from 'axios';
 let headers = {};
 
 export const request = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://10.188.186.51:3000',
   headers: headers,
 });
 

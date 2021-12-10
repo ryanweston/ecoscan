@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {
   GoogleSignin,
@@ -7,12 +7,16 @@ import {
 import {AuthContext} from '../../auth/auth-provider';
 
 const Login = () => {
-  const {setAuthState}: any = React.useContext(AuthContext);
+  const {signIn}: any = React.useContext(AuthContext);
 
-  const signIn = async () => {
+  useEffect(() => {
+    console.log('Login page rendered');
+  }, []);
+
+  const signInUser = async () => {
     try {
       const userInfo = await GoogleSignin.signIn();
-      setAuthState(userInfo);
+      signIn(userInfo);
     } catch (e) {
       console.log(e);
     }
@@ -22,7 +26,7 @@ const Login = () => {
     <View style={styles.container}>
       <GoogleSigninButton
         onPress={() => {
-          signIn();
+          signInUser();
         }}
       />
     </View>

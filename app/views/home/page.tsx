@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {Headline, Container} from '../../components';
 import ProductItem from '../../components/product-item'; // Move to relevant place later
 import {request} from '../../request';
+import {AuthContext} from '../../auth/auth-provider';
 
 const Home = ({navigation}: any) => {
+  const {handleUnauthorized}: any = React.useContext(AuthContext);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     getProducts();
-  }, []);
+  });
 
   const headerTitle = 'Recently scanned';
   const headerTitle1 = 'Featured';
@@ -17,8 +19,8 @@ const Home = ({navigation}: any) => {
     try {
       const response = await request.get('/products');
       setProducts(response.data);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      handleUnauthorized(error.response.status);
     }
   };
 
