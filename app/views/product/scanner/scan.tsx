@@ -2,14 +2,15 @@ import React, {useState} from 'react';
 import {RNCamera} from 'react-native-camera';
 import ProductModal from './product-modal';
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Image, Text} from 'react-native';
 
 const BarcodeReader = () => {
-  // const {currentTheme} = React.useContext(ThemeContext);
   const [barcode, setBarcode] = useState('');
 
   const onBarcodeRead = (scanResult: any) => {
-    if (scanResult.data && scanResult.type) {
+    if (scanResult.data && scanResult.type && !barcode) {
+      console.log('READ BARCODE', scanResult.data);
+      console.log(typeof scanResult.data);
       setBarcode(scanResult.data);
     }
   };
@@ -39,13 +40,14 @@ const BarcodeReader = () => {
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel',
         }}
-        onGoogleVisionBarcodesDetected={({barcodes}) => {
-          if (barcodes.length) {
-            console.log(barcodes);
-          }
-        }}
         onBarCodeRead={onBarcodeRead.bind(this)}
       />
+      <View style={styles.guide}>
+        <Image source={require('../../../styles/target.png')} />
+        <Text style={{color: 'white', marginTop: 25}}>
+          Hover over a barcode to scan
+        </Text>
+      </View>
     </View>
   );
 };
@@ -58,6 +60,17 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
+  },
+  guide: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 100,
+    position: 'absolute',
+    height: '100%',
+    top: 0,
+    left: 0,
+    width: '100%',
   },
   sectionDescription: {
     marginTop: 8,
