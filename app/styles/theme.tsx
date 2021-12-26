@@ -1,11 +1,13 @@
 const theme = {
   dark: {
-    color: '#000000',
-    primary: '#FF0000',
+    primary: '#648142',
+    secondary: '#FFFFFF',
+    accent: '#95B46A',
   },
   light: {
-    color: '#FFFFFF',
-    primary: '#000',
+    primary: '#648142',
+    secondary: '#FFFFFF',
+    accent: '#95B46A',
   },
 };
 

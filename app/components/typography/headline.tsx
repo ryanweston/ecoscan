@@ -2,13 +2,13 @@ import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 
 // @ts-ignore
-const Headline = props => {
-  return <Text style={styles.text}>{props.children}</Text>;
+const Headline = ({children, propStyles}: any) => {
+  return <Text style={{...styles.text, ...propStyles}}>{children}</Text>;
 };
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 18,
+    fontSize: 20,
     lineHeight: 32,
     marginVertical: 2,
     letterSpacing: 0,
