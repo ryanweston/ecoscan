@@ -14,15 +14,16 @@ interface Product {
 
 const ProductPage = ({navigation, route}: any) => {
   const [item, setItem] = useState({});
-  const {id} = route.params;
+  const {barcode} = route.params;
 
   useEffect(() => {
-    getProduct(id);
-  }, [id]);
+    getProduct(barcode);
+  }, [barcode]);
 
-  const getProduct = async (id: string) => {
+  const getProduct = async (barcode: string) => {
     try {
-      const response = await request.get('/products/' + id);
+      const response = await request.get('/products/?barcode=' + barcode);
+      console.log(response.data);
       setItem(response.data);
     } catch (e) {
       console.log(e);
@@ -48,7 +49,7 @@ const ProductPage = ({navigation, route}: any) => {
           <Button
             title="Add a review"
             onPress={() => {
-              navigation.navigate('Review');
+              navigation.navigate('Review', {barcode: item.barcode});
             }}
           />
         </View>

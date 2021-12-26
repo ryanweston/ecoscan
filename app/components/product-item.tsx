@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {ProductScore} from '../components';
 
 // Move this component to relevant place later
 const ProductItem = ({navigation, info}: any) => {
@@ -8,12 +9,18 @@ const ProductItem = ({navigation, info}: any) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
-        navigation.navigate('Product', {id: info.id});
+        navigation.navigate('Product', {barcode: info.barcode});
       }}>
       {info ? (
         <View style={styles.flex}>
-          <Text>{info.productName}</Text>
-          <Text style={styles.score}>Score: {info.totalScore}</Text>
+          <Image
+            style={{width: 50, height: 50, borderRadius: 35}}
+            source={{uri: info.img}}
+          />
+          <Text style={{fontSize: 15, paddingLeft: 10}}>
+            {info.productName}
+          </Text>
+          <ProductScore score={info.reviewAggregate} />
         </View>
       ) : (
         <Text>Loading</Text>
@@ -26,9 +33,7 @@ const styles = StyleSheet.create({
   flex: {
     width: '100%',
     flexDirection: 'row',
-  },
-  score: {
-    marginLeft: 'auto',
+    alignItems: 'center',
   },
   container: {
     backgroundColor: '#FFFFFF',
