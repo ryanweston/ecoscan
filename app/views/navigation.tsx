@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 // import {NavigationContainer} from '@react-navigation/native';
 import HomeStack from './home/index';
 import BarcodeReader from './product/index';
+import {ThemeContext} from '../styles/theme-context';
 import ProfilePage from './profile/page'; // Change to index for the navigation
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //@ts-ignore
@@ -9,6 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const BottomNavigation = () => {
   const Tab = createBottomTabNavigator();
+  const {currentTheme} = useContext(ThemeContext);
 
   const screenOptions = (route: any, color?: string) => {
     let icon, header, size;
@@ -22,7 +24,7 @@ const BottomNavigation = () => {
       case 'Product':
         icon = 'camera-iris';
         header = false;
-        size = 35;
+        size = 30;
         break;
       case 'Profile':
         header = true;
@@ -39,22 +41,33 @@ const BottomNavigation = () => {
   };
 
   return (
+    // mention that active colours weren't considered in the designs and that i mentioned them during design review
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({color}) => screenOptions(route, color).icon,
         headerShown: screenOptions(route).header,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: `${currentTheme.primary}`,
+        },
+        tabBarActiveTintColor: `${currentTheme.accent}`,
+        tabBarInactiveTintColor: `${currentTheme.secondary}`,
       })}>
       <Tab.Screen name="HomePage" component={HomeStack} />
+      <Tab.Screen options={{}} name="Product" component={BarcodeReader} />
       <Tab.Screen
         options={{
-          tabBarStyle: {},
-          title: '',
-          tabBarLabelStyle: {height: 0},
+          headerMode: 'none',
+          headerStyle: {
+            backgroundColor: `${currentTheme.primary}`,
+          },
+          headerTitleStyle: {
+            color: `${currentTheme.secondary}`,
+          },
         }}
-        name="Product"
-        component={BarcodeReader}
+        name="Profile"
+        component={ProfilePage}
       />
-      <Tab.Screen name="Profile" component={ProfilePage} />
     </Tab.Navigator>
   );
 };
