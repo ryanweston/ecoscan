@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* EcoScanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EcoScanTests.m */; };
-		1088775AFA8FA880FAD2BBB0 /* libPods-EcoScan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E4F8DE6DDC037FBA4345A8 /* libPods-EcoScan.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3FF3FB65616B7F78D9BFB02B /* libPods-EcoScan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAADFB74956ED2372C348D7B /* libPods-EcoScan.a */; };
 		4EDD1BE0277341C000626C33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EDD1BDF277341C000626C33 /* Assets.xcassets */; };
-		5009EF2F639D23B0B71EF5D6 /* libPods-EcoScan-EcoScanTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54A129D788EDA22EAAF797C5 /* libPods-EcoScan-EcoScanTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		C6C7FB48F54C6242F4CF3D9B /* libPods-EcoScan-EcoScanTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F851DD83E8401619F867E2 /* libPods-EcoScan-EcoScanTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,15 +35,15 @@
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = EcoScan/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EcoScan/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EcoScan/main.m; sourceTree = "<group>"; };
-		2F03E450CBAF8F02AB9072B9 /* Pods-EcoScan-EcoScanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan-EcoScanTests.debug.xcconfig"; path = "Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests.debug.xcconfig"; sourceTree = "<group>"; };
+		15F851DD83E8401619F867E2 /* libPods-EcoScan-EcoScanTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EcoScan-EcoScanTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AD267058E4F99D23C190ED6 /* Pods-EcoScan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan.release.xcconfig"; path = "Target Support Files/Pods-EcoScan/Pods-EcoScan.release.xcconfig"; sourceTree = "<group>"; };
 		4EDD1BDF277341C000626C33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		54A129D788EDA22EAAF797C5 /* libPods-EcoScan-EcoScanTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EcoScan-EcoScanTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C0BBBBEEA8DE30826195AAB /* Pods-EcoScan-EcoScanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan-EcoScanTests.release.xcconfig"; path = "Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = EcoScan/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8E210F2B0ED749433FAD8C7B /* Pods-EcoScan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan.debug.xcconfig"; path = "Target Support Files/Pods-EcoScan/Pods-EcoScan.debug.xcconfig"; sourceTree = "<group>"; };
-		91E4F8DE6DDC037FBA4345A8 /* libPods-EcoScan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EcoScan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A5E71EF22998F79CE046862 /* Pods-EcoScan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan.release.xcconfig"; path = "Target Support Files/Pods-EcoScan/Pods-EcoScan.release.xcconfig"; sourceTree = "<group>"; };
+		89AFD4628F04ECC9293C8FDA /* Pods-EcoScan-EcoScanTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan-EcoScanTests.debug.xcconfig"; path = "Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BAADFB74956ED2372C348D7B /* libPods-EcoScan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EcoScan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE3E0778ADF1C02C7C918B04 /* Pods-EcoScan-EcoScanTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan-EcoScanTests.release.xcconfig"; path = "Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F99FF6DEF14BA0589EC3A384 /* Pods-EcoScan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcoScan.debug.xcconfig"; path = "Target Support Files/Pods-EcoScan/Pods-EcoScan.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5009EF2F639D23B0B71EF5D6 /* libPods-EcoScan-EcoScanTests.a in Frameworks */,
+				C6C7FB48F54C6242F4CF3D9B /* libPods-EcoScan-EcoScanTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1088775AFA8FA880FAD2BBB0 /* libPods-EcoScan.a in Frameworks */,
+				3FF3FB65616B7F78D9BFB02B /* libPods-EcoScan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				91E4F8DE6DDC037FBA4345A8 /* libPods-EcoScan.a */,
-				54A129D788EDA22EAAF797C5 /* libPods-EcoScan-EcoScanTests.a */,
+				BAADFB74956ED2372C348D7B /* libPods-EcoScan.a */,
+				15F851DD83E8401619F867E2 /* libPods-EcoScan-EcoScanTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,10 +140,10 @@
 		A434DE3B270BC041E55FF9EF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8E210F2B0ED749433FAD8C7B /* Pods-EcoScan.debug.xcconfig */,
-				9A5E71EF22998F79CE046862 /* Pods-EcoScan.release.xcconfig */,
-				2F03E450CBAF8F02AB9072B9 /* Pods-EcoScan-EcoScanTests.debug.xcconfig */,
-				7C0BBBBEEA8DE30826195AAB /* Pods-EcoScan-EcoScanTests.release.xcconfig */,
+				F99FF6DEF14BA0589EC3A384 /* Pods-EcoScan.debug.xcconfig */,
+				3AD267058E4F99D23C190ED6 /* Pods-EcoScan.release.xcconfig */,
+				89AFD4628F04ECC9293C8FDA /* Pods-EcoScan-EcoScanTests.debug.xcconfig */,
+				CE3E0778ADF1C02C7C918B04 /* Pods-EcoScan-EcoScanTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -155,11 +155,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EcoScanTests" */;
 			buildPhases = (
-				4183799D8324F71E98BCBD98 /* [CP] Check Pods Manifest.lock */,
+				F6228AAC49A4BAD61216AFD4 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				58635DAB855A11088E034DC1 /* [CP] Copy Pods Resources */,
+				8D20DA675663C77ABACED17E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -175,13 +175,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EcoScan" */;
 			buildPhases = (
-				98F7B0EC30C4AFB9873D0F4A /* [CP] Check Pods Manifest.lock */,
+				A6DF9ADFD289C5EB8A4A68E9 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				25927146B89493C438B5DF08 /* [CP] Copy Pods Resources */,
+				2F2BBB338E3F13633461BD8A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,7 +262,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		25927146B89493C438B5DF08 /* [CP] Copy Pods Resources */ = {
+		2F2BBB338E3F13633461BD8A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -279,29 +279,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EcoScan/Pods-EcoScan-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4183799D8324F71E98BCBD98 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EcoScan-EcoScanTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		58635DAB855A11088E034DC1 /* [CP] Copy Pods Resources */ = {
+		8D20DA675663C77ABACED17E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,7 +296,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EcoScan-EcoScanTests/Pods-EcoScan-EcoScanTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		98F7B0EC30C4AFB9873D0F4A /* [CP] Check Pods Manifest.lock */ = {
+		A6DF9ADFD289C5EB8A4A68E9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -334,6 +312,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-EcoScan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6228AAC49A4BAD61216AFD4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EcoScan-EcoScanTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -392,7 +392,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F03E450CBAF8F02AB9072B9 /* Pods-EcoScan-EcoScanTests.debug.xcconfig */;
+			baseConfigurationReference = 89AFD4628F04ECC9293C8FDA /* Pods-EcoScan-EcoScanTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -419,7 +419,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C0BBBBEEA8DE30826195AAB /* Pods-EcoScan-EcoScanTests.release.xcconfig */;
+			baseConfigurationReference = CE3E0778ADF1C02C7C918B04 /* Pods-EcoScan-EcoScanTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -443,7 +443,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E210F2B0ED749433FAD8C7B /* Pods-EcoScan.debug.xcconfig */;
+			baseConfigurationReference = F99FF6DEF14BA0589EC3A384 /* Pods-EcoScan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -471,7 +471,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A5E71EF22998F79CE046862 /* Pods-EcoScan.release.xcconfig */;
+			baseConfigurationReference = 3AD267058E4F99D23C190ED6 /* Pods-EcoScan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
