@@ -30,4 +30,14 @@ const ThemeProvider = ({children}: any) => {
   );
 };
 
-export {ThemeContext, ThemeProvider};
+const withTheme =
+  (WrappedComponent: any) =>
+  ({...props}: any) => {
+    return (
+      <ThemeContext.Consumer>
+        {currentTheme => <WrappedComponent theme={currentTheme} {...props} />}
+      </ThemeContext.Consumer>
+    );
+  };
+
+export {ThemeContext, ThemeProvider, withTheme};

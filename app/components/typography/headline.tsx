@@ -8,7 +8,8 @@ const Headline = ({children, propStyles}: any) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 20,
+    fontSize: 25,
+    fontWeight: '500',
     lineHeight: 32,
     marginVertical: 2,
     letterSpacing: 0,
