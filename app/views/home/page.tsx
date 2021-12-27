@@ -1,15 +1,36 @@
-import React, {useEffect, useState, useCallback, useContext} from 'react';
-import {SafeAreaView, Text, StyleSheet, Image} from 'react-native';
-import {Headline, Container} from '../../components';
+import React, {
+  useEffect, useState, useCallback, useContext,
+} from 'react';
+import {
+  SafeAreaView, Text, StyleSheet, Image, StatusBar,
+} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Headline, Container } from '../../components';
 import ProductItem from '../../components/product-item'; // Move to relevant place later
-import {request} from '../../request';
-import {AuthContext} from '../../auth/auth-provider';
-import {ScrollView} from 'react-native-gesture-handler';
-import {withTheme} from '../../styles/theme-context';
+import { request } from '../../request';
+import { AuthContext } from '../../auth/auth-provider';
+import { withTheme } from '../../styles/theme-context';
 import ProductModal from '../product/scanner/product-modal';
 
-const Home = ({navigation, theme}: any) => {
-  const {handleUnauthorized}: any = useContext(AuthContext);
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    marginTop: 20,
+    padding: 50,
+    alignItems: 'center',
+  },
+  headerImg: {
+    height: 30,
+    marginLeft: 'auto',
+  },
+});
+
+// Image imports
+const logo = require('../../styles/100.png');
+const banner = require('../../styles/CLIP.png');
+
+function Home({ navigation, theme }: any) {
+  const { handleUnauthorized }: any = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [selected, setSelected] = useState('');
@@ -26,7 +47,6 @@ const Home = ({navigation, theme}: any) => {
   }, [handleUnauthorized]);
 
   useEffect(() => {
-    console.log('THEME:', theme);
     getProducts();
   }, [getProducts, theme]);
 
@@ -34,75 +54,58 @@ const Home = ({navigation, theme}: any) => {
   const headerTitle1 = 'Featured';
 
   return (
-    <ScrollView>
-      <Container>
-        <SafeAreaView style={styles.header}>
-          <Headline propStyles={{fontSize: 30}}>Welcome</Headline>
-          <Image
-            style={styles.headerImg}
-            source={require('../../styles/100.png')}
-          />
-        </SafeAreaView>
-      </Container>
-      <Image
-        style={{width: '100%', height: 75, margin: 0}}
-        source={require('../../styles/CLIP.png')}
-      />
-      <Container background={true}>
-        <Headline propStyles={{color: 'white'}}>{headerTitle}</Headline>
+    <SafeAreaView>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView>
+        <Container>
+          <SafeAreaView style={styles.header}>
+            <Headline propStyles={{ fontSize: 30 }}>Welcome</Headline>
+            <Image
+              style={styles.headerImg}
+              source={logo}
+            />
+          </SafeAreaView>
+        </Container>
+        <Image
+          style={{ width: '100%', height: 75, margin: 0 }}
+          source={banner}
+        />
+        <Container background>
+          <Headline propStyles={{ color: 'white' }}>{headerTitle}</Headline>
 
-        {isLoading ? (
-          <Text>Loading...</Text>
-        ) : (
-          products.map((item, index) => {
-            return (
+          {isLoading ? (
+            <Text>Loading...</Text>
+          ) : (
+            products.map((item) => (
               <ProductItem
-                key={index}
                 navigation={navigation}
                 info={item}
                 setSelected={setSelected}
               />
-            );
-          })
-        )}
+            ))
+          )}
 
-        <Headline propStyles={{marginTop: 20, color: 'white'}}>
-          {headerTitle1}
-        </Headline>
-        {isLoading ? (
-          <Text>Loading...</Text>
-        ) : (
-          products.map((item, index) => {
-            //@ts-ignore
-            return (
+          <Headline propStyles={{ marginTop: 20, color: 'white' }}>
+            {headerTitle1}
+          </Headline>
+          {isLoading ? (
+            <Text>Loading...</Text>
+          ) : (
+            products.map((item) => (
               <ProductItem
-                key={index}
                 navigation={navigation}
                 info={item}
                 setSelected={setSelected}
               />
-            );
-          })
-        )}
-      </Container>
-      {selected ? (
-        <ProductModal barcode={selected} setBarcode={setSelected} />
-      ) : null}
-    </ScrollView>
+            ))
+          )}
+        </Container>
+        {selected ? (
+          <ProductModal barcode={selected} setBarcode={setSelected} />
+        ) : null}
+      </ScrollView>
+    </SafeAreaView>
   );
-};
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    marginTop: 20,
-    padding: 50,
-    alignItems: 'center',
-  },
-  headerImg: {
-    height: 30,
-    marginLeft: 'auto',
-  },
-});
+}
 
 export default withTheme(Home);

@@ -1,31 +1,28 @@
-import React, {useEffect, useState} from 'react';
-import {Container, Headline, ProductScore} from '../../components';
-import {Text, View, Button, StyleSheet} from 'react-native';
-import {request} from '../../request';
+import React, { useEffect, useState } from 'react';
+import {
+  Text, View, Button, StyleSheet,
+} from 'react-native';
+import { Container, Headline, ProductScore } from '../../components';
+import { request } from '../../request';
 
-interface Product {
-  productName: string;
-  brandName: string;
-  brandRating: number;
-  productRating: number;
-  productQuality: number;
-  totalScore: number;
-}
+// interface Product {
+//   productName: string;
+//   brandName: string;
+//   brandRating: number;
+//   productRating: number;
+//   productQuality: number;
+//   totalScore: number;
+// }
 
-const ProductPage = ({navigation, route}: any) => {
+function ProductPage({ navigation, route }: any) {
   const [item, setItem] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const {barcode} = route.params;
+  const { barcode } = route.params;
 
-  useEffect(() => {
-    console.log('PRODUCT PAGE RENDER');
-    getProduct(barcode);
-  }, [barcode]);
-
-  const getProduct = async (barcode: string) => {
+  const getProduct = async () => {
     try {
       setIsLoading(true);
-      const response = await request.get('/products/?barcode=' + barcode);
+      const response = await request.get(`/products/?barcode=${barcode}`);
       console.log(response.data);
       setItem(response.data);
       setIsLoading(false);
@@ -35,6 +32,11 @@ const ProductPage = ({navigation, route}: any) => {
     }
   };
 
+  useEffect(() => {
+    console.log('PRODUCT PAGE RENDER');
+    getProduct();
+  }, [barcode]);
+
   return (
     <Container>
       {isLoading ? (
@@ -42,7 +44,7 @@ const ProductPage = ({navigation, route}: any) => {
       ) : (
         <View>
           <View style={styles.scoreContainer}>
-            <ProductScore score={item.reviewAggregate} large={true} />
+            <ProductScore score={item.reviewAggregate} large />
           </View>
           <Headline>{item.productName}</Headline>
           <Headline>
@@ -50,20 +52,31 @@ const ProductPage = ({navigation, route}: any) => {
           </Headline>
           {item.reviewAggregate ? (
             <View>
-              <Headline>Quality: {item.reviewAggregate.qualityScore}</Headline>
               <Headline>
-                Sustainability: {item.reviewAggregate.sustainabilityScore}
+                Quality:
+                {item.reviewAggregate.qualityScore}
+              </Headline>
+              <Headline>
+                Sustainability:
+                {' '}
+                {item.reviewAggregate.sustainabilityScore}
               </Headline>
             </View>
           ) : (
             <Text>No scores yet</Text>
           )}
 
-          <Headline style={{marginTop: 30}}>Brand:</Headline>
+          <Headline style={{ marginTop: 30 }}>Brand:</Headline>
           {item.brand.qualityScore !== 'NaN' ? (
             <View>
-              <Text>Quality: {item.brand.qualityScore}</Text>
-              <Text>Sustainability: {item.brand.sustainabilityScore}</Text>
+              <Text>
+                Quality:
+                {item.brand.qualityScore}
+              </Text>
+              <Text>
+                Sustainability:
+                {item.brand.sustainabilityScore}
+              </Text>
             </View>
           ) : (
             <Text>No brand information yet</Text>
@@ -78,14 +91,14 @@ const ProductPage = ({navigation, route}: any) => {
           <Button
             title="Add a review"
             onPress={() => {
-              navigation.navigate('Review', {barcode: item.barcode});
+              navigation.navigate('Review', { barcode: item.barcode });
             }}
           />
         </View>
       )}
     </Container>
   );
-};
+}
 
 const styles = StyleSheet.create({
   scoreContainer: {

@@ -1,24 +1,24 @@
-import React, {useState, useEffect, createContext} from 'react';
-import {request, setTokenHeaders} from '../request';
+import React, { useState, useEffect, createContext } from 'react';
 import Keychain from 'react-native-keychain';
+import { request, setTokenHeaders } from '../request';
 
-const authDefault = {isSignedIn: false, loading: true};
+const authDefault = { isSignedIn: false, loading: true };
 const AuthContext = createContext(authDefault);
 
-const AuthProvider = ({children}: any) => {
+function AuthProvider({ children }: any) {
   const [auth, setAuth] = useState(authDefault);
 
   const getAuthState = async () => {
     try {
       // Called on mount, fetches tokens from keychain, sets headers & state
-      const result = await Keychain.getGenericPassword({service: 'netscapes'});
+      const result = await Keychain.getGenericPassword({ service: 'netscapes' });
       if (result.password) {
         const tokens = JSON.parse(result.password);
         setTokenHeaders(tokens.accessToken);
-        setAuth({isSignedIn: true, loading: false});
+        setAuth({ isSignedIn: true, loading: false });
         return;
       }
-      setAuth({isSignedIn: false, loading: false});
+      setAuth({ isSignedIn: false, loading: false });
     } catch (e) {
       console.log(e);
     }
@@ -27,7 +27,7 @@ const AuthProvider = ({children}: any) => {
   const signIn = async (value: any) => {
     try {
       // Validate user using our API
-      const body = {code: value.serverAuthCode};
+      const body = { code: value.serverAuthCode };
       const response = await request.post('/google-authentication/login', body);
       console.log(response);
 
@@ -44,7 +44,16 @@ const AuthProvider = ({children}: any) => {
       setTokenHeaders(response.data.accessToken);
 
       // Change state to reflect signed in user
-      setAuth({isSignedIn: true, loading: false});
+      setAuth({ isSignedIn: true, loading: false });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const clearKeychain = async () => {
+    try {
+      await Keychain.resetGenericPassword({ service: 'netscapes' });
+      setAuth({ isSignedIn: false, loading: false });
     } catch (e) {
       console.log(e);
     }
@@ -59,21 +68,12 @@ const AuthProvider = ({children}: any) => {
     }
   };
 
-  const clearKeychain = async () => {
-    try {
-      await Keychain.resetGenericPassword({service: 'netscapes'});
-      setAuth({isSignedIn: false, loading: false});
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const handleUnauthorized = async (code: number) => {
     try {
       console.log('HANDLE UNAUTHORIZED', code);
       if (code === 401) {
         // Set loading to true while this process is happening
-        setAuth({...auth, loading: true});
+        setAuth({ ...auth, loading: true });
 
         // Fetch keychain tokens & parse so we can use them
         const result = await Keychain.getGenericPassword({
@@ -105,7 +105,7 @@ const AuthProvider = ({children}: any) => {
                 service: 'netscapes',
               },
             );
-            setAuth({...auth, loading: false});
+            setAuth({ ...auth, loading: false });
             return;
           }
         }
@@ -123,10 +123,13 @@ const AuthProvider = ({children}: any) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{auth, signIn, logOut, handleUnauthorized}}>
+    <AuthContext.Provider value={{
+      auth, signIn, logOut, handleUnauthorized,
+    }}
+    >
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export {AuthContext, AuthProvider};
+export { AuthContext, AuthProvider };

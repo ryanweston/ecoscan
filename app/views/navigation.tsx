@@ -1,19 +1,20 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext } from 'react';
 // import {NavigationContainer} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// @ts-ignore
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeStack from './home/index';
 import BarcodeReader from './product/index';
-import {ThemeContext} from '../styles/theme-context';
+import { ThemeContext } from '../styles/theme-context';
 import ProfilePage from './profile/page'; // Change to index for the navigation
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-//@ts-ignore
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const BottomNavigation = () => {
+function BottomNavigation() {
   const Tab = createBottomTabNavigator();
-  const {currentTheme} = useContext(ThemeContext);
+  const { currentTheme } = useContext(ThemeContext);
 
   const screenOptions = (route: any, color?: string) => {
-    let icon, header, size;
+    let icon; let header; let
+      size;
 
     switch (route.name) {
       case 'HomePage':
@@ -35,16 +36,17 @@ const BottomNavigation = () => {
         break;
     }
     return {
-      header: header,
+      header,
       icon: <MaterialCommunityIcons name={icon} color={color} size={size} />,
     };
   };
 
   return (
-    // mention that active colours weren't considered in the designs and that i mentioned them during design review
+    // mention that active colours weren't considered in the designs
+    // and that i mentioned them during design review
     <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({color}) => screenOptions(route, color).icon,
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color }) => screenOptions(route, color).icon,
         headerShown: screenOptions(route).header,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -52,7 +54,8 @@ const BottomNavigation = () => {
         },
         tabBarActiveTintColor: `${currentTheme.accent}`,
         tabBarInactiveTintColor: `${currentTheme.secondary}`,
-      })}>
+      })}
+    >
       <Tab.Screen name="HomePage" component={HomeStack} />
       <Tab.Screen options={{}} name="Product" component={BarcodeReader} />
       <Tab.Screen
@@ -70,6 +73,6 @@ const BottomNavigation = () => {
       />
     </Tab.Navigator>
   );
-};
+}
 
 export default BottomNavigation;

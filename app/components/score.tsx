@@ -1,6 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 
+const styles = StyleSheet.create({
+  containerSmall: {
+    width: 35,
+    height: 35,
+    justifyContent: 'center',
+    borderRadius: 70 / 2,
+    marginLeft: 'auto',
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  containerLarge: {
+    width: 120,
+    height: 120,
+    justifyContent: 'center',
+    borderRadius: 240 / 2,
+  },
+  scoreSmall: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 14,
+  },
+  scoreLarge: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 48,
+  },
+});
+
 function ProductScore({ score, large }: any) {
   const [colour, setColour] = useState('grey');
 
@@ -21,7 +55,7 @@ function ProductScore({ score, large }: any) {
   return (
     <View
       style={[
-        large ? styles.containerLarge : styles.containerSmall,
+        large ? styles.containerLarge : [styles.containerSmall],
         { backgroundColor: colour },
       ]}
     >
@@ -31,33 +65,5 @@ function ProductScore({ score, large }: any) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  containerSmall: {
-    width: 30,
-    height: 30,
-    justifyContent: 'center',
-    borderRadius: 60 / 2,
-    marginLeft: 'auto',
-  },
-  containerLarge: {
-    width: 120,
-    height: 120,
-    justifyContent: 'center',
-    borderRadius: 240 / 2,
-  },
-  scoreSmall: {
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 12,
-  },
-  scoreLarge: {
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 48,
-  },
-});
 
 export default ProductScore;

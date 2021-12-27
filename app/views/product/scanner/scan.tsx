@@ -1,56 +1,11 @@
-import React, {useState} from 'react';
-import {RNCamera} from 'react-native-camera';
+import React, { useState } from 'react';
+import { RNCamera } from 'react-native-camera';
+import {
+  StyleSheet, View, Image, Text,
+} from 'react-native';
 import ProductModal from './product-modal';
 
-import {StyleSheet, View, Image, Text} from 'react-native';
-
-const BarcodeReader = () => {
-  const [barcode, setBarcode] = useState('');
-
-  const onBarcodeRead = (scanResult: any) => {
-    if (scanResult.data && scanResult.type && !barcode) {
-      console.log('READ BARCODE', scanResult.data);
-      console.log(typeof scanResult.data);
-      setBarcode(scanResult.data);
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      {barcode ? (
-        <ProductModal setBarcode={setBarcode} barcode={barcode} />
-      ) : null}
-      <RNCamera
-        ref={ref => {
-          //@ts-ignore
-          this.camera = ref;
-        }}
-        style={styles.preview}
-        type={RNCamera.Constants.Type.back}
-        flashMode={RNCamera.Constants.FlashMode.on}
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        androidRecordAudioPermissionOptions={{
-          title: 'Permission to use audio recording',
-          message: 'We need your permission to use your audio',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        onBarCodeRead={onBarcodeRead.bind(this)}
-      />
-      <View style={styles.guide}>
-        <Image source={require('../../../styles/target.png')} />
-        <Text style={{color: 'white', marginTop: 25}}>
-          Hover over a barcode to scan
-        </Text>
-      </View>
-    </View>
-  );
-};
+const targetImg = require('../../../styles/target.png');
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -100,5 +55,58 @@ const styles = StyleSheet.create({
     margin: 20,
   },
 });
+
+// Add this package to add support for functional component:
+// https://github.com/reime005/react-native-camera-hooks
+
+function BarcodeReader() {
+  const [barcode, setBarcode] = useState('');
+
+  const onBarcodeRead = (scanResult: any) => {
+    if (scanResult.data && scanResult.type && !barcode) {
+      console.log('READ BARCODE', scanResult.data);
+      console.log(typeof scanResult.data);
+      setBarcode(scanResult.data);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      {barcode ? (
+        <ProductModal setBarcode={setBarcode} barcode={barcode} />
+      ) : null}
+      <RNCamera
+        ref={(ref) => {
+          this.camera = ref;
+        }}
+        style={styles.preview}
+        type={RNCamera.Constants.Type.back}
+        flashMode={RNCamera.Constants.FlashMode.on}
+        androidCameraPermissionOptions={{
+          title: 'Permission to use camera',
+          message: 'We need your permission to use your camera',
+          buttonPositive: 'Ok',
+          buttonNegative: 'Cancel',
+        }}
+        androidRecordAudioPermissionOptions={{
+          title: 'Permission to use audio recording',
+          message: 'We need your permission to use your audio',
+          buttonPositive: 'Ok',
+          buttonNegative: 'Cancel',
+        }}
+        // Remove exceptions after package is installed
+        // @ts-ignore
+        // eslint-disable-next-line react/jsx-no-bind
+        onBarCodeRead={onBarcodeRead.bind(this)}
+      />
+      <View style={styles.guide}>
+        <Image source={targetImg} />
+        <Text style={{ color: 'white', marginTop: 25 }}>
+          Hover over a barcode to scan
+        </Text>
+      </View>
+    </View>
+  );
+}
 
 export default BarcodeReader;

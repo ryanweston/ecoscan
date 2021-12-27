@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
-import {View, StyleSheet, Image} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Image } from 'react-native';
 
 import {
   GoogleSignin,
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
-import {AuthContext} from '../../auth/auth-provider';
+import { AuthContext } from '../../auth/auth-provider';
 
-const Login = () => {
-  const {signIn}: any = React.useContext(AuthContext);
+function Login() {
+  const { signIn }: any = React.useContext(AuthContext);
 
   useEffect(() => {
     console.log('Login page rendered');
@@ -26,11 +26,11 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <Image
-        style={{width: 200, height: 200}}
+        style={{ width: 200, height: 200 }}
         source={require('../../styles/logo.png')}
       />
       <GoogleSigninButton
-        style={{width: 212, height: 48, marginTop: 20}}
+        style={{ width: 212, height: 48, marginTop: 20 }}
         size={GoogleSigninButton.Size.Standard}
         onPress={() => {
           signInUser();
@@ -38,7 +38,7 @@ const Login = () => {
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

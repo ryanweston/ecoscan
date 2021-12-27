@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {Headline, Container} from '../../components';
+import { Text } from 'react-native';
+import { Headline, Container } from '../../components';
 
-const HowPage = () => {
+function HowPage() {
   return (
     <Container>
       <Headline>How do we evaluate scores?</Headline>
@@ -10,6 +10,6 @@ const HowPage = () => {
       <Text>Product ratings</Text>
     </Container>
   );
-};
+}
 
 export default HowPage;

@@ -1,19 +1,17 @@
-import React, {useEffect, useState, useContext} from 'react';
-import {Text, Button, View, Image} from 'react-native';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {AuthContext} from '../../auth/auth-provider';
-import {Container} from '../../components';
-import {ThemeContext} from '../../styles/theme-context';
-import {request} from '../../request';
+import React, { useEffect, useState, useContext } from 'react';
+import {
+  Text, Button, View, Image,
+} from 'react-native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { AuthContext } from '../../auth/auth-provider';
+import { Container } from '../../components';
+import { ThemeContext } from '../../styles/theme-context';
+import { request } from '../../request';
 
-const ProfilePage = () => {
+function ProfilePage() {
   const [user, setUser] = useState({});
-  const {logOut}: any = useContext(AuthContext);
-  const {currentTheme} = useContext(ThemeContext);
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  const { logOut }: any = useContext(AuthContext);
+  const { currentTheme } = useContext(ThemeContext);
 
   const fetchUser = async () => {
     try {
@@ -23,6 +21,10 @@ const ProfilePage = () => {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const signOut = async () => {
     try {
@@ -43,7 +45,8 @@ const ProfilePage = () => {
               paddingTop: 40,
               flexDirection: 'column',
               alignItems: 'center',
-            }}>
+            }}
+          >
             <Image
               style={{
                 borderColor: `${currentTheme.primary}`,
@@ -52,13 +55,18 @@ const ProfilePage = () => {
                 width: 200,
                 height: 200,
               }}
-              source={{uri: user.picture}}
+              source={{ uri: user.picture }}
             />
           </View>
-          {/* </View> */}
           <Container>
-            <Text>Name: {user.name}</Text>
-            <Text>Email: {user.email}</Text>
+            <Text>
+              Name:
+              {user.name}
+            </Text>
+            <Text>
+              Email:
+              {user.email}
+            </Text>
           </Container>
         </View>
       ) : (
@@ -72,5 +80,5 @@ const ProfilePage = () => {
       />
     </View>
   );
-};
+}
 export default ProfilePage;

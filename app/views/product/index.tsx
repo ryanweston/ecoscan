@@ -1,15 +1,16 @@
-import React, {useContext} from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-const Stack = createNativeStackNavigator();
+import React, { useContext } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BarcodeReader from './scanner/scan';
-import {ThemeContext} from '../../styles/theme-context';
+import { ThemeContext } from '../../styles/theme-context';
 import ProductPage from './product-page';
 
-const Product = () => {
-  const {currentTheme} = useContext(ThemeContext);
+const Stack = createNativeStackNavigator();
+
+function Product() {
+  const { currentTheme } = useContext(ThemeContext);
 
   return (
-    //@ts-ignore
+    // @ts-ignore
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
@@ -19,11 +20,12 @@ const Product = () => {
           color: `${currentTheme.secondary}`,
         },
         headerTintColor: `${currentTheme.secondary}`,
-      }}>
+      }}
+    >
       <Stack.Screen name="Scan" component={BarcodeReader} />
       <Stack.Screen name="ProductPage" component={ProductPage} />
     </Stack.Navigator>
   );
-};
+}
 
 export default Product;

@@ -1,15 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
-import {StyleSheet} from 'react-native';
-
-// @ts-ignore
-const Container = ({background, children}: any) => {
-  return (
-    <View style={[background ? styles.containerBg : styles.container]}>
-      {children}
-    </View>
-  );
-};
+import { View, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,5 +11,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#95B46A',
   },
 });
+
+function Container({ background, children }: any) {
+  return (
+    <View style={[background ? styles.containerBg : styles.container]}>
+      {children}
+    </View>
+  );
+}
 
 export default Container;

@@ -10,7 +10,7 @@ const initializeTheme = {
 // Create context using initial theme that's accessible through the whole component tree
 const ThemeContext = React.createContext(initializeTheme);
 
-const ThemeProvider = ({children}: any) => {
+function ThemeProvider({ children }: any) {
   const [dark, setDark] = React.useState(true); // Default theme is light
 
   // On mount, read the preferred theme from the persistence
@@ -24,20 +24,18 @@ const ThemeProvider = ({children}: any) => {
   const currentTheme = dark ? theme.dark : theme.light;
 
   return (
-    <ThemeContext.Provider value={{currentTheme, dark, toggle}}>
+    <ThemeContext.Provider value={{ currentTheme, dark, toggle }}>
       {children}
     </ThemeContext.Provider>
   );
+}
+
+const withTheme = (WrappedComponent: any) => function ({ ...props }: any) {
+  return (
+    <ThemeContext.Consumer>
+      {(currentTheme) => <WrappedComponent theme={currentTheme} {...props} />}
+    </ThemeContext.Consumer>
+  );
 };
 
-const withTheme =
-  (WrappedComponent: any) =>
-  ({...props}: any) => {
-    return (
-      <ThemeContext.Consumer>
-        {currentTheme => <WrappedComponent theme={currentTheme} {...props} />}
-      </ThemeContext.Consumer>
-    );
-  };
-
-export {ThemeContext, ThemeProvider, withTheme};
+export { ThemeContext, ThemeProvider, withTheme };

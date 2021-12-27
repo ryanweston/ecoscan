@@ -1,10 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-
-// @ts-ignore
-const Headline = ({children, propStyles}: any) => {
-  return <Text style={{...styles.text, ...propStyles}}>{children}</Text>;
-};
+import { Text, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   text: {
@@ -15,5 +10,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0,
   },
 });
+
+function Headline({ children, propStyles }: any) {
+  return <Text style={{ ...styles.text, ...propStyles }}>{children}</Text>;
+}
 
 export default Headline;

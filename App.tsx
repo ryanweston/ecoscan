@@ -6,14 +6,14 @@
  * @flow strict-local
  */
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import Main from './app/views/main';
-import {ThemeProvider} from './app/styles/theme-context';
-import {AuthProvider} from './app/auth/auth-provider';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import { ThemeProvider } from './app/styles/theme-context';
+import { AuthProvider } from './app/auth/auth-provider';
 import 'react-native-gesture-handler';
 
-const App = () => {
+function App() {
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -31,6 +31,6 @@ const App = () => {
       </AuthProvider>
     </ThemeProvider>
   );
-};
+}
 
 export default App;

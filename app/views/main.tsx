@@ -1,13 +1,13 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { Text } from 'react-native';
 import BottomNavigation from './navigation';
-import {NavigationContainer} from '@react-navigation/native';
-import {AuthContext} from '../../app/auth/auth-provider';
+import { AuthContext } from '../../app/auth/auth-provider';
 import Login from './auth';
-import {Text} from 'react-native';
-import {Container} from '../components/';
+import { Container } from '../components';
 
-const Main = () => {
-  const {auth}: any = React.useContext(AuthContext);
+function Main() {
+  const { auth }: any = React.useContext(AuthContext);
 
   return auth.loading ? (
     <Container>
@@ -20,6 +20,6 @@ const Main = () => {
   ) : (
     <Login />
   );
-};
+}
 
 export default Main;
