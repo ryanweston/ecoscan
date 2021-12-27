@@ -1,19 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {Text, StyleSheet, View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, StyleSheet, View } from 'react-native';
 
-const ProductScore = ({score}: any) => {
-  // const [loading, setLoading] = useState(true);
+function ProductScore({ score, large }: any) {
   const [colour, setColour] = useState('grey');
 
-  // const designateColour = useCallback(() => {
-
-  //   console.log(loading);
-  // }, [loading, score]);
-
   useEffect(() => {
-    console.log('SCORE RENDER');
-    if (score !== null) {
-      let checkScore = parseFloat(score.sustainabilityScore);
+    if (score !== null && score !== undefined) {
+      const checkScore = parseFloat(score.sustainabilityScore);
 
       if (checkScore <= 2) {
         setColour('red');
@@ -23,30 +16,47 @@ const ProductScore = ({score}: any) => {
         setColour('green');
       }
     }
-  }, [score]);
+  }, [score, large]);
 
   return (
-    <View style={[styles.container, {backgroundColor: colour}]}>
-      <Text style={styles.score}>
+    <View
+      style={[
+        large ? styles.containerLarge : styles.containerSmall,
+        { backgroundColor: colour },
+      ]}
+    >
+      <Text style={[large ? styles.scoreLarge : styles.scoreSmall]}>
         {score ? score.sustainabilityScore : '?'}
       </Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
+  containerSmall: {
     width: 30,
     height: 30,
     justifyContent: 'center',
     borderRadius: 60 / 2,
     marginLeft: 'auto',
   },
-  score: {
+  containerLarge: {
+    width: 120,
+    height: 120,
+    justifyContent: 'center',
+    borderRadius: 240 / 2,
+  },
+  scoreSmall: {
     alignSelf: 'center',
     fontWeight: 'bold',
     color: 'white',
     fontSize: 12,
+  },
+  scoreLarge: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 48,
   },
 });
 
