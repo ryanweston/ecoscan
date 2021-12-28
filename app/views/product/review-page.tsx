@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Text,
   Button,
@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Container, Headline } from '@/components';
 import { request } from '@/request';
+import { AuthContext } from '@/auth/auth-provider';
 
 const styles = StyleSheet.create({
   input: {
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
 });
 
 function ReviewPage({ route }: any) {
+  const { handleUnauthorized }: any = useContext(AuthContext);
   const [sustainability, setSustainability] = useState(0);
   const [quality, setQuality] = useState(0);
   const { barcode } = route.params;
@@ -36,7 +38,8 @@ function ReviewPage({ route }: any) {
     try {
       const body = { sustainability, quality, barcode };
       await request.post('/reviews', body);
-    } catch (e) {
+    } catch (error) {
+      handleUnauthorized(error.response.status);
       throw Error('Error fetching review');
     }
   };
