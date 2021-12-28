@@ -12,7 +12,7 @@ function AuthProvider({ children }: any) {
     try {
       // Called on mount, fetches tokens from keychain, sets headers & state
       const result = await Keychain.getGenericPassword({ service: 'netscapes' });
-      if (result.password) {
+      if (result && result.password) {
         const tokens = JSON.parse(result.password);
         setTokenHeaders(tokens.accessToken);
         setAuth({ isSignedIn: true, loading: false });
@@ -20,7 +20,7 @@ function AuthProvider({ children }: any) {
       }
       setAuth({ isSignedIn: false, loading: false });
     } catch (e) {
-      console.log(e);
+      throw Error('Error getting auth state');
     }
   };
 
@@ -29,7 +29,6 @@ function AuthProvider({ children }: any) {
       // Validate user using our API
       const body = { code: value.serverAuthCode };
       const response = await request.post('/google-authentication/login', body);
-      console.log(response);
 
       // Add accessToken response to the keychain to manage sessions
       await Keychain.setGenericPassword(
@@ -46,7 +45,7 @@ function AuthProvider({ children }: any) {
       // Change state to reflect signed in user
       setAuth({ isSignedIn: true, loading: false });
     } catch (e) {
-      console.log(e);
+      throw Error('Error signing in');
     }
   };
 
@@ -55,7 +54,7 @@ function AuthProvider({ children }: any) {
       await Keychain.resetGenericPassword({ service: 'netscapes' });
       setAuth({ isSignedIn: false, loading: false });
     } catch (e) {
-      console.log(e);
+      throw Error('Error clearning Keychain');
     }
   };
 
@@ -64,13 +63,12 @@ function AuthProvider({ children }: any) {
       await request.post('/auth/logout');
       clearKeychain();
     } catch (e) {
-      console.log(e);
+      throw Error('Error logging out');
     }
   };
 
   const handleUnauthorized = async (code: number) => {
     try {
-      console.log('HANDLE UNAUTHORIZED', code);
       if (code === 401) {
         // Set loading to true while this process is happening
         setAuth({ ...auth, loading: true });
@@ -80,12 +78,10 @@ function AuthProvider({ children }: any) {
           service: 'netscapes',
         });
         let tokens = {};
-        if (result.password) {
+        if (result && result.password) {
           tokens = JSON.parse(result.password);
         }
-        console.log('TOKENS', tokens);
         if (tokens.refreshToken) {
-          console.log('HAS REFRESH TOKEN');
           // Use refresh token to fetch a new valid access token
           setTokenHeaders(tokens.refreshToken);
           const response = await request.post('/auth/refresh-token');
@@ -93,7 +89,6 @@ function AuthProvider({ children }: any) {
           // If response is accessToken, it means you remain signed in,
           // it will set this new token in the keychain, set headers & state.
           if (response.data.accessToken) {
-            console.log('GOT NEW ACCESS TOKEN');
             setTokenHeaders(response.data.accessToken);
             await Keychain.setGenericPassword(
               response.data.email,
@@ -114,7 +109,7 @@ function AuthProvider({ children }: any) {
         clearKeychain();
       }
     } catch (e) {
-      console.log(e);
+      throw Error('Error fetching user');
     }
   };
 

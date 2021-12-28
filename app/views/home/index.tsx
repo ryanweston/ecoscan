@@ -31,8 +31,6 @@ function HomeStack() {
         name="Home"
         component={HomePage}
       />
-      <Stack.Screen name="Product" component={ProductPage} />
-      <Stack.Screen name="Profile" component={ItemPage} />
       <Stack.Screen name="How do we score?" component={HowPage} />
       <Stack.Screen name="Review" component={ReviewPage} />
     </Stack.Navigator>

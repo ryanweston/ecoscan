@@ -1,5 +1,5 @@
 import React from 'react';
-import theme from './theme';
+import { theme } from './theme';
 
 const initializeTheme = {
   dark: true,
@@ -30,6 +30,7 @@ function ThemeProvider({ children }: any) {
   );
 }
 
+// Compositional HOC component that wraps given component in a context consumer
 const withTheme = (WrappedComponent: any) => function ({ ...props }: any) {
   return (
     <ThemeContext.Consumer>

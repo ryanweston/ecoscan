@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 
 import {
@@ -7,38 +7,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { AuthContext } from '../../auth/auth-provider';
 
-function Login() {
-  const { signIn }: any = React.useContext(AuthContext);
-
-  useEffect(() => {
-    console.log('Login page rendered');
-  }, []);
-
-  const signInUser = async () => {
-    try {
-      const userInfo = await GoogleSignin.signIn();
-      signIn(userInfo);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Image
-        style={{ width: 200, height: 200 }}
-        source={require('../../styles/logo.png')}
-      />
-      <GoogleSigninButton
-        style={{ width: 212, height: 48, marginTop: 20 }}
-        size={GoogleSigninButton.Size.Standard}
-        onPress={() => {
-          signInUser();
-        }}
-      />
-    </View>
-  );
-}
+const logoImg = require('../../styles/logo.png');
 
 const styles = StyleSheet.create({
   container: {
@@ -50,5 +19,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+function Login() {
+  const { signIn }: any = React.useContext(AuthContext);
+
+  const signInUser = async () => {
+    try {
+      const userInfo = await GoogleSignin.signIn();
+      signIn(userInfo);
+    } catch (e) {
+      throw Error('Error signing in');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Image
+        style={{ width: 200, height: 200 }}
+        source={logoImg}
+      />
+      <GoogleSigninButton
+        style={{ width: 212, height: 48, marginTop: 20 }}
+        size={GoogleSigninButton.Size.Standard}
+        onPress={() => {
+          signInUser();
+        }}
+      />
+    </View>
+  );
+}
 
 export default Login;
