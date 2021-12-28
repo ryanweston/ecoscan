@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { RNCamera } from 'react-native-camera';
 import {
-  StyleSheet, View, Image, Text,
+  StyleSheet, View, Image, Text, Pressable,
 } from 'react-native';
+// @ts-ignore
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProductModal from './product-modal';
+import { withTheme } from '@/styles/theme-context';
 
-const targetImg = require('../../../styles/target.png');
+const targetImg = require('@/styles/target.png');
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -17,6 +20,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   guide: {
+    marginTop: 30,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -47,7 +51,6 @@ const styles = StyleSheet.create({
   },
   capture: {
     flex: 0,
-
     borderRadius: 5,
     padding: 15,
     paddingHorizontal: 20,
@@ -59,19 +62,48 @@ const styles = StyleSheet.create({
 // Add this package to add support for functional component:
 // https://github.com/reime005/react-native-camera-hooks
 
-function BarcodeReader() {
+function BarcodeReader({ navigation, theme }: any) {
   const [barcode, setBarcode] = useState('');
 
   const onBarcodeRead = (scanResult: any) => {
     if (scanResult.data && scanResult.type && !barcode) {
-      console.log('READ BARCODE', scanResult.data);
-      console.log(typeof scanResult.data);
+      // console.log('READ BARCODE', scanResult.data);
+      // console.log(typeof scanResult.data);
       setBarcode(scanResult.data);
     }
   };
 
   return (
     <View style={styles.container}>
+      <View style={{
+        marginTop: 10,
+        zIndex: 1000,
+        position: 'absolute',
+        top: 40,
+        left: 20,
+        width: 50,
+        height: 50,
+        justifyContent: 'center',
+        borderRadius: 100 / 2,
+        backgroundColor: theme.currentTheme.primary,
+        shadowColor: '#171717',
+        shadowOffset: { width: -2, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+      }}
+      >
+        <Pressable
+          style={{
+            alignSelf: 'center',
+          }}
+          onPress={() => {
+            console.log('HIT');
+            navigation.navigate('Home');
+          }}
+        >
+          <MaterialCommunityIcons name="arrow-left" color={theme.currentTheme.secondary} size={30} />
+        </Pressable>
+      </View>
       {barcode ? (
         <ProductModal setBarcode={setBarcode} barcode={barcode} />
       ) : null}
@@ -109,4 +141,4 @@ function BarcodeReader() {
   );
 }
 
-export default BarcodeReader;
+export default withTheme(BarcodeReader);

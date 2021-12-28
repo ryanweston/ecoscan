@@ -13,6 +13,7 @@ function Product() {
     // @ts-ignore
     <Stack.Navigator
       screenOptions={{
+        headerShown: false,
         headerStyle: {
           backgroundColor: `${currentTheme.primary}`,
         },
@@ -23,7 +24,6 @@ function Product() {
       }}
     >
       <Stack.Screen name="Scan" component={BarcodeReader} />
-      <Stack.Screen name="ProductPage" component={ProductPage} />
     </Stack.Navigator>
   );
 }

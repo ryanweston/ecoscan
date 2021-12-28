@@ -4,6 +4,7 @@ import {
   View, Text, StyleSheet, Image,
 } from 'react-native';
 import { ProductScore } from '../components';
+import { withTheme } from '@/styles/theme-context';
 
 const styles = StyleSheet.create({
   flex: {
@@ -20,14 +21,12 @@ const styles = StyleSheet.create({
 });
 
 // Move this component to relevant place later
-function ProductItem({ info, setSelected }: any) {
-  useEffect(() => {
-    console.log(setSelected);
-  });
-
+function ProductItem({
+  info, setSelected, colour, dark, theme,
+}: any) {
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={[styles.container, { backgroundColor: colour }]}
       onPress={() => {
         setSelected(info.barcode);
       }}
@@ -39,11 +38,13 @@ function ProductItem({ info, setSelected }: any) {
             source={{ uri: info.img }}
           />
           <Text
-            style={{
-              paddingLeft: 10,
-              fontSize: 16,
-              color: 'white',
-            }}
+            style={[
+              dark ? { color: theme.currentTheme.grey } : { color: theme.currentTheme.secondary },
+              {
+                fontWeight: 'bold',
+                paddingLeft: 10,
+                fontSize: 14,
+              }]}
           >
             {info.productName}
           </Text>
@@ -56,4 +57,4 @@ function ProductItem({ info, setSelected }: any) {
   );
 }
 
-export default ProductItem;
+export default withTheme(ProductItem);

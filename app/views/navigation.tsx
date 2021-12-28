@@ -3,10 +3,32 @@ import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Pressable } from 'react-native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import HomeStack from './home/index';
 import BarcodeReader from './product/index';
 import { ThemeContext } from '../styles/theme-context';
+import { AuthContext } from '@/auth/auth-provider';
 import ProfilePage from './profile/page'; // Change to index for the navigation
+
+function ButtonProp() {
+  const { logOut }: any = useContext(AuthContext);
+
+  const signOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+      logOut();
+    } catch (e) {
+      throw Error('Error signing out');
+    }
+  };
+
+  return (
+    <Pressable style={{ marginRight: 10 }} onPress={() => signOut()}>
+      <MaterialCommunityIcons name="logout-variant" color="white" size={25} />
+    </Pressable>
+  );
+}
 
 function BottomNavigation() {
   const Tab = createBottomTabNavigator();
@@ -29,7 +51,7 @@ function BottomNavigation() {
         break;
       case 'Profile':
         header = true;
-        icon = 'account-cowboy-hat';
+        icon = 'account';
         size = 30;
         break;
       default:
@@ -52,21 +74,23 @@ function BottomNavigation() {
         tabBarStyle: {
           backgroundColor: `${currentTheme.primary}`,
         },
-        tabBarActiveTintColor: `${currentTheme.accent}`,
-        tabBarInactiveTintColor: `${currentTheme.secondary}`,
+        tabBarActiveTintColor: `${currentTheme.secondary}`,
+        tabBarInactiveTintColor: `${currentTheme.accent}`,
       })}
     >
       <Tab.Screen name="HomePage" component={HomeStack} />
-      <Tab.Screen options={{}} name="Product" component={BarcodeReader} />
+      <Tab.Screen options={{ headerShown: false, tabBarStyle: { display: 'none' } }} name="Product" component={BarcodeReader} />
       <Tab.Screen
         options={{
-          headerMode: 'none',
           headerStyle: {
             backgroundColor: `${currentTheme.primary}`,
           },
           headerTitleStyle: {
             color: `${currentTheme.secondary}`,
           },
+          headerRight: () => (
+            ButtonProp()
+          ),
         }}
         name="Profile"
         component={ProfilePage}

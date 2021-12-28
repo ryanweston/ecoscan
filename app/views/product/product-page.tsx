@@ -1,104 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
-  Text, View, Button, StyleSheet,
+  Text, View, StyleSheet, ScrollView,
 } from 'react-native';
-import { Container, Headline, ProductScore } from '../../components';
-import { request } from '../../request';
 
-// interface Product {
-//   productName: string;
-//   brandName: string;
-//   brandRating: number;
-//   productRating: number;
-//   productQuality: number;
-//   totalScore: number;
-// }
-
-function ProductPage({ navigation, route }: any) {
-  const [item, setItem] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-  const { barcode } = route.params;
-
-  const getProduct = async () => {
-    try {
-      setIsLoading(true);
-      const response = await request.get(`/products/?barcode=${barcode}`);
-      console.log(response.data);
-      setItem(response.data);
-      setIsLoading(false);
-    } catch (e) {
-      setIsLoading(false);
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    console.log('PRODUCT PAGE RENDER');
-    getProduct();
-  }, [barcode]);
-
-  return (
-    <Container>
-      {isLoading ? (
-        <Text>Loading</Text>
-      ) : (
-        <View>
-          <View style={styles.scoreContainer}>
-            <ProductScore score={item.reviewAggregate} large />
-          </View>
-          <Headline>{item.productName}</Headline>
-          <Headline>
-            {item.brand.name ? item.brand.name : 'No brand available'}
-          </Headline>
-          {item.reviewAggregate ? (
-            <View>
-              <Headline>
-                Quality:
-                {item.reviewAggregate.qualityScore}
-              </Headline>
-              <Headline>
-                Sustainability:
-                {' '}
-                {item.reviewAggregate.sustainabilityScore}
-              </Headline>
-            </View>
-          ) : (
-            <Text>No scores yet</Text>
-          )}
-
-          <Headline style={{ marginTop: 30 }}>Brand:</Headline>
-          {item.brand.qualityScore !== 'NaN' ? (
-            <View>
-              <Text>
-                Quality:
-                {item.brand.qualityScore}
-              </Text>
-              <Text>
-                Sustainability:
-                {item.brand.sustainabilityScore}
-              </Text>
-            </View>
-          ) : (
-            <Text>No brand information yet</Text>
-          )}
-
-          <Button
-            title="How do we evaluate scores?"
-            onPress={() => {
-              navigation.navigate('How do we score?');
-            }}
-          />
-          <Button
-            title="Add a review"
-            onPress={() => {
-              navigation.navigate('Review', { barcode: item.barcode });
-            }}
-          />
-        </View>
-      )}
-    </Container>
-  );
-}
+// @ts-ignore
+import ProgressBar from 'react-native-progress/Bar';
+import {
+  Headline, ProductScore, Button,
+} from '@/components';
 
 const styles = StyleSheet.create({
   scoreContainer: {
@@ -109,6 +18,57 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 20,
   },
+  listItem: {
+    marginTop: 40,
+    marginBottom: 40,
+    width: '100%',
+    flexDirection: 'row',
+  },
 });
 
+// interface Product {
+//   productName: string;
+//   brandName: string;
+//   brandRating: number;
+//   productRating: number;
+//   productQuality: number;
+//   totalScore: number;
+// }
+
+function ProductPage({ product, setBarcode }: any) {
+  return product ? (
+    <ScrollView>
+      <View style={styles.scoreContainer}>
+        <ProductScore score={product.reviewAggregate} large />
+      </View>
+      <Headline>{product.productName}</Headline>
+      <Text>{product.brand.name}</Text>
+      <View style={styles.listItem}>
+        <Text>Sustainability:</Text>
+        <ProgressBar
+          progress={0.3}
+          width={200}
+          height={15}
+          borderRadius={40}
+          unfilledColor="#DDD"
+          borderWidth={0}
+          color="green"
+        />
+      </View>
+
+      <Button text="Add a review" action={setBarcode} />
+
+    </ScrollView>
+  ) : (
+    <View
+      style={{
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Headline>Sorry, we couldn&lsquo;t find this item.</Headline>
+    </View>
+  );
+}
 export default ProductPage;

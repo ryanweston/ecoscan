@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
+import { withTheme } from '@/styles/theme-context';
 
 const styles = StyleSheet.create({
   containerSmall: {
@@ -35,19 +36,20 @@ const styles = StyleSheet.create({
   },
 });
 
-function ProductScore({ score, large }: any) {
-  const [colour, setColour] = useState('grey');
+function ProductScore({ score, large, theme }: any) {
+  const [background, setBackground] = useState('');
+  const [colour, setColour] = useState(theme.currentTheme.secondary);
 
   useEffect(() => {
     if (score !== null && score !== undefined) {
       const checkScore = parseFloat(score.sustainabilityScore);
-
       if (checkScore <= 2) {
-        setColour('red');
+        setBackground(theme.currentTheme.score.low);
       } else if (checkScore <= 4) {
-        setColour('orange');
+        setBackground(theme.currentTheme.score.med);
+        setColour(theme.currentTheme.primary);
       } else if (checkScore === 5) {
-        setColour('green');
+        setBackground(theme.currentTheme.score.high);
       }
     }
   }, [score, large]);
@@ -56,14 +58,14 @@ function ProductScore({ score, large }: any) {
     <View
       style={[
         large ? styles.containerLarge : [styles.containerSmall],
-        { backgroundColor: colour },
+        { backgroundColor: background },
       ]}
     >
-      <Text style={[large ? styles.scoreLarge : styles.scoreSmall]}>
+      <Text style={[large ? styles.scoreLarge : styles.scoreSmall, { color: colour }]}>
         {score ? score.sustainabilityScore : '?'}
       </Text>
     </View>
   );
 }
 
-export default ProductScore;
+export default withTheme(ProductScore);

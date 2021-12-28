@@ -6,8 +6,8 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
-import { Container, Headline } from '../../components';
-import { request } from '../../request';
+import { Container, Headline } from '@/components';
+import { request } from '@/request';
 
 const styles = StyleSheet.create({
   input: {
@@ -37,7 +37,7 @@ function ReviewPage({ route }: any) {
       const body = { sustainability, quality, barcode };
       await request.post('/reviews', body);
     } catch (e) {
-      console.log(e);
+      throw Error('Error fetching review');
     }
   };
 
