@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
   headerImg: {
     aspectRatio: 1.5,
     resizeMode: 'contain',
-    marginLeft: 'auto',
   },
 });
 
@@ -61,6 +60,7 @@ function Home({ navigation, theme }: any) {
           <SafeAreaView style={styles.header}>
             <Headline propStyles={{ fontSize: 35, lineHeight: 0 }}>Welcome</Headline>
             <Pressable
+              style={{ marginLeft: 'auto' }}
               onPress={() => {
                 navigation.navigate('Product');
               }}

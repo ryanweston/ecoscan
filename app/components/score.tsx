@@ -59,6 +59,7 @@ function ProductScore({ score, large, theme }: any) {
       style={[
         large ? styles.containerLarge : [styles.containerSmall],
         { backgroundColor: background },
+        styles.shadowProp,
       ]}
     >
       <Text style={[large ? styles.scoreLarge : styles.scoreSmall, { color: colour }]}>
