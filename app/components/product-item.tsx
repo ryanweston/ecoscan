@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   View, Text, StyleSheet, Image,
