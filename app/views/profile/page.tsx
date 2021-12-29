@@ -6,7 +6,6 @@ import { Container, Headline } from '@/components';
 import { ThemeContext } from '@/styles/theme-context';
 import { request } from '@/request';
 import { IUser } from '@/types';
-import { AuthContext } from '@/auth/auth-provider';
 
 const banner = require('../../styles/CLIP.png');
 
@@ -30,16 +29,10 @@ const styles = StyleSheet.create({
 function ProfilePage() {
   const [user, setUser] = useState<IUser | Record<string, never>>({});
   const { currentTheme } = useContext(ThemeContext);
-  const { handleUnauthorized }: any = useContext(AuthContext);
 
   const fetchUser = async () => {
-    try {
-      const response = await request.get('/users/me');
-      setUser(response.data);
-    } catch (error) {
-      handleUnauthorized(error.response.status);
-      throw Error('Error getting user');
-    }
+    const response = await request.get('/users/me');
+    setUser(response.data);
   };
 
   useEffect(() => {
@@ -110,12 +103,6 @@ function ProfilePage() {
       ) : (
         <Text> Loading </Text>
       ) }
-      {/* <Button
-        title="Sign out"
-        onPress={() => {
-          signOut();
-        }}
-      /> */}
     </ScrollView>
   );
 }

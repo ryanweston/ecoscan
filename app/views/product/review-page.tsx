@@ -1,18 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   Text,
-  Button,
+  Image,
   TouchableWithoutFeedback,
   View,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
-import { Container, Headline } from '@/components';
+import { Container, Headline, Button } from '@/components';
 import { request } from '@/request';
-import { AuthContext } from '@/auth/auth-provider';
+
+const banner = require('@/styles/CLIP.png');
 
 const styles = StyleSheet.create({
   input: {
-    fontSize: 20,
+    fontSize: 35,
     marginRight: 10,
     padding: 5,
     borderRadius: 10,
@@ -24,8 +26,7 @@ const styles = StyleSheet.create({
   unselected: {},
 });
 
-function ReviewPage({ route }: any) {
-  const { handleUnauthorized }: any = useContext(AuthContext);
+function ReviewPage({ route, navigation }: any) {
   const [sustainability, setSustainability] = useState(0);
   const [quality, setQuality] = useState(0);
   const { barcode } = route.params;
@@ -35,13 +36,9 @@ function ReviewPage({ route }: any) {
   const options = [0, 1, 2, 3, 4, 5];
 
   const postReview = async () => {
-    try {
-      const body = { sustainability, quality, barcode };
-      await request.post('/reviews', body);
-    } catch (error) {
-      handleUnauthorized(error.response.status);
-      throw Error('Error fetching review');
-    }
+    const body = { sustainability, quality, barcode };
+    await request.post('/reviews', body);
+    navigation.navigate('Home');
   };
 
   const checkReview = () => {
@@ -66,62 +63,80 @@ function ReviewPage({ route }: any) {
   };
 
   return (
-    <Container>
-      <Headline>Add a review</Headline>
-      <Text style={{ marginTop: 10 }}>Sustainability</Text>
-      <View style={{ flexDirection: 'row', marginTop: 10 }}>
-        {options.map((item) => {
-          const selected = !!(sustainability === item);
-          return (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                setScore(item, 'sustainability');
-              }}
-            >
-              <Text
-                style={[
-                  styles.input,
-                  selected ? styles.selected : styles.unselected,
-                ]}
+    <ScrollView>
+      <Container>
+        <Headline>Add a review</Headline>
+      </Container>
+      <Image
+        style={{
+          width: '100%', height: 75, margin: 0,
+        }}
+        source={banner}
+      />
+      <Container background>
+        <Headline propStyles={{ color: 'white' }}>Sustainability</Headline>
+        <View style={{ flexDirection: 'row', marginTop: 10 }}>
+          {options.map((item) => {
+            const selected = !!(sustainability === item);
+            return (
+              <TouchableWithoutFeedback
+                key={item}
+                onPress={() => {
+                  setScore(item, 'sustainability');
+                }}
               >
-                {item}
-              </Text>
-            </TouchableWithoutFeedback>
-          );
-        })}
-      </View>
+                <Text
+                  style={[
+                    styles.input,
+                    selected ? styles.selected : styles.unselected,
+                    { color: 'white' },
+                  ]}
+                >
+                  {item}
+                </Text>
+              </TouchableWithoutFeedback>
+            );
+          })}
+        </View>
 
-      <Text style={{ marginTop: 10 }}>Quality</Text>
-      <View style={{ flexDirection: 'row', marginTop: 10 }}>
-        {options.map((item) => {
-          const selected = !!(quality === item);
-          return (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                setScore(item, 'quality');
-              }}
-            >
-              <Text
-                style={[
-                  styles.input,
-                  selected ? styles.selected : styles.unselected,
-                ]}
+        <Headline propStyles={{ color: 'white' }}>Quality</Headline>
+        <View style={{ flexDirection: 'row', marginTop: 10 }}>
+          {options.map((item) => {
+            const selected = !!(quality === item);
+            return (
+              <TouchableWithoutFeedback
+                key={item}
+                onPress={() => {
+                  setScore(item, 'quality');
+                }}
               >
-                {item}
-              </Text>
-            </TouchableWithoutFeedback>
-          );
-        })}
-      </View>
+                <Text
+                  style={[
+                    styles.input,
+                    selected ? styles.selected : styles.unselected,
+                    { color: 'white' },
+                  ]}
+                >
+                  {item}
+                </Text>
+              </TouchableWithoutFeedback>
+            );
+          })}
+        </View>
+      </Container>
+      <Image
+        style={{
+          width: '100%', height: 60, margin: 0, transform: [{ rotate: '180deg' }],
+        }}
+        source={banner}
+      />
 
       <Button
-        title="Add review"
-        onPress={() => {
-          checkReview();
-        }}
+        text="Add review"
+        action={checkReview()}
       />
       {alert ? <Text>{alert}</Text> : null}
-    </Container>
+    </ScrollView>
   );
 }
 

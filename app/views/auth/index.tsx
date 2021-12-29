@@ -24,12 +24,8 @@ function Login() {
   const { signIn }: any = React.useContext(AuthContext);
 
   const signInUser = async () => {
-    try {
-      const userInfo = await GoogleSignin.signIn();
-      signIn(userInfo);
-    } catch (e) {
-      throw Error('Error signing in');
-    }
+    const userInfo = await GoogleSignin.signIn();
+    signIn(userInfo);
   };
 
   return (

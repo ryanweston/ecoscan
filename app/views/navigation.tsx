@@ -15,12 +15,8 @@ function ButtonProp() {
   const { logOut }: any = useContext(AuthContext);
 
   const signOut = async () => {
-    try {
-      await GoogleSignin.signOut();
-      logOut();
-    } catch (e) {
-      throw Error('Error signing out');
-    }
+    await GoogleSignin.signOut();
+    logOut();
   };
 
   return (

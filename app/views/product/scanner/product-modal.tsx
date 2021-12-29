@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
 import {
   View,
@@ -11,22 +11,15 @@ import {
 import { request } from '@/request';
 import { withTheme } from '@/styles/theme-context';
 import ProductPage from '../product-page';
-import { AuthContext } from '@/auth/auth-provider';
 
-function ProductModal({ barcode, setBarcode }: any) {
+function ProductModal({ barcode, setBarcode, navigation }: any) {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
-  const { handleUnauthorized }: any = useContext(AuthContext);
 
   const getProduct = async () => {
-    try {
-      const response = await request.get(`/products/?barcode=${barcode}`);
-      setProduct(response.data);
-      setLoading(false);
-    } catch (error) {
-      handleUnauthorized(error.response.status);
-      throw Error('Error getting product');
-    }
+    const response = await request.get(`/products/?barcode=${barcode}`);
+    setProduct(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -94,7 +87,7 @@ function ProductModal({ barcode, setBarcode }: any) {
               >
                 <Headline>Seaching for item...</Headline>
               </View>
-            ) : <ProductPage product={product} setBarcode={setBarcode} /> }
+            ) : <ProductPage product={product} navigation={navigation} setBarcode={setBarcode} /> }
           </Container>
         </View>
       </Modal>

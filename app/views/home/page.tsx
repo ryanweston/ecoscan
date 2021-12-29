@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState, useCallback, useContext,
+  useEffect, useState, useCallback,
 } from 'react';
 import {
   SafeAreaView, Text, StyleSheet, Image, StatusBar, Pressable,
@@ -8,9 +8,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Headline, Container } from '@/components';
 import ProductItem from '@/components/product-item'; // Move to relevant place later
 import { request } from '@/request';
-import { AuthContext } from '@/auth/auth-provider';
 import { withTheme } from '@/styles/theme-context';
 import ProductModal from '@/views/product/scanner/product-modal';
+import { IProducts } from '@/types';
+
+// Image imports
+const logo = require('@/styles/scanColour.png');
+const banner = require('../../styles/CLIP.png');
 
 const styles = StyleSheet.create({
   header: {
@@ -24,28 +28,19 @@ const styles = StyleSheet.create({
   },
 });
 
-// Image imports
-const logo = require('@/styles/scanColour.png');
-const banner = require('../../styles/CLIP.png');
-
 function Home({ navigation, theme }: any) {
-  const { handleUnauthorized }: any = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProducts>([]);
   const [selected, setSelected] = useState('');
 
   const getProducts = useCallback(async () => {
-    try {
-      const response = await request.get('/products/most-popular');
-      setProducts(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      handleUnauthorized(error.response.status);
-    }
-  }, [handleUnauthorized]);
+    const response = await request.get('/products/most-popular');
+    setProducts(response.data);
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
+    // console.log('HOME RENDER');
     getProducts();
   }, [getProducts, theme]);
 
@@ -121,7 +116,7 @@ function Home({ navigation, theme }: any) {
           )}
         </Container>
         {selected ? (
-          <ProductModal barcode={selected} setBarcode={setSelected} />
+          <ProductModal barcode={selected} setBarcode={setSelected} navigation={navigation} />
         ) : null}
       </ScrollView>
     </SafeAreaView>
