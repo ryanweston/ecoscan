@@ -8,6 +8,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import {
   Headline, ProductScore, Button,
 } from '@/components';
+import { withTheme } from '@/styles/theme-context';
 
 const styles = StyleSheet.create({
   scoreContainer: {
@@ -19,23 +20,23 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   listItem: {
-    marginTop: 40,
-    marginBottom: 40,
+    marginTop: 10,
+    marginBottom: 10,
     width: '100%',
     flexDirection: 'row',
   },
+  progressContainer: {
+    paddingTop: 25,
+    paddingBottom: 25,
+  },
+  progressWrapper: {
+    marginLeft: 'auto',
+  },
 });
 
-// interface Product {
-//   productName: string;
-//   brandName: string;
-//   brandRating: number;
-//   productRating: number;
-//   productQuality: number;
-//   totalScore: number;
-// }
-
-function ProductPage({ product, setBarcode }: any) {
+function ProductPage({
+  product, navigation, theme, setBarcode,
+}: any) {
   return product ? (
     <ScrollView>
       <View style={styles.scoreContainer}>
@@ -43,20 +44,58 @@ function ProductPage({ product, setBarcode }: any) {
       </View>
       <Headline>{product.productName}</Headline>
       <Text>{product.brand.name}</Text>
-      <View style={styles.listItem}>
-        <Text>Sustainability:</Text>
-        <ProgressBar
-          progress={0.3}
-          width={200}
-          height={15}
-          borderRadius={40}
-          unfilledColor="#DDD"
-          borderWidth={0}
-          color="green"
-        />
+      <View style={styles.progressContainer}>
+        <View style={styles.listItem}>
+          <Text>Impact:</Text>
+          <View style={styles.progressWrapper}>
+            <ProgressBar
+              progress={0.3}
+              width={250}
+              height={20}
+              borderRadius={40}
+              unfilledColor="#DDD"
+              borderWidth={0}
+              color={theme.currentTheme.primary}
+            />
+          </View>
+        </View>
+        <View style={styles.listItem}>
+          <Text>Quality:</Text>
+          <View style={styles.progressWrapper}>
+            <ProgressBar
+              progress={0.3}
+              width={250}
+              height={20}
+              borderRadius={40}
+              unfilledColor="#DDD"
+              borderWidth={0}
+              color={theme.currentTheme.primary}
+            />
+          </View>
+        </View>
+        <View style={styles.listItem}>
+          <Text>Brand:</Text>
+          <View style={styles.progressWrapper}>
+            <ProgressBar
+              progress={0.3}
+              width={250}
+              height={20}
+              borderRadius={40}
+              unfilledColor="#DDD"
+              borderWidth={0}
+              color={theme.currentTheme.primary}
+            />
+          </View>
+        </View>
       </View>
 
-      <Button text="Add a review" action={setBarcode} />
+      <Button
+        text="Add a review"
+        action={() => {
+          setBarcode('');
+          navigation.navigate('Review', { barcode: product.barcode });
+        }}
+      />
 
     </ScrollView>
   ) : (
@@ -71,4 +110,4 @@ function ProductPage({ product, setBarcode }: any) {
     </View>
   );
 }
-export default ProductPage;
+export default withTheme(ProductPage);
