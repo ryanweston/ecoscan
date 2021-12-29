@@ -5,9 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Pressable } from 'react-native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import HomeStack from './home/index';
-import BarcodeReader from './product/index';
-import { ThemeContext } from '../styles/theme-context';
+import HomeStack from '@/views/home/index';
+import ScanPage from '@/views/scan/page';
+import { ThemeContext } from '@/styles/theme-context';
 import { AuthContext } from '@/auth/auth-provider';
 import ProfilePage from './profile/page'; // Change to index for the navigation
 
@@ -35,12 +35,12 @@ function BottomNavigation() {
       size;
 
     switch (route.name) {
-      case 'HomePage':
+      case 'HomeStack':
         icon = 'home';
         header = false;
         size = 30;
         break;
-      case 'Product':
+      case 'Scan':
         icon = 'camera-iris';
         header = false;
         size = 30;
@@ -74,8 +74,8 @@ function BottomNavigation() {
         tabBarInactiveTintColor: `${currentTheme.accent}`,
       })}
     >
-      <Tab.Screen name="HomePage" component={HomeStack} />
-      <Tab.Screen options={{ headerShown: false, tabBarStyle: { display: 'none' } }} name="Product" component={BarcodeReader} />
+      <Tab.Screen name="HomeStack" component={HomeStack} />
+      <Tab.Screen options={{ headerShown: false, tabBarStyle: { display: 'none' } }} name="Scan" component={ScanPage} />
       <Tab.Screen
         options={{
           headerStyle: {

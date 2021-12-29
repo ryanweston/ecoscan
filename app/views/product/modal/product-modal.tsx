@@ -10,7 +10,7 @@ import {
 } from '@/components';
 import { request } from '@/request';
 import { withTheme } from '@/styles/theme-context';
-import ProductPage from '../product-page';
+import ProductPage from './product-page';
 
 function ProductModal({ barcode, setBarcode, navigation }: any) {
   const [loading, setLoading] = useState(true);

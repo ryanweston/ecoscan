@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './page';
-import ProductPage from '../product/product-page';
-import ItemPage from '../profile/page';
-import HowPage from '../product/information-page';
-import ReviewPage from '../product/review-page';
+import InformationPage from '../product/information/page';
+import ReviewPage from '../product/review/page';
 import { ThemeContext } from '../../styles/theme-context';
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +14,6 @@ function HomeStack() {
     // @ts-ignore
     <Stack.Navigator
       screenOptions={{
-        headerMode: 'none',
         headerStyle: {
           backgroundColor: `${currentTheme.primary}`,
         },
@@ -31,7 +28,7 @@ function HomeStack() {
         name="Home"
         component={HomePage}
       />
-      <Stack.Screen name="How do we score?" component={HowPage} />
+      <Stack.Screen name="Information" component={InformationPage} />
       <Stack.Screen name="Review" component={ReviewPage} />
     </Stack.Navigator>
   );

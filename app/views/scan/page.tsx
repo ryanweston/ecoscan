@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 // @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import ProductModal from './product-modal';
+import ProductModal from '../product/modal/product-modal';
 import { withTheme } from '@/styles/theme-context';
 
 const targetImg = require('@/styles/target.png');
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 // Add this package to add support for functional component:
 // https://github.com/reime005/react-native-camera-hooks
 
-function BarcodeReader({ navigation, theme }: any) {
+function ScanPage({ navigation, theme }: any) {
   const [barcode, setBarcode] = useState('');
 
   const onBarcodeRead = (scanResult: any) => {
@@ -97,7 +97,6 @@ function BarcodeReader({ navigation, theme }: any) {
             alignSelf: 'center',
           }}
           onPress={() => {
-            console.log('HIT');
             navigation.navigate('Home');
           }}
         >
@@ -141,4 +140,4 @@ function BarcodeReader({ navigation, theme }: any) {
   );
 }
 
-export default withTheme(BarcodeReader);
+export default withTheme(ScanPage);

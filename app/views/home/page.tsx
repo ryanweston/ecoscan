@@ -6,10 +6,10 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Headline, Container } from '@/components';
-import ProductItem from '@/components/product-item'; // Move to relevant place later
+import ProductItem from '@/components/product/product-item'; // Move to relevant place later
 import { request } from '@/request';
 import { withTheme } from '@/styles/theme-context';
-import ProductModal from '@/views/product/scanner/product-modal';
+import ProductModal from '@/views/product/modal/product-modal';
 import { IProducts } from '@/types';
 
 // Image imports

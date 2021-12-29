@@ -4,8 +4,8 @@ import { Text, Alert } from 'react-native';
 import { setJSExceptionHandler } from 'react-native-exception-handler';
 import { setUnhandledPromiseRejectionTracker } from 'react-native-promise-rejection-utils';
 import BottomNavigation from './navigation';
-import { AuthContext } from '../../app/auth/auth-provider';
-import Login from './auth';
+import { AuthContext } from '@/auth/auth-provider';
+import Login from './login/page';
 import { Container } from '../components';
 
 function Main() {

@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import BarcodeReader from './scanner/scan';
+import BarcodeReader from './page';
 import { ThemeContext } from '../../styles/theme-context';
-import ProductPage from './product-page';
 
 const Stack = createNativeStackNavigator();
 
@@ -10,7 +9,6 @@ function Product() {
   const { currentTheme } = useContext(ThemeContext);
 
   return (
-    // @ts-ignore
     <Stack.Navigator
       screenOptions={{
         headerShown: false,

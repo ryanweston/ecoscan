@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   View, Text, StyleSheet, Image,
 } from 'react-native';
-import { ProductScore } from '../components';
+import { ProductScore } from '..';
 import { withTheme } from '@/styles/theme-context';
 
 const styles = StyleSheet.create({
