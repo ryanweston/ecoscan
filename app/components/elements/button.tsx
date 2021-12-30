@@ -9,7 +9,9 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   text: {
+    textAlign: 'center',
     color: 'white',
+    fontWeight: 'bold',
   },
 });
 

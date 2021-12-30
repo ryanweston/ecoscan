@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
+  containerMedium: {
+    width: 75,
+    height: 75,
+    justifyContent: 'center',
+    borderRadius: 150 / 2,
+  },
   containerLarge: {
     width: 120,
     height: 120,
@@ -28,6 +34,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 14,
   },
+  scoreMedium: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 24,
+  },
   scoreLarge: {
     alignSelf: 'center',
     fontWeight: 'bold',
@@ -36,20 +48,24 @@ const styles = StyleSheet.create({
   },
 });
 
-function ProductScore({ score, large, theme }: any) {
-  const [background, setBackground] = useState('');
-  const [colour, setColour] = useState(theme.currentTheme.secondary);
+function ProductScore({
+  score, large, medium, small, theme,
+}: any) {
+  const [background, setBackground] = useState(theme.currentTheme.grey);
+  const [colour, setColour] = useState('#CCC');
 
   useEffect(() => {
     if (score !== null && score !== undefined) {
       const checkScore = parseFloat(score.sustainabilityScore);
       if (checkScore <= 2) {
         setBackground(theme.currentTheme.score.low);
+        setColour(theme.currentTheme.secondary);
       } else if (checkScore <= 4) {
         setBackground(theme.currentTheme.score.med);
-        setColour(theme.currentTheme.primary);
+        setColour(theme.currentTheme.secondary);
       } else if (checkScore === 5) {
         setBackground(theme.currentTheme.score.high);
+        setColour(theme.currentTheme.secondary);
       }
     }
   }, [score, large]);
@@ -57,12 +73,20 @@ function ProductScore({ score, large, theme }: any) {
   return (
     <View
       style={[
-        large ? styles.containerLarge : [styles.containerSmall],
+        large ? styles.containerLarge : null,
+        medium ? styles.containerMedium : null,
+        small ? styles.containerSmall : null,
         { backgroundColor: background },
         styles.shadowProp,
       ]}
     >
-      <Text style={[large ? styles.scoreLarge : styles.scoreSmall, { color: colour }]}>
+      <Text style={[
+        large ? styles.scoreLarge : null,
+        medium ? styles.scoreMedium : null,
+        small ? styles.scoreSmall : null,
+        { color: colour },
+      ]}
+      >
         {score ? score.sustainabilityScore : '?'}
       </Text>
     </View>

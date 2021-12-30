@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
-  Text, View, StyleSheet, ScrollView,
+  Text, View, StyleSheet, ScrollView, Pressable,
 } from 'react-native';
 
 // @ts-ignore
-import ProgressBar from 'react-native-progress/Bar';
+// import ProgressBar from 'react-native-progress/Bar';
 import {
-  Headline, ProductScore, Button,
+  Headline, ProductScore, Button, Subtitle,
 } from '@/components';
 import { withTheme } from '@/styles/theme-context';
+import ScoreItem from './components/score-item';
 
 const styles = StyleSheet.create({
   scoreContainer: {
@@ -19,81 +20,99 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: 20,
   },
-  listItem: {
-    marginTop: 10,
-    marginBottom: 10,
-    width: '100%',
-    flexDirection: 'row',
-  },
   progressContainer: {
-    paddingTop: 25,
-    paddingBottom: 25,
+    paddingTop: 35,
+    paddingBottom: 35,
   },
-  progressWrapper: {
-    marginLeft: 'auto',
+  noScoresContainer: {
+    backgroundColor: '#EDEDED',
+    borderRadius: 20,
+    width: '100%',
+    padding: 15,
+  },
+  nameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  nameText: {
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  tooltip: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 25,
+    width: 25,
+    borderColor: '#CCC',
+    borderWidth: 2,
+    borderRadius: 40,
   },
 });
 
 function ProductPage({
-  product, navigation, theme, setBarcode,
+  product, navigation, setBarcode,
 }: any) {
   return product ? (
     <ScrollView>
       <View style={styles.scoreContainer}>
         <ProductScore score={product.reviewAggregate} large />
       </View>
-      <Headline>{product.productName}</Headline>
-      <Text>{product.brand.name}</Text>
+      <View style={styles.nameContainer}>
+        <View style={{ flex: 1 }}>
+          <Headline propStyles={styles.nameText}>{product.productName}</Headline>
+          <Text style={styles.nameText}>{product.brand.name}</Text>
+        </View>
+        <Pressable onPress={() => {
+          setBarcode('');
+          navigation.navigate('Information');
+        }}
+        >
+          <View style={styles.tooltip}>
+            <Text style={{ fontWeight: 'bold', color: '#CCC' }}>?</Text>
+          </View>
+        </Pressable>
+      </View>
+
       <View style={styles.progressContainer}>
-        <View style={styles.listItem}>
-          <Text>Impact:</Text>
-          <View style={styles.progressWrapper}>
-            <ProgressBar
-              progress={0.3}
-              width={250}
-              height={20}
-              borderRadius={40}
-              unfilledColor="#DDD"
-              borderWidth={0}
-              color={theme.currentTheme.primary}
+        { product.reviewAggregate
+          ? (
+            <View>
+              <ScoreItem
+                title="Impact"
+                score={product.reviewAggregate.sustainabilityScore}
+              />
+              <ScoreItem
+                title="Quality"
+                score={product.reviewAggregate.qualityScore}
+              />
+            </View>
+          ) : (
+            <View style={styles.noScoresContainer}>
+              <Text>No reviews</Text>
+            </View>
+          )}
+
+        { product.brand.sustainabilityScore !== 'NaN' ? (
+          <View>
+            <ScoreItem
+              title="Brand"
+              score={product.brand.sustainabilityScore}
             />
           </View>
-        </View>
-        <View style={styles.listItem}>
-          <Text>Quality:</Text>
-          <View style={styles.progressWrapper}>
-            <ProgressBar
-              progress={0.3}
-              width={250}
-              height={20}
-              borderRadius={40}
-              unfilledColor="#DDD"
-              borderWidth={0}
-              color={theme.currentTheme.primary}
-            />
+        ) : (
+          <View style={[styles.noScoresContainer, { marginTop: 20 }]}>
+            <Text>We have yet to review this brand</Text>
           </View>
-        </View>
-        <View style={styles.listItem}>
-          <Text>Brand:</Text>
-          <View style={styles.progressWrapper}>
-            <ProgressBar
-              progress={0.3}
-              width={250}
-              height={20}
-              borderRadius={40}
-              unfilledColor="#DDD"
-              borderWidth={0}
-              color={theme.currentTheme.primary}
-            />
-          </View>
-        </View>
+        )}
       </View>
 
       <Button
         text="Add a review"
         action={() => {
           setBarcode('');
-          navigation.navigate('Review', { barcode: product.barcode });
+          navigation.navigate('Review', { product });
         }}
       />
 

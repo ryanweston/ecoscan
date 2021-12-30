@@ -3,24 +3,20 @@ import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Pressable } from 'react-native';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { Pressable, View, Image } from 'react-native';
 import HomeStack from '@/views/home/index';
 import ScanPage from '@/views/scan/page';
 import { ThemeContext } from '@/styles/theme-context';
 import { AuthContext } from '@/auth/auth-provider';
 import ProfilePage from './profile/page'; // Change to index for the navigation
 
+const logo = require('../styles/tabbarIcon.png');
+
 function ButtonProp() {
   const { logOut }: any = useContext(AuthContext);
 
-  const signOut = async () => {
-    await GoogleSignin.signOut();
-    logOut();
-  };
-
   return (
-    <Pressable style={{ marginRight: 10 }} onPress={() => signOut()}>
+    <Pressable style={{ marginRight: 10 }} onPress={() => logOut()}>
       <MaterialCommunityIcons name="logout-variant" color="white" size={25} />
     </Pressable>
   );
@@ -31,8 +27,7 @@ function BottomNavigation() {
   const { currentTheme } = useContext(ThemeContext);
 
   const screenOptions = (route: any, color?: string) => {
-    let icon; let header; let
-      size;
+    let icon; let header; let size;
 
     switch (route.name) {
       case 'HomeStack':
@@ -55,7 +50,30 @@ function BottomNavigation() {
     }
     return {
       header,
-      icon: <MaterialCommunityIcons name={icon} color={color} size={size} />,
+      icon: route.name === 'Scan'
+        ? (
+          <View style={{
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 85,
+            width: 80,
+            borderRadius: 120,
+            backgroundColor: '#648142',
+            zIndex: 1000,
+          }}
+          >
+            <Image
+              style={{
+                aspectRatio: 0.7,
+                resizeMode: 'contain',
+                marginBottom: 12,
+              }}
+              source={logo}
+            />
+          </View>
+        )
+        : <MaterialCommunityIcons name={icon} color={color} size={size} />,
     };
   };
 

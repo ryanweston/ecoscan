@@ -11,7 +11,6 @@ function HomeStack() {
   const { currentTheme } = useContext(ThemeContext);
 
   return (
-    // @ts-ignore
     <Stack.Navigator
       screenOptions={{
         headerStyle: {

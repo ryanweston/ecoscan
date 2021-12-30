@@ -31,7 +31,7 @@ function Login() {
   return (
     <View style={styles.container}>
       <Image
-        style={{ width: 200, height: 200 }}
+        style={{ width: 212, height: 212 }}
         source={logoImg}
       />
       <GoogleSigninButton

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   View, Text, StyleSheet, Image,
@@ -39,16 +39,18 @@ function ProductItem({
           />
           <Text
             style={[
-              dark ? { color: theme.currentTheme.grey } : { color: theme.currentTheme.secondary },
+              dark ? { color: theme.currentTheme.secondary } : { color: 'black' },
               {
                 fontWeight: 'bold',
+                flex: 1,
                 paddingLeft: 10,
                 fontSize: 14,
+                flexWrap: 'wrap',
               }]}
           >
             {info.productName}
           </Text>
-          <ProductScore score={info.reviewAggregate} />
+          <ProductScore small score={info.reviewAggregate} />
         </View>
       ) : (
         <Text>Loading</Text>

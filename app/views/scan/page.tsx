@@ -104,7 +104,7 @@ function ScanPage({ navigation, theme }: any) {
         </Pressable>
       </View>
       {barcode ? (
-        <ProductModal setBarcode={setBarcode} barcode={barcode} />
+        <ProductModal setBarcode={setBarcode} barcode={barcode} navigation={navigation} />
       ) : null}
       <RNCamera
         ref={(ref) => {

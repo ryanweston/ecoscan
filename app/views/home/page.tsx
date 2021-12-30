@@ -5,7 +5,7 @@ import {
   SafeAreaView, Text, StyleSheet, Image, StatusBar, Pressable,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Headline, Container } from '@/components';
+import { Headline, Container, CurveContainer } from '@/components';
 import ProductItem from '@/components/product/product-item'; // Move to relevant place later
 import { request } from '@/request';
 import { withTheme } from '@/styles/theme-context';
@@ -14,7 +14,6 @@ import { IProducts } from '@/types';
 
 // Image imports
 const logo = require('@/styles/scanColour.png');
-const banner = require('../../styles/CLIP.png');
 
 const styles = StyleSheet.create({
   header: {
@@ -23,19 +22,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerImg: {
-    aspectRatio: 1.5,
+    aspectRatio: 1.1,
     resizeMode: 'contain',
   },
 });
 
 function Home({ navigation, theme }: any) {
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState<IProducts>([]);
+  const [popularProducts, setPopularProducts] = useState<IProducts>([]);
+  const [sustainableProducts, setSustainableProducts] = useState<IProducts>([]);
   const [selected, setSelected] = useState('');
 
   const getProducts = useCallback(async () => {
-    const response = await request.get('/products/most-popular');
-    setProducts(response.data);
+    const popularResponse = await request.get('/products/most-popular');
+    const sustainableResponse = await request.get('/products/most-sustainable');
+    setPopularProducts(popularResponse.data);
+    console.log(sustainableResponse.data);
+    setSustainableProducts(sustainableResponse.data);
     setIsLoading(false);
   }, []);
 
@@ -44,20 +47,20 @@ function Home({ navigation, theme }: any) {
     getProducts();
   }, [getProducts, theme]);
 
-  const headerTitle = 'Most popular';
-  const headerTitle1 = 'Featured';
-
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" />
       <ScrollView>
+
         <Container>
           <SafeAreaView style={styles.header}>
-            <Headline propStyles={{ fontSize: 35, lineHeight: 0 }}>Welcome</Headline>
+            <Headline propStyles={{ fontSize: 35, lineHeight: 0 }}>
+              Welcome!
+            </Headline>
             <Pressable
               style={{ marginLeft: 'auto' }}
               onPress={() => {
-                navigation.navigate('Product');
+                navigation.navigate('Scan');
               }}
             >
               <Image
@@ -67,57 +70,57 @@ function Home({ navigation, theme }: any) {
             </Pressable>
           </SafeAreaView>
         </Container>
-        <Image
-          style={{
-            width: '100%', height: 75, margin: 0,
-          }}
-          source={banner}
-        />
-        <Container background>
-          <Headline propStyles={{ color: 'white' }}>{headerTitle}</Headline>
 
+        <CurveContainer topRound bottomRound>
+          <Headline propStyles={{ color: 'white' }}>Most popular</Headline>
           {isLoading ? (
             <Text>Loading...</Text>
           ) : (
-            products.map((item) => (
+            popularProducts.map((item) => (
               <ProductItem
                 // TODO: Add type for item and use barcode as key
                 key={item.barcode}
-                colour="#86A25E"
+                colour="#89A760"
                 info={item}
                 setSelected={setSelected}
+                dark
               />
             ))
           )}
+        </CurveContainer>
 
-        </Container>
-
-        <Image
-          style={{
-            width: '100%', height: 60, margin: 0, transform: [{ rotate: '180deg' }],
-          }}
-          source={banner}
-        />
         <Container>
           <Headline propStyles={{ marginTop: 20 }}>
-            {headerTitle1}
+            Most sustainable
           </Headline>
           {isLoading ? (
             <Text>Loading...</Text>
           ) : (
-            products.map((item) => (
-              <ProductItem
-                key={item.barcode}
-                info={item}
-                colour={theme.currentTheme.accent}
-                setSelected={setSelected}
-              />
-            ))
-          )}
+            sustainableProducts.map((item) => {
+              // Temporary remap until API is fixed
+              const newItem = {
+                ...item.product,
+                reviewAggregate: {
+                  sustainabilityScore: item.sustainabilityScore,
+                  qualityScore: item.qualityScore,
+                },
+              };
+              return (
+                <ProductItem
+                  key={newItem.barcode}
+                  info={newItem}
+                  dark
+                  colour={theme.currentTheme.accent}
+                  setSelected={setSelected}
+                />
+              );
+            }))}
         </Container>
+
         {selected ? (
           <ProductModal barcode={selected} setBarcode={setSelected} navigation={navigation} />
         ) : null}
+
       </ScrollView>
     </SafeAreaView>
   );

@@ -2,12 +2,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import {
   Text, ScrollView, View, Image, StyleSheet,
 } from 'react-native';
-import { Container, Headline } from '@/components';
+import { Container, CurveContainer, Headline } from '@/components';
 import { ThemeContext } from '@/styles/theme-context';
 import { request } from '@/request';
 import { IUser } from '@/types';
-
-const banner = require('../../styles/CLIP.png');
 
 const styles = StyleSheet.create({
   container: {
@@ -42,13 +40,14 @@ function ProfilePage() {
   return (
     <ScrollView>
       <View>
-        <Container background>
+        <CurveContainer bottomRound>
           { user ? (
             <View
               style={{
                 width: '100%',
                 flexDirection: 'column',
                 alignItems: 'center',
+                paddingTop: 20,
               }}
             >
               <Image
@@ -63,13 +62,7 @@ function ProfilePage() {
               />
             </View>
           ) : null }
-        </Container>
-        <Image
-          style={{
-            width: '100%', height: 60, margin: 0, transform: [{ rotate: '180deg' }],
-          }}
-          source={banner}
-        />
+        </CurveContainer>
       </View>
 
       {user ? (

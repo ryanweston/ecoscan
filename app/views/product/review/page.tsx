@@ -1,52 +1,63 @@
 import React, { useState } from 'react';
 import {
   Text,
-  Image,
-  TouchableWithoutFeedback,
   View,
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import { Container, Headline, Button } from '@/components';
+import {
+  Container, Headline, Button, CurveContainer, ProductScore,
+} from '@/components';
 import { request } from '@/request';
-
-const banner = require('@/styles/CLIP.png');
+import { withTheme } from '@/styles/theme-context';
+import ScoreItem from './components/score-item';
+import ReviewSuccess from './components/review-success';
 
 const styles = StyleSheet.create({
-  input: {
-    fontSize: 35,
-    marginRight: 10,
-    padding: 5,
-    borderRadius: 10,
+  alertContainer: {
+    backgroundColor: 'green',
+    width: '100%',
+    paddingTop: 10,
+    paddingBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  selected: {
-    borderWidth: 3,
-    borderColor: 'green',
+  productContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  unselected: {},
+  productText: {
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  scoreRow: {
+    marginBottom: 30,
+  },
 });
 
-function ReviewPage({ route, navigation }: any) {
-  const [sustainability, setSustainability] = useState(0);
-  const [quality, setQuality] = useState(0);
-  const { barcode } = route.params;
+function ReviewPage({ route, navigation, theme }: any) {
+  const [sustainability, setSustainability] = useState(3);
+  const [quality, setQuality] = useState(3);
+  const [alert, setAlert] = useState('');
+  const [success, setSuccess] = useState(false);
 
-  let alert = '';
-
-  const options = [0, 1, 2, 3, 4, 5];
+  const { product } = route.params;
+  const { barcode } = product;
 
   const postReview = async () => {
     const body = { sustainability, quality, barcode };
     await request.post('/reviews', body);
-    navigation.navigate('Home');
+    setSuccess(true);
   };
 
   const checkReview = () => {
     if (!quality && !sustainability) {
-      alert = 'Please add all scores';
+      setAlert('Both scores are required');
       return;
     } if (!(quality <= 5) || !(sustainability <= 5)) {
-      alert = 'Review failed';
+      setAlert('Review failed');
       return;
     }
     postReview();
@@ -64,80 +75,41 @@ function ReviewPage({ route, navigation }: any) {
 
   return (
     <ScrollView>
+      {alert ? (
+        <View style={[styles.alertContainer, { backgroundColor: theme.currentTheme.grey }]}>
+          <Text>{alert}</Text>
+        </View>
+      ) : null }
       <Container>
-        <Headline>Add a review</Headline>
-      </Container>
-      <Image
-        style={{
-          width: '100%', height: 75, margin: 0,
-        }}
-        source={banner}
-      />
-      <Container background>
-        <Headline propStyles={{ color: 'white' }}>Sustainability</Headline>
-        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-          {options.map((item) => {
-            const selected = !!(sustainability === item);
-            return (
-              <TouchableWithoutFeedback
-                key={item}
-                onPress={() => {
-                  setScore(item, 'sustainability');
-                }}
-              >
-                <Text
-                  style={[
-                    styles.input,
-                    selected ? styles.selected : styles.unselected,
-                    { color: 'white' },
-                  ]}
-                >
-                  {item}
-                </Text>
-              </TouchableWithoutFeedback>
-            );
-          })}
-        </View>
-
-        <Headline propStyles={{ color: 'white' }}>Quality</Headline>
-        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-          {options.map((item) => {
-            const selected = !!(quality === item);
-            return (
-              <TouchableWithoutFeedback
-                key={item}
-                onPress={() => {
-                  setScore(item, 'quality');
-                }}
-              >
-                <Text
-                  style={[
-                    styles.input,
-                    selected ? styles.selected : styles.unselected,
-                    { color: 'white' },
-                  ]}
-                >
-                  {item}
-                </Text>
-              </TouchableWithoutFeedback>
-            );
-          })}
+        <View style={styles.productContainer}>
+          <View style={{ flex: 1 }}>
+            <Headline propStyles={styles.productText}>{ product.productName }</Headline>
+            <Text style={styles.productText}>{ product.brand.name }</Text>
+          </View>
+          <ProductScore medium score={product.reviewAggregate} />
         </View>
       </Container>
-      <Image
-        style={{
-          width: '100%', height: 60, margin: 0, transform: [{ rotate: '180deg' }],
-        }}
-        source={banner}
-      />
 
-      <Button
-        text="Add review"
-        action={checkReview()}
-      />
-      {alert ? <Text>{alert}</Text> : null}
+      <CurveContainer topRound bottomRound>
+        <View style={styles.scoreRow}>
+          <Headline propStyles={{ color: 'white', fontSize: 18 }}>1. Ease of disposal</Headline>
+          <ScoreItem action={(score: number) => { setScore(score, 'sustainability'); }} score={sustainability} />
+        </View>
+
+        <View style={styles.scoreRow}>
+          <Headline propStyles={{ color: 'white', fontSize: 18 }}>2. Quality of product</Headline>
+          <ScoreItem action={(score: number) => { setScore(score, 'quality'); }} score={quality} />
+        </View>
+
+        <Button
+          text="Add review"
+          action={() => checkReview()}
+        />
+      </CurveContainer>
+
+      <ReviewSuccess isVisible={success} navigation={navigation} />
     </ScrollView>
   );
 }
 
-export default ReviewPage;
+export default withTheme(ReviewPage);
