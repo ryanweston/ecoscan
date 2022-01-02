@@ -7,7 +7,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { AuthContext } from '../../auth/auth-provider';
 
-const logoImg = require('../../styles/logo.png');
+const logoImg = require('@/assets/logo.png');
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 });
 
 function Login() {
-  const { signIn }: any = React.useContext(AuthContext);
+  const { signIn } = React.useContext(AuthContext);
 
   const signInUser = async () => {
     const userInfo = await GoogleSignin.signIn();

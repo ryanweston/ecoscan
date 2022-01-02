@@ -7,12 +7,21 @@ const styles = StyleSheet.create({
   },
 });
 
-function Container({ propStyles, children }: any) {
+function Container({ style, children }: Props) {
   return (
-    <View style={{ ...styles.container, ...propStyles }}>
+    <View style={{ ...styles.container, ...style }}>
       {children}
     </View>
   );
 }
+
+interface Props {
+  style?: object,
+  children: React.ReactNode
+}
+
+Container.defaultProps = {
+  style: {},
+};
 
 export default Container;

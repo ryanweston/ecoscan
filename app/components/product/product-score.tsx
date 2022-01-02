@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { withTheme } from '@/styles/theme-context';
+import { shadowStyle } from '@/styles/theme';
+import { ITheme, IThemeProp, IReview } from '@/types';
 
-const styles = StyleSheet.create({
+interface Props {
+  score: IReview | undefined | null,
+  large: boolean,
+  medium: boolean,
+  small: boolean,
+  themeProp: IThemeProp
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   containerSmall: {
     width: 35,
     height: 35,
     justifyContent: 'center',
     borderRadius: 70 / 2,
     marginLeft: 'auto',
-  },
-  shadowProp: {
-    shadowColor: '#171717',
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
   },
   containerMedium: {
     width: 75,
@@ -31,7 +35,7 @@ const styles = StyleSheet.create({
   scoreSmall: {
     alignSelf: 'center',
     fontWeight: 'bold',
-    color: 'white',
+    color: theme.colors.textContrast,
     fontSize: 14,
   },
   scoreMedium: {
@@ -46,26 +50,34 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 48,
   },
+  shadowStyle,
 });
 
 function ProductScore({
-  score, large, medium, small, theme,
-}: any) {
-  const [background, setBackground] = useState(theme.currentTheme.grey);
+  score, large, medium, small, themeProp,
+}: Props) {
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
+
+  const [background, setBackground] = useState(theme.colors.greys.background);
   const [colour, setColour] = useState('#CCC');
 
+  // TODO: Handle this in a cleaner way
   useEffect(() => {
     if (score !== null && score !== undefined) {
-      const checkScore = parseFloat(score.sustainabilityScore);
+      const checkScore = score.sustainabilityScore;
       if (checkScore <= 2) {
-        setBackground(theme.currentTheme.score.low);
-        setColour(theme.currentTheme.secondary);
+        setBackground(theme.colors.score.low);
+        setColour(theme.colors.secondary);
       } else if (checkScore <= 4) {
-        setBackground(theme.currentTheme.score.med);
-        setColour(theme.currentTheme.secondary);
+        setBackground(theme.colors.score.med);
+        setColour(theme.colors.secondary);
       } else if (checkScore === 5) {
-        setBackground(theme.currentTheme.score.high);
-        setColour(theme.currentTheme.secondary);
+        setBackground(theme.colors.score.high);
+        setColour(theme.colors.secondary);
       }
     }
   }, [score, large]);
@@ -77,7 +89,7 @@ function ProductScore({
         medium ? styles.containerMedium : null,
         small ? styles.containerSmall : null,
         { backgroundColor: background },
-        styles.shadowProp,
+        styles.shadowStyle,
       ]}
     >
       <Text style={[

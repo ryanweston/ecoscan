@@ -5,17 +5,36 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
 import {
-  Container, Headline, Button, CurveContainer, ProductScore,
+  Container, Headline, Subtitle, CurveContainer, ProductScore,
+  Button,
 } from '@/components';
 import { request } from '@/request';
 import { withTheme } from '@/styles/theme-context';
 import ScoreItem from './components/score-item';
 import ReviewSuccess from './components/review-success';
+import {
+  HomeStackParamList, ITheme, IThemeProp, ScanStackParamList, TabParamList,
+} from '@/types';
 
-const styles = StyleSheet.create({
+type ReviewScreenNavigationProp = CompositeScreenProps<
+  NativeStackScreenProps<HomeStackParamList | ScanStackParamList, 'Review'>,
+  BottomTabScreenProps<TabParamList>
+>;
+
+interface Props {
+  route: ReviewScreenNavigationProp['route'],
+  navigation: ReviewScreenNavigationProp['navigation'],
+  themeProp: IThemeProp
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   alertContainer: {
-    backgroundColor: 'green',
+    backgroundColor: theme.colors.primary,
     width: '100%',
     paddingTop: 10,
     paddingBottom: 10,
@@ -37,19 +56,27 @@ const styles = StyleSheet.create({
   },
 });
 
-function ReviewPage({ route, navigation, theme }: any) {
+function ReviewPage({ route, navigation, themeProp }: Props) {
   const [sustainability, setSustainability] = useState(3);
   const [quality, setQuality] = useState(3);
   const [alert, setAlert] = useState('');
   const [success, setSuccess] = useState(false);
 
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
+
   const { product } = route.params;
   const { barcode } = product;
+
+  const setModal = () => setSuccess(!success);
 
   const postReview = async () => {
     const body = { sustainability, quality, barcode };
     await request.post('/reviews', body);
-    setSuccess(true);
+    setModal();
   };
 
   const checkReview = () => {
@@ -76,15 +103,27 @@ function ReviewPage({ route, navigation, theme }: any) {
   return (
     <ScrollView>
       {alert ? (
-        <View style={[styles.alertContainer, { backgroundColor: theme.currentTheme.grey }]}>
+        <View style={[
+          styles.alertContainer,
+          { backgroundColor: theme.colors.greys.background },
+        ]}
+        >
           <Text>{alert}</Text>
         </View>
       ) : null }
+
       <Container>
         <View style={styles.productContainer}>
           <View style={{ flex: 1 }}>
-            <Headline propStyles={styles.productText}>{ product.productName }</Headline>
-            <Text style={styles.productText}>{ product.brand.name }</Text>
+            <Headline style={styles.productText}>
+              { product.productName }
+            </Headline>
+            { product.brand
+              ? (
+                <Text style={styles.productText}>
+                  { product.brand.name }
+                </Text>
+              ) : null}
           </View>
           <ProductScore medium score={product.reviewAggregate} />
         </View>
@@ -92,13 +131,23 @@ function ReviewPage({ route, navigation, theme }: any) {
 
       <CurveContainer topRound bottomRound>
         <View style={styles.scoreRow}>
-          <Headline propStyles={{ color: 'white', fontSize: 18 }}>1. Ease of disposal</Headline>
-          <ScoreItem action={(score: number) => { setScore(score, 'sustainability'); }} score={sustainability} />
+          <Subtitle dark>1. Ease of disposal</Subtitle>
+          <ScoreItem
+            action={(score: number) => {
+              setScore(score, 'sustainability');
+            }}
+            score={sustainability}
+          />
         </View>
 
         <View style={styles.scoreRow}>
-          <Headline propStyles={{ color: 'white', fontSize: 18 }}>2. Quality of product</Headline>
-          <ScoreItem action={(score: number) => { setScore(score, 'quality'); }} score={quality} />
+          <Subtitle dark>2. Quality of product</Subtitle>
+          <ScoreItem
+            action={(score: number) => {
+              setScore(score, 'quality');
+            }}
+            score={quality}
+          />
         </View>
 
         <Button
@@ -107,7 +156,7 @@ function ReviewPage({ route, navigation, theme }: any) {
         />
       </CurveContainer>
 
-      <ReviewSuccess isVisible={success} navigation={navigation} />
+      <ReviewSuccess isVisible={success} setModal={setModal} navigation={navigation} />
     </ScrollView>
   );
 }

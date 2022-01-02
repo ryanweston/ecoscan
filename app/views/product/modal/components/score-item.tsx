@@ -5,6 +5,13 @@ import {
 // @ts-ignore
 import ProgressBar from 'react-native-progress/Bar';
 import { withTheme } from '@/styles/theme-context';
+import { IThemeProp } from '@/types';
+
+interface Props {
+  title: string,
+  score: number,
+  themeProp: IThemeProp
+}
 
 const styles = StyleSheet.create({
   listItem: {
@@ -19,25 +26,20 @@ const styles = StyleSheet.create({
 });
 
 function ScoreItem({
-  title, score, theme,
-}: any) {
+  title, score, themeProp,
+}: Props) {
+  const { theme } = themeProp;
   const [colour, setColour] = useState('');
 
   useEffect(() => {
-    console.log(score);
     if (score !== null && score !== undefined) {
-      console.log('INSIDE SCORE');
-      const checkScore = parseFloat(score);
-      console.log(checkScore);
+      const checkScore = score;
       if (checkScore <= 2) {
-        setColour(theme.currentTheme.score.low);
-        console.log('LOW');
+        setColour(theme.colors.score.low);
       } else if (checkScore <= 4) {
-        setColour(theme.currentTheme.score.med);
-        console.log('MED');
+        setColour(theme.colors.score.med);
       } else if (checkScore === 5) {
-        setColour(theme.currentTheme.score.high);
-        console.log('HIGH');
+        setColour(theme.colors.score.high);
       }
     }
   }, [score]);

@@ -4,17 +4,30 @@ import {
   View,
   Pressable,
 } from 'react-native';
-// @ts-ignore
 import {
   Container, Headline,
 } from '@/components';
 import { request } from '@/request';
 import { withTheme } from '@/styles/theme-context';
 import ProductPage from './product-page';
+import { IThemeProp } from '@/types';
 
-function ProductModal({ barcode, setBarcode, navigation }: any) {
+interface Props {
+  barcode: string,
+  isVisible: boolean,
+  // eslint-disable-next-line no-unused-vars
+  closeModal(): void
+  navigation: object,
+  themeProp: IThemeProp
+}
+
+function ProductModal({
+  barcode, isVisible, closeModal, navigation, themeProp,
+}: Props) {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
+
+  const { theme } = themeProp;
 
   const getProduct = async () => {
     const response = await request.get(`/products/?barcode=${barcode}`);
@@ -25,8 +38,6 @@ function ProductModal({ barcode, setBarcode, navigation }: any) {
   useEffect(() => {
     getProduct();
   }, []);
-
-  const isVisible = !!barcode;
 
   // Close this modal in a more native way using the correct props
   return (
@@ -40,8 +51,8 @@ function ProductModal({ barcode, setBarcode, navigation }: any) {
     >
       <Modal
         swipeDirection={['down']}
-        onSwipeComplete={() => setBarcode('')}
-        onBackdropPress={() => setBarcode('')}
+        onSwipeComplete={() => closeModal()}
+        onBackdropPress={() => closeModal()}
         style={{
           justifyContent: 'flex-end',
           margin: 0,
@@ -52,8 +63,8 @@ function ProductModal({ barcode, setBarcode, navigation }: any) {
         <View
           style={{
             backgroundColor: 'white',
-            borderTopLeftRadius: 30,
-            borderTopRightRadius: 30,
+            borderTopLeftRadius: theme.tokens.borderRadius,
+            borderTopRightRadius: theme.tokens.borderRadius,
           }}
         >
           <View
@@ -67,12 +78,12 @@ function ProductModal({ barcode, setBarcode, navigation }: any) {
             <Pressable
               style={{
                 width: 100,
-                borderRadius: 50,
+                borderRadius: theme.tokens.borderRadius,
                 height: 5,
                 backgroundColor: '#CCC',
               }}
               onPress={() => {
-                setBarcode('');
+                closeModal();
               }}
             />
           </View>
@@ -87,7 +98,7 @@ function ProductModal({ barcode, setBarcode, navigation }: any) {
               >
                 <Headline>Seaching for item...</Headline>
               </View>
-            ) : <ProductPage product={product} navigation={navigation} setBarcode={setBarcode} /> }
+            ) : <ProductPage product={product} navigation={navigation} closeModal={closeModal} /> }
           </Container>
         </View>
       </Modal>

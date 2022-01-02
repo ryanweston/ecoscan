@@ -1,3 +1,5 @@
+export { default as Body } from './typography/body';
+export { default as Title } from './typography/title';
 export { default as Headline } from './typography/headline';
 export { default as Container } from './elements/container';
 export { default as Subtitle } from './typography/subtitle';

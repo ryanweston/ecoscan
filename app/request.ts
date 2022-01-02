@@ -3,7 +3,7 @@ import axios from 'axios';
 let headers = {};
 
 export const request = axios.create({
-  baseURL: 'http://192.168.1.63:3000',
+  baseURL: 'http://192.168.0.141:3000',
   headers,
 });
 

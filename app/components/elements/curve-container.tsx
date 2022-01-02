@@ -1,12 +1,22 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 import { Container } from '@/components';
+import { IThemeProp } from '@/types';
+import { withTheme } from '@/styles/theme-context';
 
-const banner = require('../../styles/CLIP.png');
+interface Props {
+  topRound: boolean,
+  bottomRound: boolean,
+  children: React.ReactNode
+  themeProp: IThemeProp
+}
+
+const banner = require('@/assets/curve.png');
 
 function CurveContainer({
-  topRound, bottomRound, children,
-}: any) {
+  topRound, bottomRound, children, themeProp,
+}: Props) {
+  const { theme } = themeProp;
   return (
     <View>
       { topRound ? (
@@ -18,9 +28,9 @@ function CurveContainer({
         />
       ) : null }
 
-      <Container propStyles={{
+      <Container style={{
         marginTop: -1,
-        backgroundColor: '#95B46A',
+        backgroundColor: theme.colors.accent,
         paddingTop: 10,
       }}
       >
@@ -40,4 +50,4 @@ function CurveContainer({
   );
 }
 
-export default CurveContainer;
+export default withTheme(CurveContainer);

@@ -9,7 +9,7 @@ import Login from './login/page';
 import LoadingPage from './loading';
 
 function Main() {
-  const { auth, handleUnauthorized }: any = useContext(AuthContext);
+  const { auth, handleUnauthorized } = useContext(AuthContext);
 
   // Error handling inside scope of Auth provider to check for issues with being
   // unauthenticated.
@@ -24,11 +24,11 @@ function Main() {
     );
   }
 
-  const errorHandler = (e: any, isFatal: any) => {
+  // TODO: Type errors & cleanup error handling. Look at errory boundary
+  const errorHandler = (e: any, isFatal: boolean) => {
     // Check that it's not an API response error
     if (isFatal && e.response === undefined) {
       // Handle JS errors with an alert
-      console.warn('WARN', e.message);
       errorAlert();
     } else if (e.response && e.response.status === 401) {
       // Handle unauthenticated error
@@ -43,7 +43,6 @@ function Main() {
 
   // Handle all promise rejections with the promise handler
   setUnhandledPromiseRejectionTracker((id, error) => {
-    console.log('ERROR HANDLER PROMISE', id, error);
     errorHandler(error, false);
   });
 

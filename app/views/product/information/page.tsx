@@ -1,23 +1,41 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { Headline, Container } from '@/components';
+import { View } from 'react-native';
+import { Headline, Container, Body } from '@/components';
+
+const styles = {
+  section: {
+    marginBottom: 20,
+  },
+};
 
 function InformationPage() {
   return (
     <Container>
-      <View style={{ marginBottom: 20 }}>
+      <View style={styles.section}>
         <Headline>Impact</Headline>
-        <Text>Impact represents the environmental impact of the materials in this product. For example, recyclable and biodegradable products score higher, plastics and non-degradable materials score less.</Text>
+        <Body>
+          Impact represents the environmental impact of the materials in this product.
+          For example, recyclable and biodegradable products score higher, plastics and
+          non-degradable materials score less.
+        </Body>
       </View>
 
-      <View style={{ marginBottom: 20 }}>
+      <View style={styles.section}>
         <Headline>Quality</Headline>
-        <Text>Impact represents the environmental impact of the materials in this product. For example, recyclable and biodegradable products score higher, plastics and non-degradable materials score less.</Text>
+        <Body>
+          Impact represents the environmental impact of the materials in this product.
+          For example, recyclable and biodegradable products score higher, plastics
+          and non-degradable materials score less.
+        </Body>
       </View>
 
-      <View style={{ marginBottom: 20 }}>
+      <View style={styles.section}>
         <Headline>Brand</Headline>
-        <Text>Impact represents the environmental impact of the materials in this product. For example, recyclable and biodegradable products score higher, plastics and non-degradable materials score less.</Text>
+        <Body>
+          Impact represents the environmental impact of the materials in this product.
+          For example, recyclable and biodegradable products score higher, plastics
+          and non-degradable materials score less.
+        </Body>
       </View>
     </Container>
   );

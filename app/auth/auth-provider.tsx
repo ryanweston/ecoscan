@@ -1,15 +1,46 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, {
+  useState, useEffect, createContext, useMemo,
+} from 'react';
 import Keychain from 'react-native-keychain';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { request, setTokenHeaders } from '@/request';
+import { ITokens } from '@/types';
 
-const authDefault = { isSignedIn: false, loading: false, message: '' };
-const AuthContext = createContext(authDefault);
+interface Props {
+  children: React.ReactNode;
+}
 
-function AuthProvider({ children }: any) {
-  const [auth, setAuth] = useState(authDefault);
+interface IAuth {
+  isSignedIn: boolean,
+  loading: boolean,
+  message: string
+}
 
-  const getAuthState = async () => {
+interface IAuthContext {
+  auth: IAuth,
+  handleUnauthorized: (() => Promise<void>) | (() => void),
+  // eslint-disable-next-line no-unused-vars
+  signIn: ((value: any) => Promise<void>) | (() => void),
+  logOut: (() => Promise<void>) | (() => void),
+}
+
+const authObjectDefault: IAuth = {
+  isSignedIn: false, loading: false, message: '',
+};
+
+const authContextDefault: IAuthContext = {
+  auth: { isSignedIn: false, loading: false, message: '' },
+  handleUnauthorized: () => {},
+  signIn: () => {},
+  logOut: () => {},
+};
+
+const AuthContext = createContext<IAuthContext>(authContextDefault);
+
+function AuthProvider({ children }: Props) {
+  const [auth, setAuth] = useState<IAuth>(authObjectDefault);
+
+  async function getAuthState() {
     try {
       setAuth({ ...auth, loading: true, message: 'Signing in' });
       // Called on mount, fetches tokens from keychain, sets headers & state
@@ -24,9 +55,10 @@ function AuthProvider({ children }: any) {
     } catch (e) {
       throw Error('Error getting auth state');
     }
-  };
+  }
 
-  const signIn = async (value: any) => {
+  async function signIn(value: any) {
+    console.log('LOG VALUES FOR TYPING', value);
     setAuth({ ...auth, loading: true, message: 'Logging in' });
     // Validate user using our API
     const body = { code: value.serverAuthCode };
@@ -46,22 +78,21 @@ function AuthProvider({ children }: any) {
 
     // Change state to reflect signed in user
     setAuth({ isSignedIn: true, loading: false, message: '' });
-  };
+  }
 
-  const clearKeychain = async () => {
+  async function clearKeychain() {
     await Keychain.resetGenericPassword({ service: 'netscapes' });
     setAuth({ isSignedIn: false, loading: false, message: '' });
-  };
+  }
 
-  const logOut = async () => {
+  async function logOut() {
     setAuth({ ...auth, loading: true, message: 'Logging out' });
     await GoogleSignin.signOut();
     await request.post('/auth/logout');
     clearKeychain();
-  };
+  }
 
-  const handleUnauthorized = async () => {
-    console.log('MADE IT IN AUTH, START');
+  async function handleUnauthorized() {
     // Set loading to true while this process is happening
     setAuth({ ...auth, loading: true, message: 'Reauthenticating' });
 
@@ -69,7 +100,7 @@ function AuthProvider({ children }: any) {
     const result = await Keychain.getGenericPassword({
       service: 'netscapes',
     });
-    let tokens = {};
+    let tokens: ITokens | Record<string, never> = {};
     if (result && result.password) {
       tokens = JSON.parse(result.password);
     }
@@ -92,7 +123,6 @@ function AuthProvider({ children }: any) {
             service: 'netscapes',
           },
         );
-        console.log('MADE IT IN AUTH, RESETTING');
         setAuth({ ...auth, loading: false });
         return;
       }
@@ -100,17 +130,19 @@ function AuthProvider({ children }: any) {
     // If you have no tokens & you get no new access token from using the refresh
     // reset our client by clearing the keychain, setting isSignedIn to false.
     clearKeychain();
-  };
+  }
 
   useEffect(() => {
     getAuthState();
   }, []);
 
+  const contextValue = useMemo(() => ({
+    auth, signIn, logOut, handleUnauthorized,
+  }), [auth.loading, auth.isSignedIn]);
+
   return (
-    <AuthContext.Provider value={{
-      auth, signIn, logOut, handleUnauthorized,
-    }}
-    >
+    // @ts-ignore
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );

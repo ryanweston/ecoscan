@@ -8,6 +8,7 @@
 
 import React, { useEffect } from 'react';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Main from './app/views/main';
 import { ThemeProvider } from './app/styles/theme-context';
 import { AuthProvider } from './app/auth/auth-provider';
@@ -25,11 +26,13 @@ function App() {
   });
 
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Main />
-      </AuthProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Main />
+        </AuthProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 

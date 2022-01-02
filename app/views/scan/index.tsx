@@ -1,33 +1,37 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ScanPage from './page';
 import ReviewPage from '@/views/product/review/page';
 import InformationPage from '@/views/product/information/page';
-import { ThemeContext } from '@/styles/theme-context';
+import { withTheme } from '@/styles/theme-context';
+import { IThemeProp, ScanStackParamList } from '@/types';
 
-const Stack = createNativeStackNavigator();
+interface Props {
+  themeProp: IThemeProp
+}
 
-function Product() {
-  const { currentTheme } = useContext(ThemeContext);
+const Stack = createNativeStackNavigator<ScanStackParamList>();
+
+function Product({ themeProp }: Props) {
+  const { theme } = themeProp;
 
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
         headerStyle: {
-          backgroundColor: `${currentTheme.primary}`,
+          backgroundColor: `${theme.colors.primary}`,
         },
         headerTitleStyle: {
-          color: `${currentTheme.secondary}`,
+          color: `${theme.colors.secondary}`,
         },
-        headerTintColor: `${currentTheme.secondary}`,
+        headerTintColor: `${theme.colors.secondary}`,
       }}
     >
-      <Stack.Screen name="Scan" component={ScanPage} />
+      <Stack.Screen options={{ headerShown: false }} name="Scan" component={ScanPage} />
       <Stack.Screen name="Review" component={ReviewPage} />
       <Stack.Screen name="Information" component={InformationPage} />
     </Stack.Navigator>
   );
 }
 
-export default Product;
+export default withTheme(Product);

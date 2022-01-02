@@ -1,19 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   View, Text, StyleSheet, Image,
 } from 'react-native';
 import { ProductScore } from '..';
 import { withTheme } from '@/styles/theme-context';
+import { IProduct, ITheme, IThemeProp } from '@/types';
 
-const styles = StyleSheet.create({
+interface Props {
+  product: IProduct,
+  action: Function,
+  colour: string,
+  dark: boolean,
+  themeProp: IThemeProp,
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   flex: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
   },
   container: {
-    backgroundColor: '#648041',
+    backgroundColor: theme.colors.greys.background,
+    // backgroundColor: '#648041',
     padding: 15,
     borderRadius: 10,
     marginTop: 15,
@@ -22,24 +32,35 @@ const styles = StyleSheet.create({
 
 // Move this component to relevant place later
 function ProductItem({
-  info, setSelected, colour, dark, theme,
-}: any) {
+  product, action, colour, dark, themeProp,
+}: Props) {
+  // Pull in theme from context
+  const { theme } = themeProp;
+
+  // the Styles object will be re-generated if the theme changes
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
+
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: colour }]}
       onPress={() => {
-        setSelected(info.barcode);
+        action(product.barcode);
       }}
     >
-      {info ? (
+      {product ? (
         <View style={styles.flex}>
           <Image
             style={{ width: 50, height: 50, borderRadius: 35 }}
-            source={{ uri: info.img }}
+            source={{ uri: product.img }}
           />
           <Text
             style={[
-              dark ? { color: theme.currentTheme.secondary } : { color: 'black' },
+              dark
+                ? { color: theme.colors.textContrast }
+                : { color: theme.colors.text },
               {
                 fontWeight: 'bold',
                 flex: 1,
@@ -48,9 +69,9 @@ function ProductItem({
                 flexWrap: 'wrap',
               }]}
           >
-            {info.productName}
+            {product.productName}
           </Text>
-          <ProductScore small score={info.reviewAggregate} />
+          <ProductScore small score={product.reviewAggregate} />
         </View>
       ) : (
         <Text>Loading</Text>

@@ -1,16 +1,32 @@
 import React, { useState } from 'react';
 import { RNCamera } from 'react-native-camera';
 import {
-  StyleSheet, View, Image, Text, Pressable,
+  StyleSheet, View, Image, Text, Pressable, SafeAreaView,
 } from 'react-native';
 // @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { CompositeScreenProps } from '@react-navigation/native';
 import ProductModal from '../product/modal/product-modal';
 import { withTheme } from '@/styles/theme-context';
+import {
+  ITheme, IThemeProp, ScanStackParamList, TabParamList,
+} from '@/types';
 
-const targetImg = require('@/styles/target.png');
+type ScanScreenNavigationProp = CompositeScreenProps<
+NativeStackScreenProps<ScanStackParamList, 'Scan'>,
+BottomTabScreenProps<TabParamList>
+>;
 
-const styles = StyleSheet.create({
+interface Props {
+  navigation: ScanScreenNavigationProp['navigation'],
+  themeProp: IThemeProp
+}
+
+const targetImg = require('@/assets/target.png');
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
@@ -42,7 +58,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'black',
+    backgroundColor: theme.colors.text,
+    // backgroundColor: 'black',
   },
   preview: {
     flex: 1,
@@ -62,81 +79,91 @@ const styles = StyleSheet.create({
 // Add this package to add support for functional component:
 // https://github.com/reime005/react-native-camera-hooks
 
-function ScanPage({ navigation, theme }: any) {
+function ScanPage({ navigation, themeProp }: Props) {
   const [barcode, setBarcode] = useState('');
+
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
+
+  const isVisible = !!barcode;
+  const closeModal = () => setBarcode('');
 
   const onBarcodeRead = (scanResult: any) => {
     if (scanResult.data && scanResult.type && !barcode) {
-      // console.log('READ BARCODE', scanResult.data);
-      // console.log(typeof scanResult.data);
       setBarcode(scanResult.data);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <View style={{
-        marginTop: 10,
-        zIndex: 1000,
-        position: 'absolute',
-        top: 40,
-        left: 20,
-        width: 50,
-        height: 50,
-        justifyContent: 'center',
-        borderRadius: 100 / 2,
-        backgroundColor: theme.currentTheme.primary,
-        shadowColor: '#171717',
-        shadowOffset: { width: -2, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3,
-      }}
-      >
-        <Pressable
-          style={{
-            alignSelf: 'center',
-          }}
-          onPress={() => {
-            navigation.navigate('Home');
-          }}
+    <SafeAreaView>
+      <View style={styles.container}>
+        <View style={{
+          marginTop: 10,
+          zIndex: 1000,
+          position: 'absolute',
+          top: 40,
+          left: 20,
+          width: 50,
+          height: 50,
+          justifyContent: 'center',
+          borderRadius: 100 / 2,
+          backgroundColor: theme.colors.primary,
+        }}
         >
-          <MaterialCommunityIcons name="arrow-left" color={theme.currentTheme.secondary} size={30} />
-        </Pressable>
-      </View>
-      {barcode ? (
-        <ProductModal setBarcode={setBarcode} barcode={barcode} navigation={navigation} />
-      ) : null}
-      <RNCamera
-        ref={(ref) => {
-          this.camera = ref;
-        }}
-        style={styles.preview}
-        type={RNCamera.Constants.Type.back}
-        flashMode={RNCamera.Constants.FlashMode.on}
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        androidRecordAudioPermissionOptions={{
-          title: 'Permission to use audio recording',
-          message: 'We need your permission to use your audio',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
+          <Pressable
+            style={{
+              alignSelf: 'center',
+            }}
+            onPress={() => {
+              navigation.navigate('HomeStack', { screen: 'Home' });
+            }}
+          >
+            <MaterialCommunityIcons name="arrow-left" color={theme.colors.textContrast} size={30} />
+          </Pressable>
+        </View>
+        <RNCamera
+          ref={(ref) => {
+            this.camera = ref;
+          }}
+          style={styles.preview}
+          type={RNCamera.Constants.Type.back}
+          flashMode={RNCamera.Constants.FlashMode.on}
+          androidCameraPermissionOptions={{
+            title: 'Permission to use camera',
+            message: 'We need your permission to use your camera',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+          androidRecordAudioPermissionOptions={{
+            title: 'Permission to use audio recording',
+            message: 'We need your permission to use your audio',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
         // Remove exceptions after package is installed
         // @ts-ignore
         // eslint-disable-next-line react/jsx-no-bind
-        onBarCodeRead={onBarcodeRead.bind(this)}
-      />
-      <View style={styles.guide}>
-        <Image source={targetImg} />
-        <Text style={{ color: 'white', marginTop: 25 }}>
-          Hover over a barcode to scan
-        </Text>
+          onBarCodeRead={onBarcodeRead.bind(this)}
+        />
+        <View style={styles.guide}>
+          <Image source={targetImg} />
+          <Text style={{ color: theme.colors.textContrast, marginTop: 25 }}>
+            Hover over a barcode to scan
+          </Text>
+        </View>
       </View>
-    </View>
+      {barcode ? (
+        <ProductModal
+          isVisible={isVisible}
+          closeModal={closeModal}
+          barcode={barcode}
+          navigation={navigation}
+        />
+      ) : null}
+    </SafeAreaView>
   );
 }
 

@@ -5,15 +5,11 @@ import { ITypeComponentProps } from '@/types';
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 32,
-    fontWeight: '500',
-    lineHeight: 32,
-    marginVertical: 2,
-    letterSpacing: 0,
+    fontSize: 14,
   },
 });
 
-function Headline({
+function Body({
   dark, children, style, themeProp,
 }: ITypeComponentProps) {
   const { theme } = themeProp;
@@ -30,9 +26,9 @@ function Headline({
   );
 }
 
-Headline.defaultProps = {
+Body.defaultProps = {
   dark: false,
   style: {},
 };
 
-export default withTheme(Headline);
+export default withTheme(Body);

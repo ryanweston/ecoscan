@@ -1,17 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Text, View, StyleSheet, ScrollView, Pressable,
 } from 'react-native';
 
-// @ts-ignore
-// import ProgressBar from 'react-native-progress/Bar';
 import {
-  Headline, ProductScore, Button, Subtitle,
+  Headline, ProductScore, Button,
 } from '@/components';
 import { withTheme } from '@/styles/theme-context';
 import ScoreItem from './components/score-item';
+import { ITheme, IProduct, IThemeProp } from '@/types';
 
-const styles = StyleSheet.create({
+interface Props {
+  product: IProduct,
+  navigation: object,
+  // eslint-disable-next-line no-unused-vars
+  closeModal(): void,
+  themeProp: IThemeProp
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   scoreContainer: {
     width: '100%',
     flexDirection: 'column',
@@ -25,7 +32,8 @@ const styles = StyleSheet.create({
     paddingBottom: 35,
   },
   noScoresContainer: {
-    backgroundColor: '#EDEDED',
+    backgroundColor: theme.colors.greys.background,
+    // backgroundColor: '#EDEDED',
     borderRadius: 20,
     width: '100%',
     padding: 15,
@@ -52,20 +60,36 @@ const styles = StyleSheet.create({
 });
 
 function ProductPage({
-  product, navigation, setBarcode,
-}: any) {
+  product, navigation, closeModal, themeProp,
+}: Props) {
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
+
   return product ? (
     <ScrollView>
       <View style={styles.scoreContainer}>
         <ProductScore score={product.reviewAggregate} large />
       </View>
+
       <View style={styles.nameContainer}>
         <View style={{ flex: 1 }}>
-          <Headline propStyles={styles.nameText}>{product.productName}</Headline>
-          <Text style={styles.nameText}>{product.brand.name}</Text>
+          <Headline style={styles.nameText}>
+            {product.productName}
+          </Headline>
+
+          { product.brand ? (
+            <Text style={styles.nameText}>
+              {product.brand.name}
+            </Text>
+          ) : null }
+
         </View>
+
         <Pressable onPress={() => {
-          setBarcode('');
+          closeModal();
           navigation.navigate('Information');
         }}
         >
@@ -94,7 +118,7 @@ function ProductPage({
             </View>
           )}
 
-        { product.brand.sustainabilityScore !== 'NaN' ? (
+        { product.brand && product.brand.sustainabilityScore !== 'NaN' ? (
           <View>
             <ScoreItem
               title="Brand"
@@ -111,7 +135,7 @@ function ProductPage({
       <Button
         text="Add a review"
         action={() => {
-          setBarcode('');
+          closeModal();
           navigation.navigate('Review', { product });
         }}
       />

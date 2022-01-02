@@ -1,19 +1,24 @@
 import React, { useContext } from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Pressable, View, Image } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
 import HomeStack from '@/views/home/index';
-import ScanPage from '@/views/scan/page';
-import { ThemeContext } from '@/styles/theme-context';
+import ScanStack from '@/views/scan';
 import { AuthContext } from '@/auth/auth-provider';
 import ProfilePage from './profile/page'; // Change to index for the navigation
+import { withTheme } from '@/styles/theme-context';
+import { IThemeProp, TabParamList } from '@/types';
 
-const logo = require('../styles/tabbarIcon.png');
+const logo = require('@/assets/tabbarIcon.png');
+
+interface Props {
+  themeProp: IThemeProp
+}
 
 function ButtonProp() {
-  const { logOut }: any = useContext(AuthContext);
+  const { logOut } = useContext(AuthContext);
 
   return (
     <Pressable style={{ marginRight: 10 }} onPress={() => logOut()}>
@@ -22,11 +27,36 @@ function ButtonProp() {
   );
 }
 
-function BottomNavigation() {
-  const Tab = createBottomTabNavigator();
-  const { currentTheme } = useContext(ThemeContext);
+function ScanButton() {
+  return (
+    <View style={{
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: 85,
+      width: 80,
+      borderRadius: 120,
+      backgroundColor: '#648142',
+      zIndex: 1000,
+    }}
+    >
+      <Image
+        style={{
+          aspectRatio: 0.7,
+          resizeMode: 'contain',
+          marginBottom: 12,
+        }}
+        source={logo}
+      />
+    </View>
+  );
+}
 
-  const screenOptions = (route: any, color?: string) => {
+function BottomNavigation({ themeProp }: Props) {
+  const Tab = createBottomTabNavigator<TabParamList>();
+  const { theme } = themeProp;
+
+  const screenOptions = (route: RouteProp<TabParamList>, color?: string) => {
     let icon; let header; let size;
 
     switch (route.name) {
@@ -35,11 +65,11 @@ function BottomNavigation() {
         header = false;
         size = 30;
         break;
-      case 'Scan':
+      case 'ScanStack':
         icon = 'camera-iris';
         header = false;
         size = 30;
-        break;
+        return { header, icon: <ScanButton /> };
       case 'Profile':
         header = true;
         icon = 'account';
@@ -50,30 +80,7 @@ function BottomNavigation() {
     }
     return {
       header,
-      icon: route.name === 'Scan'
-        ? (
-          <View style={{
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 85,
-            width: 80,
-            borderRadius: 120,
-            backgroundColor: '#648142',
-            zIndex: 1000,
-          }}
-          >
-            <Image
-              style={{
-                aspectRatio: 0.7,
-                resizeMode: 'contain',
-                marginBottom: 12,
-              }}
-              source={logo}
-            />
-          </View>
-        )
-        : <MaterialCommunityIcons name={icon} color={color} size={size} />,
+      icon: <MaterialCommunityIcons name={icon} color={color} size={size} />,
     };
   };
 
@@ -86,21 +93,28 @@ function BottomNavigation() {
         headerShown: screenOptions(route).header,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: `${currentTheme.primary}`,
+          backgroundColor: `${theme.colors.primary}`,
         },
-        tabBarActiveTintColor: `${currentTheme.secondary}`,
-        tabBarInactiveTintColor: `${currentTheme.accent}`,
+        tabBarActiveTintColor: `${theme.colors.secondary}`,
+        tabBarInactiveTintColor: `${theme.colors.accent}`,
       })}
     >
       <Tab.Screen name="HomeStack" component={HomeStack} />
-      <Tab.Screen options={{ headerShown: false, tabBarStyle: { display: 'none' } }} name="Scan" component={ScanPage} />
+      <Tab.Screen
+        options={{
+          headerShown: false,
+          tabBarStyle: { display: 'none' },
+        }}
+        name="ScanStack"
+        component={ScanStack}
+      />
       <Tab.Screen
         options={{
           headerStyle: {
-            backgroundColor: `${currentTheme.primary}`,
+            backgroundColor: `${theme.colors.primary}`,
           },
           headerTitleStyle: {
-            color: `${currentTheme.secondary}`,
+            color: `${theme.colors.secondary}`,
           },
           headerRight: () => (
             ButtonProp()
@@ -113,4 +127,4 @@ function BottomNavigation() {
   );
 }
 
-export default BottomNavigation;
+export default withTheme(BottomNavigation);

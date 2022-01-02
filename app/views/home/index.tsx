@@ -1,25 +1,30 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './page';
 import InformationPage from '../product/information/page';
 import ReviewPage from '../product/review/page';
-import { ThemeContext } from '../../styles/theme-context';
+import { withTheme } from '@/styles/theme-context';
+import { HomeStackParamList, IThemeProp } from '@/types';
 
-const Stack = createNativeStackNavigator();
+interface Props {
+  themeProp: IThemeProp
+}
 
-function HomeStack() {
-  const { currentTheme } = useContext(ThemeContext);
+const Stack = createNativeStackNavigator<HomeStackParamList>();
+
+function HomeStack({ themeProp }: Props) {
+  const { theme } = themeProp;
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: `${currentTheme.primary}`,
+          backgroundColor: `${theme.colors.primary}`,
         },
         headerTitleStyle: {
-          color: `${currentTheme.secondary}`,
+          color: `${theme.colors.secondary}`,
         },
-        headerTintColor: `${currentTheme.secondary}`,
+        headerTintColor: `${theme.colors.secondary}`,
       }}
     >
       <Stack.Screen
@@ -33,4 +38,4 @@ function HomeStack() {
   );
 }
 
-export default HomeStack;
+export default withTheme(HomeStack);

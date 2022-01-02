@@ -1,19 +1,23 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text, ScrollView, View, Image, StyleSheet,
 } from 'react-native';
 import { Container, CurveContainer, Headline } from '@/components';
-import { ThemeContext } from '@/styles/theme-context';
 import { request } from '@/request';
-import { IUser } from '@/types';
+import { ITheme, IThemeProp, IUser } from '@/types';
+import { withTheme } from '@/styles/theme-context';
 
-const styles = StyleSheet.create({
+interface Props {
+  themeProp: IThemeProp
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   container: {
     padding: 15,
     marginLeft: 10,
     borderWidth: 1,
     borderRadius: 50,
-    borderColor: '#CCC',
+    borderColor: theme.colors.greys.background,
     flexGrow: 1,
   },
   wrapper: {
@@ -24,9 +28,14 @@ const styles = StyleSheet.create({
   },
 });
 
-function ProfilePage() {
+function ProfilePage({ themeProp }: Props) {
   const [user, setUser] = useState<IUser | Record<string, never>>({});
-  const { currentTheme } = useContext(ThemeContext);
+
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
 
   const fetchUser = async () => {
     const response = await request.get('/users/me');
@@ -52,7 +61,7 @@ function ProfilePage() {
             >
               <Image
                 style={{
-                  borderColor: `${currentTheme.secondary}`,
+                  borderColor: `${theme.colors.secondary}`,
                   borderWidth: 7,
                   borderRadius: 100,
                   width: 200,
@@ -99,4 +108,4 @@ function ProfilePage() {
     </ScrollView>
   );
 }
-export default ProfilePage;
+export default withTheme(ProfilePage);

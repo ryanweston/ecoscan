@@ -1,21 +1,35 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
+import { withTheme } from '@/styles/theme-context';
+import { ITheme, IThemeProp } from '@/types';
 
-const styles = StyleSheet.create({
+interface Props {
+  text: string,
+  action(): void
+  themeProp: IThemeProp
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   button: {
     padding: 20,
     color: 'white',
-    backgroundColor: '#648142',
+    backgroundColor: theme.colors.primary,
     borderRadius: 100,
   },
   text: {
     textAlign: 'center',
-    color: 'white',
+    color: theme.colors.text,
     fontWeight: 'bold',
   },
 });
 
-function Button({ text, action }: any) {
+function Button({ text, action, themeProp }: Props) {
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
+
   return (
     <Pressable
       style={styles.button}
@@ -28,4 +42,4 @@ function Button({ text, action }: any) {
   );
 }
 
-export default Button;
+export default withTheme(Button);

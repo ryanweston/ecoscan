@@ -1,16 +1,22 @@
-import React from 'react';
-import { theme } from './theme';
+// Disable prop spreading for HOC component
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useMemo } from 'react';
+import { themeOptions } from './theme';
+
+interface Props {
+  children: React.ReactNode
+}
 
 const initializeTheme = {
   dark: true,
-  currentTheme: theme.dark,
+  theme: themeOptions.dark,
   toggle: () => {},
 };
 
 // Create context using initial theme that's accessible through the whole component tree
 const ThemeContext = React.createContext(initializeTheme);
 
-function ThemeProvider({ children }: any) {
+function ThemeProvider({ children }: Props) {
   const [dark, setDark] = React.useState(true); // Default theme is light
 
   // On mount, read the preferred theme from the persistence
@@ -21,20 +27,26 @@ function ThemeProvider({ children }: any) {
     setDark(isDark);
   };
 
-  const currentTheme = dark ? theme.dark : theme.light;
+  const theme = dark ? themeOptions.dark : themeOptions.light;
+
+  const themeValues = useMemo(() => ({
+    dark, theme, toggle,
+  }), [dark]);
 
   return (
-    <ThemeContext.Provider value={{ currentTheme, dark, toggle }}>
+    <ThemeContext.Provider value={themeValues}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
 // Compositional HOC component that wraps given component in a context consumer
-const withTheme = (WrappedComponent: any) => function ({ ...props }: any) {
+// eslint-disable-next-line func-names
+const withTheme = <P extends object>(Component: React.FunctionComponent<P>) => function
+({ ...props }) {
   return (
     <ThemeContext.Consumer>
-      {(currentTheme) => <WrappedComponent theme={currentTheme} {...props} />}
+      {(themeValues) => <Component themeProp={themeValues} {...props as P} />}
     </ThemeContext.Consumer>
   );
 };

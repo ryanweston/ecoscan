@@ -5,6 +5,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ProgressSnail from 'react-native-progress/CircleSnail';
 import { Headline } from '@/components';
 
+interface Props {
+  message: string
+}
+
 const styles = StyleSheet.create({
   container: {
     height: '100%',
@@ -16,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function LoadingPage({ message }: any) {
+function LoadingPage({ message }: Props) {
   return (
     <SafeAreaView style={styles.container}>
       <ProgressSnail style={{ marginBottom: 30 }} size={175} color={['green']} />

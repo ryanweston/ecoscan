@@ -4,22 +4,53 @@ export interface IUser {
   picture: string,
 }
 
-export interface IProducts extends Array<IProduct>{}
-
-export interface IProduct {
-  barcode: string,
-  productName: string;
-  image: string;
-  reviewAggregate: IReview | Record<string, never>;
-  reviewAmount: number,
-  scanAmount: number,
-  src: string
+export interface ITokens {
+  accessToken: string,
+  refreshToken: string,
 }
 
-export interface IReview {
-  qualityScore: number;
-  sustainabilityScore: number;
+export interface IThemeProp {
+  dark: boolean,
+  theme: ITheme,
+  toggle(): void
 }
-export interface IBrand {
+export interface ITheme {
+  colors: {
+    primary: string,
+    secondary: string,
+    accent: string,
+    greys: {
+      background: string,
+      button: string,
+    },
+    text: string,
+    textContrast: string,
+    score: {
+      low: string,
+      med: string,
+      high: string,
+    },
+  },
+  tokens: {
+    borderRadius: number,
+    padding: number,
+    marginTop: number,
+    marginBottom: number,
+  },
+}
 
-}
+export type {
+  TabParamList,
+  ScanStackParamList,
+  HomeStackParamList,
+  ITypeComponentProps,
+} from '@/types/props';
+
+export type {
+  IProduct,
+  IProducts,
+  ISustainableProduct,
+  ISustainableProducts,
+  IBrand,
+  IReview,
+} from '@/types/products';

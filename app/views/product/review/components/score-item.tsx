@@ -2,11 +2,20 @@ import React from 'react';
 import {
   View, Text, StyleSheet, TouchableWithoutFeedback,
 } from 'react-native';
+import { shadowStyle } from '@/styles/theme';
+import { withTheme } from '@/styles/theme-context';
+import { ITheme, IThemeProp } from '@/types';
 
-const styles = StyleSheet.create({
+interface Props {
+  // eslint-disable-next-line no-unused-vars
+  action: (value: number) => void,
+  score: number,
+  themeProp: IThemeProp
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   input: {
     fontSize: 30,
-    // marginRight: 10,
     fontWeight: 'bold',
     color: 'white',
     lineHeight: 0,
@@ -22,19 +31,26 @@ const styles = StyleSheet.create({
     borderRadius: 120,
   },
   selected: {
-    backgroundColor: '#648142',
-    shadowColor: '#171717',
-    shadowOffset: { width: -2, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    backgroundColor: theme.colors.primary,
   },
+  shadowStyle,
 });
 
-function ScoreItem({ action, score }: any) {
+function ScoreItem({ action, score, themeProp }: Props) {
   const options = [1, 2, 3, 4, 5];
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
 
   return (
-    <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'space-between' }}>
+    <View style={{
+      flexDirection: 'row',
+      marginTop: 15,
+      justifyContent: 'space-between',
+    }}
+    >
       {options.map((scoreOption) => {
         const selected = !!(score === scoreOption);
         return (
@@ -44,7 +60,11 @@ function ScoreItem({ action, score }: any) {
               action(scoreOption);
             }}
           >
-            <View style={[styles.default, selected ? styles.selected : null]}>
+            <View style={[
+              styles.default,
+              selected ? [styles.selected, styles.shadowStyle] : null,
+            ]}
+            >
               <Text
                 style={[
                   styles.input,
@@ -60,4 +80,4 @@ function ScoreItem({ action, score }: any) {
   );
 }
 
-export default ScoreItem;
+export default withTheme(ScoreItem);
