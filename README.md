@@ -23,8 +23,6 @@ If again, it doesn't work, ensure your paths are exported correctly.
 `cd ios && pod install && cd ..`
 open xcode, build
 
-
-
 ## Run simulator on M1
 
 Project settings > Build Settings > Excluded Architecture > Set both emulator values to ARM64
@@ -34,3 +32,18 @@ Pod settings > Build Settings > Excluded Architecture > Set both emulator values
 ## Run simulator on external device
 
 XCode > Accounts > Add personal account
+
+# Commit style
+`npm install`
+`cd ios && pod install && cd ..`
+open xcode, build
+
+# Errors
+`npm install`
+`cd ios && pod install && cd ..`
+open xcode, build
+
+# Style guide
+`npm install`
+`cd ios && pod install && cd ..`
+open xcode, build
