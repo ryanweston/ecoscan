@@ -50,6 +50,7 @@ describe('Authentication flow:', () => {
   it('Credentials: Home page rendered', async () => {
     // Mock returned data for subsequent get calls.
     request.get.mockReturnValueOnce({ data: mockProducts })
+      .mockReturnValueOnce({ data: mockProducts })
       .mockReturnValueOnce({ data: mockSustainableProducts });
 
     const app = render(<App />);
@@ -67,9 +68,11 @@ describe('Authentication flow:', () => {
     // In the future: Test home component seperately and use Enzyme for
     // better component tree testing, in regards to snapshots.
     expect(request.get).toHaveBeenNthCalledWith(1, '/products/most-popular');
-    expect(request.get).toHaveBeenNthCalledWith(2, '/products/most-sustainable');
+
+    // Expect from 3rd due to focus callback recalling API.
+    expect(request.get).toHaveBeenNthCalledWith(3, '/products/most-sustainable');
     expect(request.get).toHaveNthReturnedWith(1, { data: mockProducts });
-    expect(request.get).toHaveNthReturnedWith(2, { data: mockSustainableProducts });
+    expect(request.get).toHaveNthReturnedWith(3, { data: mockSustainableProducts });
   });
 
   it('No credentials: Login page rendered', async () => {

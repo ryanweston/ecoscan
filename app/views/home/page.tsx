@@ -54,7 +54,6 @@ function Home({ navigation, themeProp }: Props) {
   useStatusBar('dark-content');
   const { theme } = themeProp;
 
-  // const isVisible = !!selected;
   const closeModal = () => setSelected('');
 
   const getProducts = useCallback(async () => {
@@ -66,7 +65,6 @@ function Home({ navigation, themeProp }: Props) {
   }, []);
 
   useEffect(() => {
-    console.log('HOME RENDER');
     // Update products when page is revisited
     navigation.addListener(
       'focus',
