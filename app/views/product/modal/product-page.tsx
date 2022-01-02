@@ -1,19 +1,23 @@
 import React from 'react';
 import {
-  Text, View, StyleSheet, ScrollView, Pressable,
+  Text, View, StyleSheet, ScrollView,
 } from 'react-native';
 
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
-  Headline, ProductScore, Button,
+  Title, ProductScore, Button, Tooltip,
 } from '@/components';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import ScoreItem from './components/score-item';
-import { ITheme, IProduct, IThemeProp } from '@/types';
+import {
+  ITheme, IProduct, IThemeProp, HomeStackParamList, ScanStackParamList,
+} from '@/types';
+
+type ModalScreenNavigationProp = NativeStackScreenProps<HomeStackParamList | ScanStackParamList>
 
 interface Props {
   product: IProduct,
-  navigation: object,
-  // eslint-disable-next-line no-unused-vars
+  navigation: ModalScreenNavigationProp['navigation'],
   closeModal(): void,
   themeProp: IThemeProp
 }
@@ -25,16 +29,15 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     justifyContent: 'center',
     marginRight: 'auto',
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingBottom: theme.tokens.gap,
   },
   progressContainer: {
-    paddingTop: 35,
+    paddingTop: 30,
     paddingBottom: 35,
   },
   noScoresContainer: {
     backgroundColor: theme.colors.greys.background,
-    // backgroundColor: '#EDEDED',
-    borderRadius: 20,
+    borderRadius: theme.tokens.borderRadius,
     width: '100%',
     padding: 15,
   },
@@ -46,16 +49,6 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
   nameText: {
     flex: 1,
     flexWrap: 'wrap',
-  },
-  tooltip: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 25,
-    width: 25,
-    borderColor: '#CCC',
-    borderWidth: 2,
-    borderRadius: 40,
   },
 });
 
@@ -76,9 +69,9 @@ function ProductPage({
 
       <View style={styles.nameContainer}>
         <View style={{ flex: 1 }}>
-          <Headline style={styles.nameText}>
+          <Title style={styles.nameText}>
             {product.productName}
-          </Headline>
+          </Title>
 
           { product.brand ? (
             <Text style={styles.nameText}>
@@ -87,16 +80,11 @@ function ProductPage({
           ) : null }
 
         </View>
-
-        <Pressable onPress={() => {
+        <Tooltip action={() => {
           closeModal();
           navigation.navigate('Information');
         }}
-        >
-          <View style={styles.tooltip}>
-            <Text style={{ fontWeight: 'bold', color: '#CCC' }}>?</Text>
-          </View>
-        </Pressable>
+        />
       </View>
 
       <View style={styles.progressContainer}>
@@ -126,7 +114,7 @@ function ProductPage({
             />
           </View>
         ) : (
-          <View style={[styles.noScoresContainer, { marginTop: 20 }]}>
+          <View style={[styles.noScoresContainer, { marginTop: theme.tokens.gap }]}>
             <Text>We have yet to review this brand</Text>
           </View>
         )}
@@ -149,7 +137,7 @@ function ProductPage({
         justifyContent: 'center',
       }}
     >
-      <Headline>Sorry, we couldn&lsquo;t find this item.</Headline>
+      <Title>Sorry, we couldn&lsquo;t find this item.</Title>
     </View>
   );
 }

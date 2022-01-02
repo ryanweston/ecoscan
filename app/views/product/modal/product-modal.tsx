@@ -5,16 +5,15 @@ import {
   Pressable,
 } from 'react-native';
 import {
-  Container, Headline,
+  Container, Title,
 } from '@/components';
 import { request } from '@/request';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import ProductPage from './product-page';
 import { IThemeProp } from '@/types';
 
 interface Props {
   barcode: string,
-  isVisible: boolean,
   // eslint-disable-next-line no-unused-vars
   closeModal(): void
   navigation: object,
@@ -22,7 +21,7 @@ interface Props {
 }
 
 function ProductModal({
-  barcode, isVisible, closeModal, navigation, themeProp,
+  barcode, closeModal, navigation, themeProp,
 }: Props) {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
@@ -35,9 +34,11 @@ function ProductModal({
     setLoading(false);
   };
 
+  const isVisible = !!barcode;
+
   useEffect(() => {
-    getProduct();
-  }, []);
+    if (barcode) getProduct();
+  }, [barcode]);
 
   // Close this modal in a more native way using the correct props
   return (
@@ -80,7 +81,7 @@ function ProductModal({
                 width: 100,
                 borderRadius: theme.tokens.borderRadius,
                 height: 5,
-                backgroundColor: '#CCC',
+                backgroundColor: theme.colors.greys.border,
               }}
               onPress={() => {
                 closeModal();
@@ -96,7 +97,7 @@ function ProductModal({
                   justifyContent: 'center',
                 }}
               >
-                <Headline>Seaching for item...</Headline>
+                <Title>Seaching for item...</Title>
               </View>
             ) : <ProductPage product={product} navigation={navigation} closeModal={closeModal} /> }
           </Container>

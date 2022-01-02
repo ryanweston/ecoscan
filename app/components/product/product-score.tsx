@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { withTheme } from '@/styles/theme-context';
-import { shadowStyle } from '@/styles/theme';
+import { withTheme } from '@/theme/theme-context';
+import { shadowStyle } from '@/theme/theme';
 import { ITheme, IThemeProp, IReview } from '@/types';
 
 interface Props {
@@ -21,10 +21,10 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     marginLeft: 'auto',
   },
   containerMedium: {
-    width: 75,
-    height: 75,
+    width: 65,
+    height: 65,
     justifyContent: 'center',
-    borderRadius: 150 / 2,
+    borderRadius: 130 / 2,
   },
   containerLarge: {
     width: 120,
@@ -42,7 +42,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
     color: 'white',
-    fontSize: 24,
+    fontSize: 22,
   },
   scoreLarge: {
     alignSelf: 'center',
@@ -63,7 +63,7 @@ function ProductScore({
   );
 
   const [background, setBackground] = useState(theme.colors.greys.background);
-  const [colour, setColour] = useState('#CCC');
+  const [colour, setColour] = useState(theme.colors.score.noScore);
 
   // TODO: Handle this in a cleaner way
   useEffect(() => {
@@ -75,7 +75,7 @@ function ProductScore({
       } else if (checkScore <= 4) {
         setBackground(theme.colors.score.med);
         setColour(theme.colors.secondary);
-      } else if (checkScore === 5) {
+      } else if (checkScore <= 5) {
         setBackground(theme.colors.score.high);
         setColour(theme.colors.secondary);
       }

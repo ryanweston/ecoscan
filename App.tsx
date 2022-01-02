@@ -10,7 +10,7 @@ import React, { useEffect } from 'react';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Main from './app/views/main';
-import { ThemeProvider } from './app/styles/theme-context';
+import { ThemeProvider } from './app/theme/theme-context';
 import { AuthProvider } from './app/auth/auth-provider';
 import 'react-native-gesture-handler';
 

@@ -2,7 +2,7 @@ import React, {
   useState, useEffect, createContext, useMemo,
 } from 'react';
 import Keychain from 'react-native-keychain';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, User } from '@react-native-google-signin/google-signin';
 import { request, setTokenHeaders } from '@/request';
 import { ITokens } from '@/types';
 
@@ -57,8 +57,7 @@ function AuthProvider({ children }: Props) {
     }
   }
 
-  async function signIn(value: any) {
-    console.log('LOG VALUES FOR TYPING', value);
+  async function signIn(value: User) {
     setAuth({ ...auth, loading: true, message: 'Logging in' });
     // Validate user using our API
     const body = { code: value.serverAuthCode };

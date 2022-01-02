@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ScanPage from './page';
 import ReviewPage from '@/views/product/review/page';
 import InformationPage from '@/views/product/information/page';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import { IThemeProp, ScanStackParamList } from '@/types';
 
 interface Props {

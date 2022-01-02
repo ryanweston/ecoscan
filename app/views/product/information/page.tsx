@@ -1,44 +1,64 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Headline, Container, Body } from '@/components';
+import { View, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import {
+  Subtitle, Title, Container, Body,
+} from '@/components';
+import { ITheme, IThemeProp } from '@/types';
+import { withTheme } from '@/theme/theme-context';
 
-const styles = {
+interface Props {
+  themeProp: IThemeProp
+}
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
   section: {
-    marginBottom: 20,
+    marginBottom: theme.tokens.gap,
   },
-};
+});
 
-function InformationPage() {
+function InformationPage({ themeProp }: Props) {
+  const { theme } = themeProp;
+  const styles = React.useMemo(
+    () => createStyles(theme),
+    [theme],
+  );
+
   return (
-    <Container>
-      <View style={styles.section}>
-        <Headline>Impact</Headline>
-        <Body>
-          Impact represents the environmental impact of the materials in this product.
-          For example, recyclable and biodegradable products score higher, plastics and
-          non-degradable materials score less.
-        </Body>
-      </View>
+    <ScrollView>
+      <Container>
+        <View style={styles.section}>
+          <Title>How do we calculate our sustainability scores?</Title>
+        </View>
+        <View style={styles.section}>
+          <Subtitle>Impact</Subtitle>
+          <Body>
+            Impact represents the environmental impact of the materials in this product.
+            For example, recyclable and biodegradable products score higher, plastics and
+            non-degradable materials score less.
+          </Body>
+        </View>
 
-      <View style={styles.section}>
-        <Headline>Quality</Headline>
-        <Body>
-          Impact represents the environmental impact of the materials in this product.
-          For example, recyclable and biodegradable products score higher, plastics
-          and non-degradable materials score less.
-        </Body>
-      </View>
+        <View style={styles.section}>
+          <Subtitle>Quality</Subtitle>
+          <Body>
+            Impact represents the environmental impact of the materials in this product.
+            For example, recyclable and biodegradable products score higher, plastics
+            and non-degradable materials score less.
+          </Body>
+        </View>
 
-      <View style={styles.section}>
-        <Headline>Brand</Headline>
-        <Body>
-          Impact represents the environmental impact of the materials in this product.
-          For example, recyclable and biodegradable products score higher, plastics
-          and non-degradable materials score less.
-        </Body>
-      </View>
-    </Container>
+        <View style={styles.section}>
+          <Subtitle>Brand</Subtitle>
+          <Body>
+            Impact represents the environmental impact of the materials in this product.
+            For example, recyclable and biodegradable products score higher, plastics
+            and non-degradable materials score less.
+          </Body>
+        </View>
+      </Container>
+    </ScrollView>
   );
 }
 
-export default InformationPage;
+export default withTheme(InformationPage);

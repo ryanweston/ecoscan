@@ -4,12 +4,13 @@ import {
   View, Text, StyleSheet, Image,
 } from 'react-native';
 import { ProductScore } from '..';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import { IProduct, ITheme, IThemeProp } from '@/types';
 
 interface Props {
   product: IProduct,
-  action: Function,
+  // eslint-disable-next-line no-unused-vars
+  action(arg: string): void,
   colour: string,
   dark: boolean,
   themeProp: IThemeProp,
@@ -53,7 +54,7 @@ function ProductItem({
       {product ? (
         <View style={styles.flex}>
           <Image
-            style={{ width: 50, height: 50, borderRadius: 35 }}
+            style={{ width: 50, height: 50, borderRadius: 50 / 2 }}
             source={{ uri: product.img }}
           />
           <Text
@@ -64,7 +65,7 @@ function ProductItem({
               {
                 fontWeight: 'bold',
                 flex: 1,
-                paddingLeft: 10,
+                paddingLeft: 15,
                 fontSize: 14,
                 flexWrap: 'wrap',
               }]}

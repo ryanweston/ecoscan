@@ -3,7 +3,7 @@ import axios from 'axios';
 let headers = {};
 
 export const request = axios.create({
-  baseURL: 'http://192.168.0.141:3000',
+  baseURL: 'https://netscapes-api-01.herokuapp.com',
   headers,
 });
 

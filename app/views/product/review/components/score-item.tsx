@@ -2,8 +2,8 @@ import React from 'react';
 import {
   View, Text, StyleSheet, TouchableWithoutFeedback,
 } from 'react-native';
-import { shadowStyle } from '@/styles/theme';
-import { withTheme } from '@/styles/theme-context';
+import { shadowStyle } from '@/theme/theme';
+import { withTheme } from '@/theme/theme-context';
 import { ITheme, IThemeProp } from '@/types';
 
 interface Props {

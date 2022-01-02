@@ -2,7 +2,7 @@ import React, {
   useEffect, useState, useCallback,
 } from 'react';
 import {
-  SafeAreaView, Text, StyleSheet, Image, StatusBar, Pressable,
+  SafeAreaView, Text, StyleSheet, Image, Pressable,
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -13,12 +13,13 @@ import {
 } from '@/components';
 import ProductItem from '@/components/product/product-item'; // Move to relevant place later
 import { request } from '@/request';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import ProductModal from '@/views/product/modal/product-modal';
 import {
   HomeStackParamList, IProducts, ISustainableProducts, IThemeProp,
   TabParamList,
 } from '@/types';
+import { useStatusBar } from '@/utils/statusBar';
 
 type HomeScreenNavigationProp = CompositeScreenProps<
   NativeStackScreenProps<HomeStackParamList, 'Home'>,
@@ -50,9 +51,10 @@ function Home({ navigation, themeProp }: Props) {
   const [sustainableProducts, setSustainableProducts] = useState<ISustainableProducts>([]);
   const [selected, setSelected] = useState('');
 
+  useStatusBar('dark-content');
   const { theme } = themeProp;
 
-  const isVisible = !!selected;
+  // const isVisible = !!selected;
   const closeModal = () => setSelected('');
 
   const getProducts = useCallback(async () => {
@@ -64,12 +66,19 @@ function Home({ navigation, themeProp }: Props) {
   }, []);
 
   useEffect(() => {
+    console.log('HOME RENDER');
+    // Update products when page is revisited
+    navigation.addListener(
+      'focus',
+      () => {
+        getProducts();
+      },
+    );
     getProducts();
   }, [getProducts]);
 
   return (
     <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
       <ScrollView>
 
         <Container>
@@ -140,8 +149,7 @@ function Home({ navigation, themeProp }: Props) {
         {selected ? (
           <ProductModal
             barcode={selected}
-            isVisible={isVisible}
-            closeModal={closeModal()}
+            closeModal={closeModal}
             navigation={navigation}
           />
         ) : null}

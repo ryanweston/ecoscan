@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import {
   Text, ScrollView, View, Image, StyleSheet,
 } from 'react-native';
-import { Container, CurveContainer, Headline } from '@/components';
+import { Container, CurveContainer, Title } from '@/components';
 import { request } from '@/request';
 import { ITheme, IThemeProp, IUser } from '@/types';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
+import { useStatusBar } from '@/utils/statusBar';
 
 interface Props {
   themeProp: IThemeProp
@@ -16,8 +17,8 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     padding: 15,
     marginLeft: 10,
     borderWidth: 1,
-    borderRadius: 50,
-    borderColor: theme.colors.greys.background,
+    borderRadius: theme.tokens.borderRadius,
+    borderColor: theme.colors.greys.border,
     flexGrow: 1,
   },
   wrapper: {
@@ -31,6 +32,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
 function ProfilePage({ themeProp }: Props) {
   const [user, setUser] = useState<IUser | Record<string, never>>({});
 
+  useStatusBar('light-content');
   const { theme } = themeProp;
   const styles = React.useMemo(
     () => createStyles(theme),
@@ -56,7 +58,7 @@ function ProfilePage({ themeProp }: Props) {
                 width: '100%',
                 flexDirection: 'column',
                 alignItems: 'center',
-                paddingTop: 20,
+                paddingTop: theme.tokens.gap,
               }}
             >
               <Image
@@ -77,9 +79,9 @@ function ProfilePage({ themeProp }: Props) {
       {user ? (
         <View>
           <Container>
-            <Headline>
+            <Title>
               Account
-            </Headline>
+            </Title>
             <View style={styles.wrapper}>
               <Text>
                 Name:

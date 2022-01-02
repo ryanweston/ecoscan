@@ -8,7 +8,7 @@ import HomeStack from '@/views/home/index';
 import ScanStack from '@/views/scan';
 import { AuthContext } from '@/auth/auth-provider';
 import ProfilePage from './profile/page'; // Change to index for the navigation
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import { IThemeProp, TabParamList } from '@/types';
 
 const logo = require('@/assets/tabbarIcon.png');

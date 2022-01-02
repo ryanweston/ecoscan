@@ -1,13 +1,13 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import { ITypeComponentProps } from '@/types';
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '500',
-    lineHeight: 32,
+    lineHeight: 35,
     marginVertical: 2,
     letterSpacing: 0,
   },

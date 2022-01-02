@@ -5,7 +5,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { Button, Title } from '@/components';
-import { HomeStackParamList, ScanStackParamList, TabParamList } from '@/types';
+import { withTheme } from '@/theme/theme-context';
+import {
+  HomeStackParamList, ScanStackParamList, TabParamList, IThemeProp,
+} from '@/types';
 
 type ReviewScreenNavigationProp = CompositeScreenProps<
   NativeStackScreenProps<HomeStackParamList | ScanStackParamList, 'Review'>,
@@ -15,23 +18,29 @@ interface Props {
   isVisible: boolean,
   setModal(): void,
   navigation: ReviewScreenNavigationProp['navigation']
+  themeProp: IThemeProp
 }
 
-function ReviewSuccess({ isVisible, setModal, navigation }: Props) {
+function ReviewSuccess({
+  isVisible, setModal, navigation, themeProp,
+}: Props) {
+  const { theme } = themeProp;
   return (
     <Modal
       isVisible={isVisible}
     >
       <View style={{
-        backgroundColor: 'white', padding: 20, borderRadius: 20,
+        backgroundColor: theme.colors.background,
+        padding: theme.tokens.gap,
+        borderRadius: theme.tokens.gap,
       }}
       >
         <Title style={{ marginBottom: 20, textAlign: 'center' }}>Review submitted</Title>
         <Button
-          text="Back to home"
+          text="Back"
           action={() => {
             setModal();
-            navigation.navigate('HomeStack', { screen: 'Home' });
+            navigation.popToTop();
           }}
         />
       </View>
@@ -39,4 +48,4 @@ function ReviewSuccess({ isVisible, setModal, navigation }: Props) {
   );
 }
 
-export default ReviewSuccess;
+export default withTheme(ReviewSuccess);

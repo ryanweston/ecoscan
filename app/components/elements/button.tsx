@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import { ITheme, IThemeProp } from '@/types';
 
 interface Props {
@@ -11,14 +11,14 @@ interface Props {
 
 const createStyles = (theme: ITheme) => StyleSheet.create({
   button: {
-    padding: 20,
+    padding: theme.tokens.gap,
     color: 'white',
     backgroundColor: theme.colors.primary,
     borderRadius: 100,
   },
   text: {
     textAlign: 'center',
-    color: theme.colors.text,
+    color: theme.colors.textContrast,
     fontWeight: 'bold',
   },
 });

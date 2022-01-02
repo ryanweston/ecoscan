@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomePage from './page';
 import InformationPage from '../product/information/page';
 import ReviewPage from '../product/review/page';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import { HomeStackParamList, IThemeProp } from '@/types';
 
 interface Props {

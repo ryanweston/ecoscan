@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, View } from 'react-native';
 import { Container } from '@/components';
 import { IThemeProp } from '@/types';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 
 interface Props {
   topRound: boolean,

@@ -3,7 +3,6 @@ export interface IUser {
   email: string,
   picture: string,
 }
-
 export interface ITokens {
   accessToken: string,
   refreshToken: string,
@@ -21,11 +20,13 @@ export interface ITheme {
     accent: string,
     greys: {
       background: string,
-      button: string,
+      border: string,
     },
+    background: string,
     text: string,
     textContrast: string,
     score: {
+      noScore: string,
       low: string,
       med: string,
       high: string,
@@ -33,9 +34,7 @@ export interface ITheme {
   },
   tokens: {
     borderRadius: number,
-    padding: number,
-    marginTop: number,
-    marginBottom: number,
+    gap: number,
   },
 }
 

@@ -10,16 +10,17 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps } from '@react-navigation/native';
 import {
-  Container, Headline, Subtitle, CurveContainer, ProductScore,
+  Container, Subtitle, CurveContainer, ProductScore,
   Button,
 } from '@/components';
 import { request } from '@/request';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import ScoreItem from './components/score-item';
 import ReviewSuccess from './components/review-success';
 import {
   HomeStackParamList, ITheme, IThemeProp, ScanStackParamList, TabParamList,
 } from '@/types';
+import { useStatusBar } from '@/utils/statusBar';
 
 type ReviewScreenNavigationProp = CompositeScreenProps<
   NativeStackScreenProps<HomeStackParamList | ScanStackParamList, 'Review'>,
@@ -44,11 +45,10 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
   },
   productContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   productText: {
-    flex: 1,
     flexWrap: 'wrap',
   },
   scoreRow: {
@@ -62,6 +62,7 @@ function ReviewPage({ route, navigation, themeProp }: Props) {
   const [alert, setAlert] = useState('');
   const [success, setSuccess] = useState(false);
 
+  useStatusBar('light-content');
   const { theme } = themeProp;
   const styles = React.useMemo(
     () => createStyles(theme),
@@ -114,10 +115,10 @@ function ReviewPage({ route, navigation, themeProp }: Props) {
 
       <Container>
         <View style={styles.productContainer}>
-          <View style={{ flex: 1 }}>
-            <Headline style={styles.productText}>
+          <View style={{ flex: 1, paddingRight: 10 }}>
+            <Subtitle style={styles.productText}>
               { product.productName }
-            </Headline>
+            </Subtitle>
             { product.brand
               ? (
                 <Text style={styles.productText}>

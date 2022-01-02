@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 // @ts-ignore
 import ProgressBar from 'react-native-progress/Bar';
-import { withTheme } from '@/styles/theme-context';
+import { withTheme } from '@/theme/theme-context';
 import { IThemeProp } from '@/types';
 
 interface Props {
@@ -38,7 +38,7 @@ function ScoreItem({
         setColour(theme.colors.score.low);
       } else if (checkScore <= 4) {
         setColour(theme.colors.score.med);
-      } else if (checkScore === 5) {
+      } else if (checkScore <= 5) {
         setColour(theme.colors.score.high);
       }
     }

@@ -4,12 +4,14 @@ export const defaultTheme = {
     secondary: '#FFFFFF',
     accent: '#95B46A',
     greys: {
-      background: '#CCC',
-      button: '#AAABBC',
+      background: '#EDEDED',
+      border: '#CCCCCC',
     },
+    background: '#FFFFFF',
     text: '#000000',
     textContrast: '#FFFFFF',
     score: {
+      noScore: '#CCCCCC',
       low: '#CE7741',
       med: '#F2CE35',
       high: '#7FCB12',
@@ -17,16 +19,14 @@ export const defaultTheme = {
   },
   tokens: {
     borderRadius: 20,
-    padding: 20,
-    marginTop: 10,
-    marginBottom: 10,
+    gap: 20,
   },
 };
 
 export const shadowStyle = {
   shadowColor: '#171717',
   shadowOffset: { width: -2, height: 4 },
-  shadowOpacity: 0.3,
+  shadowOpacity: 0.15,
   shadowRadius: 3,
 };
 
