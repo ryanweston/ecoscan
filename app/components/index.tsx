@@ -8,3 +8,4 @@ export { default as ProductItem } from './product/product-item';
 export { default as Button } from './elements/button';
 export { default as CurveContainer } from './elements/curve-container';
 export { default as Tooltip } from './elements/tooltip';
+export { default as TextLink } from './elements/text-link';
