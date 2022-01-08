@@ -7,7 +7,7 @@ import {
 import {
   Container, Title,
 } from '@/components';
-import { request } from '@/request';
+import { request } from '@/utils/request';
 import { withTheme } from '@/theme/theme-context';
 import ProductPage from './product-page';
 import { IThemeProp } from '@/types';

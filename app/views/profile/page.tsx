@@ -3,7 +3,7 @@ import {
   Text, ScrollView, View, Image, StyleSheet,
 } from 'react-native';
 import { Container, CurveContainer, Title } from '@/components';
-import { request } from '@/request';
+import { request } from '@/utils/request';
 import { ITheme, IThemeProp, IUser } from '@/types';
 import { withTheme } from '@/theme/theme-context';
 import { useStatusBar } from '@/utils/statusBar';

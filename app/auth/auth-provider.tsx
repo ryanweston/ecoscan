@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Keychain from 'react-native-keychain';
 import { GoogleSignin, User } from '@react-native-google-signin/google-signin';
-import { request, setTokenHeaders } from '@/request';
+import { request, setTokenHeaders } from '@/utils/request';
 import { ITokens } from '@/types';
 
 interface Props {
@@ -140,7 +140,6 @@ function AuthProvider({ children }: Props) {
   }), [auth.loading, auth.isSignedIn]);
 
   return (
-    // @ts-ignore
     <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>

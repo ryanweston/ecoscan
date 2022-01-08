@@ -12,7 +12,7 @@ import {
   Headline, Container, CurveContainer, Title,
 } from '@/components';
 import ProductItem from '@/components/product/product-item'; // Move to relevant place later
-import { request } from '@/request';
+import { request } from '@/utils/request';
 import { withTheme } from '@/theme/theme-context';
 import ProductModal from '@/views/product/modal/product-modal';
 import {
@@ -105,7 +105,6 @@ function Home({ navigation, themeProp }: Props) {
           ) : (
             popularProducts.map((item) => (
               <ProductItem
-                // TODO: Add type for item and use barcode as key
                 key={item.barcode}
                 colour="#89A760"
                 product={item}

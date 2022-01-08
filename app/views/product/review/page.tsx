@@ -13,7 +13,7 @@ import {
   Container, Subtitle, CurveContainer, ProductScore,
   Button,
 } from '@/components';
-import { request } from '@/request';
+import { request } from '@/utils/request';
 import { withTheme } from '@/theme/theme-context';
 import ScoreItem from './components/score-item';
 import ReviewSuccess from './components/review-success';
