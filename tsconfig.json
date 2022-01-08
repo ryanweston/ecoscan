@@ -4,6 +4,7 @@
     "paths": {
       "@/*": ["app/*/index", "app/*"],
     },
+    "typeRoots": ["./types"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
