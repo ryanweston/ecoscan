@@ -42,18 +42,18 @@ function InformationPage({ themeProp }: Props) {
         <View style={styles.section}>
           <Subtitle>Quality</Subtitle>
           <Body>
-            Impact represents the environmental impact of the materials in this product.
-            For example, recyclable and biodegradable products score higher, plastics
-            and non-degradable materials score less.
+            Quality is solely a user rating, based of the quality of the product.
+            Does the product live up to expectations? Is it satisfactory?
+            Would you buy it again?
           </Body>
         </View>
 
         <View style={styles.section}>
           <Subtitle>Brand</Subtitle>
           <Body>
-            Impact represents the environmental impact of the materials in this product.
-            For example, recyclable and biodegradable products score higher, plastics
-            and non-degradable materials score less.
+            Brand represents the sustainably of the product brand. These reviews are created
+            and published by our own team. These reviews factor in: brand environmental initiatives,
+            general sustainability, and carbon footprint.
           </Body>
         </View>
       </Container>
