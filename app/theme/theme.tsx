@@ -7,9 +7,11 @@ export const defaultTheme = {
       background: '#EDEDED',
       border: '#CCCCCC',
     },
+    delete: '#D11A2A',
     background: '#FFFFFF',
     text: '#000000',
     textContrast: '#FFFFFF',
+    link: '#0645AD',
     score: {
       noScore: '#CCCCCC',
       low: '#CE7741',
@@ -20,6 +22,7 @@ export const defaultTheme = {
   tokens: {
     borderRadius: 20,
     gap: 20,
+    sectionGap: 35,
   },
 };
 

@@ -22,9 +22,11 @@ export interface ITheme {
       background: string,
       border: string,
     },
+    delete: string,
     background: string,
     text: string,
     textContrast: string,
+    link: string,
     score: {
       noScore: string,
       low: string,
@@ -34,6 +36,7 @@ export interface ITheme {
   },
   tokens: {
     borderRadius: number,
+    sectionGap: number,
     gap: number,
   },
 }
@@ -42,6 +45,7 @@ export type {
   TabParamList,
   ScanStackParamList,
   HomeStackParamList,
+  LoginStackParamList,
   ITypeComponentProps,
 } from '@/types/props';
 

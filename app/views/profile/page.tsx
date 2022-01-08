@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import {
   Text, ScrollView, View, Image, StyleSheet,
 } from 'react-native';
-import { Container, CurveContainer, Title } from '@/components';
+import {
+  Container, CurveContainer, Title, Button,
+} from '@/components';
 import { request } from '@/utils/request';
 import { ITheme, IThemeProp, IUser } from '@/types';
 import { withTheme } from '@/theme/theme-context';
@@ -102,6 +104,17 @@ function ProfilePage({ themeProp }: Props) {
                 </Text>
               </View>
             </View>
+
+            <Button
+              disabled
+              action={() => {}}
+              style={{
+                backgroundColor: theme.colors.delete,
+                marginTop: theme.tokens.sectionGap,
+
+              }}
+              text="Delete account"
+            />
           </Container>
         </View>
       ) : (

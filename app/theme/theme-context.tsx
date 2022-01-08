@@ -17,7 +17,7 @@ const initializeTheme = {
 const ThemeContext = React.createContext(initializeTheme);
 
 function ThemeProvider({ children }: Props) {
-  const [dark, setDark] = React.useState(true); // Default theme is light
+  const [dark, setDark] = React.useState(true);
 
   // To toggle between dark and light modes
   const toggle = () => {
