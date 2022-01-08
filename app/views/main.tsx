@@ -5,7 +5,7 @@ import { setJSExceptionHandler } from 'react-native-exception-handler';
 import { setUnhandledPromiseRejectionTracker } from 'react-native-promise-rejection-utils';
 import BottomNavigation from './navigation';
 import { AuthContext } from '@/auth/auth-provider';
-import Login from './login/page';
+import LoginStack from './login';
 import LoadingPage from './loading';
 
 function Main() {
@@ -58,7 +58,9 @@ function Main() {
     );
   }
   return (
-    <Login />
+    <NavigationContainer>
+      <LoginStack />
+    </NavigationContainer>
   );
 }
 

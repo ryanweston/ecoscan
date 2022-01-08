@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: '500',
-    lineHeight: 35,
+    lineHeight: 30,
     marginVertical: 2,
     letterSpacing: 0,
   },

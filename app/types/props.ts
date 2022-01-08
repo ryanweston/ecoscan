@@ -16,6 +16,11 @@ export type HomeStackParamList = {
   Review: { product: IProduct };
 };
 
+export type LoginStackParamList = {
+  Login: undefined;
+  Privacy: undefined;
+};
+
 export type ScanStackParamList = {
   Scan: undefined
   Information: undefined;
