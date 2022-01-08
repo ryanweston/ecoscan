@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { ProductScore } from '..';
 import { withTheme } from '@/theme/theme-context';
+import { shadowStyle } from '@/theme/theme';
 import { IProduct, ITheme, IThemeProp } from '@/types';
 
 interface Props {
@@ -29,6 +30,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
     borderRadius: 10,
     marginTop: 15,
   },
+  shadowStyle,
 });
 
 // Move this component to relevant place later
@@ -46,7 +48,7 @@ function ProductItem({
 
   return (
     <TouchableOpacity
-      style={[styles.container, { backgroundColor: colour }]}
+      style={[styles.container, { backgroundColor: colour }, shadowStyle]}
       onPress={() => {
         action(product.barcode);
       }}
