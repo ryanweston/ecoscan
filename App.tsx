@@ -9,19 +9,21 @@
 import React, { useEffect } from 'react';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GOOGLE_WEB_CLIENT, GOOGLE_IOS_CLIENT } from '@env';
 import Main from './app/views/main';
 import { ThemeProvider } from './app/theme/theme-context';
 import { AuthProvider } from './app/auth/auth-provider';
 import 'react-native-gesture-handler';
 
 function App() {
+  // Establish Google config on app load
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '267142607446-ea4jh5etipmenei9apdnog59gg4jc8o9.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
+      // client ID of type WEB for your server (needed to verify user ID and offline access)
+      webClientId: GOOGLE_WEB_CLIENT,
       offlineAccess: true, // if you want to access Google API on behalf of the user
-      iosClientId:
-        '267142607446-edbitha6hcpm4ih0841sn154af5fo3vv.apps.googleusercontent.com', // [iOS] if you want to specify the client ID of type iOS (otherwise, it is taken from GoogleService-Info.plist)
+      // [iOS] if you want to specify the client ID of type iOS
+      iosClientId: GOOGLE_IOS_CLIENT,
     });
   });
 

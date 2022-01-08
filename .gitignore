@@ -1,3 +1,7 @@
+# Environment Variables
+#
+.env
+
 # OSX
 #
 .DS_Store
