@@ -6,13 +6,19 @@ import {
   GoogleSignin,
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Body, TextLink } from '@/components';
 import { AuthContext } from '../../auth/auth-provider';
-import { ITheme } from '@/types';
+import { ITheme, IThemeProp, LoginStackParamList } from '@/types';
 import { withTheme } from '@/theme/theme-context';
 import { useStatusBar } from '@/utils/statusBar';
 
 const logoImg = require('@/assets/logo.png');
+
+interface Props {
+  navigation: NativeStackNavigationProp<LoginStackParamList, 'Login'>,
+  themeProp: IThemeProp,
+}
 
 const createStyles = (theme: ITheme) => StyleSheet.create({
   container: {
@@ -32,7 +38,7 @@ const createStyles = (theme: ITheme) => StyleSheet.create({
 // This component has very hacky styles
 // Look at better variant component practices before fixing
 
-function Login({ navigation, themeProp }: any) {
+function Login({ navigation, themeProp }: Props) {
   const { signIn } = React.useContext(AuthContext);
 
   const { theme } = themeProp;

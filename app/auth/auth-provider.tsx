@@ -20,7 +20,7 @@ interface IAuthContext {
   auth: IAuth,
   handleUnauthorized: (() => Promise<void>) | (() => void),
   // eslint-disable-next-line no-unused-vars
-  signIn: ((value: any) => Promise<void>) | (() => void),
+  signIn: ((value: User) => Promise<void>) | (() => void),
   logOut: (() => Promise<void>) | (() => void),
 }
 
