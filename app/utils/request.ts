@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { API_URL } from '@env';
 
 let headers = {};
 
 export const request = axios.create({
-  baseURL: 'https://netscapes-api-01.herokuapp.com',
+  baseURL: API_URL,
   headers,
 });
 
