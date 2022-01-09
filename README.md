@@ -1,27 +1,58 @@
 # Application
 Mobile application using React Native.
 
-# Environment
-Use homebrew for optimal install.
+# Installation & setup
 
-Open a terminal outside of VSCode:
+## Prerequisites:
+ - XCode ^13.00 installed (you may need to ensure your apple ID is a developer account for this)
+ - Double check XCode and go to preferences > locations in Xcode and select the latest command line version.
+ - If you do have node installed already, ensure it’s node 16 or newer. We recommend using n to help manage n versions if necessary.
+
+## Development Environment
+
+Open your terminal application.
+
+You’ll need Homebrew installed for the next steps. Follow the homebrew installation guide found here.
+
+Or just run: 
+
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+If you don’t already have Node installed, React native recommends installing node through homebrew
+Disclaimer: I haven’t tried this with a homebrew node installation
+`brew install node`
+
+In your terminal:
+
 `brew install watchman`
 
-Ensure XCode is installed. Double check and go to preferences > locations in Xcode and select the latest command line version.
-
 In the same terminal as earlier: 
+
 `sudo gem install cocoapods`
 
-
 If this doesn't run, clean your homebrew: 
+
 `brew cleanup -d -v`
 
 If again, it doesn't work, ensure your paths are exported correctly.
 
-# Install
-`npm install`
+Ensure yarn is installed globally.
+`npm i -g yarn`
+
+## Installation
+At the top level, install packages with yarn.
+`yarn`
+
+Install pods in the ios folder.
 `cd ios && pod install && cd ..`
-open xcode, build
+
+Create a .env file at root level and replace with your information: 
+
+`API_URL=‘EXAMPLE URL’
+GOOGLE_WEB_CLIENT=‘EXAMPLE WEB CLIENT ID’
+GOOGLE_IOS_CLIENT=‘EX’AMPLE IOS CLIENT ID’`
+
+# Running the simulator
 
 ## Run simulator on M1
 
