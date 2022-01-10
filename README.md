@@ -7,8 +7,8 @@ Currently only built for iOS using React Native.
 # Installation & setup
 
 ## Prerequisites:
- - [XCode v12+](https://nodejs.org/en/) You may need to ensure your apple ID is a developer account for this)
- - [Command line tools](https://nodejs.org/en/) In XCode go to preferences > locations in Xcode and select the latest command line version.
+ - [XCode v12+](https://developer.apple.com/download/release/) You may need to ensure your apple ID is a developer account for this)
+ - [Command line tools](https://developer.apple.com/download/release/) In XCode go to preferences > locations in Xcode and select the latest command line version.
  - [Node v16.X.X](https://nodejs.org/en/) Node 17 is known to produce errors with running Metro & React Native. We recommend using n to help manage n versions if necessary.
 
 ## Development Environment
@@ -92,15 +92,17 @@ Once built, you can refresh the simulator by pressing the 'R' key inside the ope
 
 XCode has a few issues with running simulators on ARM64 architectures. You can resolve this in XCode build settings:
 
-EcoScan project folder > Build Settings > Excluded Architecture > Set both emulator values to ARM64
+`EcoScan project folder > Build Settings > Excluded Architecture > Set both emulator values to ARM64`
 
-EcoScan project folder > Build Settings > Excluded Architecture > Set both emulator values to ARM64
+`EcoScan pod folder > Build Settings > Excluded Architecture > Set both emulator values to ARM64`
 
 # Run simulator on external device
 
 ## Add your developer account & certificates
 
-XCode > Preferences > Accounts > Add account (Plus icon) > Apple ID
+Add your developer account to XCode if you haven't already:
+
+`XCode > Preferences > Accounts > Add account (Plus icon) > Apple ID`
 
 Select 'Manage certicates' and add a new Apple development certificate.
 
@@ -110,15 +112,17 @@ Change the bundle identifier to an ID of your choice.
 
 Add your certificates to your external iPhone:
 
-Settings -> General -> Device Management and "trust" yourself as developer.
+`Settings -> General -> Device Management and "trust" yourself as developer.`
 
 ## Apply your account
 
-EcoScan project folder > General
+Ensure your personal developer account is selected as the team here:
 
-Ensure your personal developer account is selected as the team here and your bundle identifier is set to your new one:
+`EcoScan project folder > General`
 
-EcoScan project folder > Signing and capabilities
+Also that your bundle identifier is set to your new one:
+
+`EcoScan project folder > Signing and capabilities`
 
 ## Select & build
 
