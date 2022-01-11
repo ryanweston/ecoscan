@@ -9,7 +9,7 @@ import {
 } from '@testing-library/react-native';
 import * as keyChainFunctions from 'react-native-keychain';
 import App from '../App';
-import { request, setTokenHeaders } from '../app/request';
+import { request, setTokenHeaders } from '../app/utils/request';
 import { mockToken, mockKeychain } from '../data/auth';
 import { mockProducts, mockSustainableProducts } from '../data/product';
 
@@ -36,7 +36,7 @@ jest.mock('react-native-keychain', () => ({
   ),
 }));
 
-jest.mock('../app/request', () => ({
+jest.mock('../app/utils/request', () => ({
   request: {
     get: jest.fn(() => ({ data: [] })),
     post: jest.fn(() => ({ data: [] })),
@@ -97,8 +97,8 @@ describe('Authentication flow:', () => {
     await expect(keyChainFunctions.getGenericPassword()).resolves.toBe(noCredentials);
     await waitFor(() => expect(keyChainFunctions.getGenericPassword).toHaveBeenCalledWith({ service: 'netscapes' }));
 
-    // Login page has rendered
-    expect(app.toJSON().children[1].type).toEqual('RNGoogleSigninButton');
+    // Login page has rendered, very hacky. Look at enzyme to help with checking components
+    expect(app.toJSON().children[0].children[0].children[1].children[0].children[1].type).toEqual('RNGoogleSigninButton');
   });
 
   // Find a better way to test inside context provider for this
