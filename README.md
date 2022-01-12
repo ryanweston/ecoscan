@@ -174,7 +174,17 @@ Here you want to select 'distribute app' and click through with all the default 
 
 # Common errors
 
-If your metro fails from closing incorrectly with a cache error: 
+If your metro fails from closing incorrectly with a cache error.
+This process should also be your first call with most errors.
+
+Delete node modules then run the following commands:
+
 ```bash
-yarn clean -cache
+cd ios
+pod deintegrate
+cd .. 
+yarn
+cd ios
+pod install
 ```
+
