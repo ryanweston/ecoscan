@@ -1,3 +1,5 @@
+⚠️ This is an unmaintained university group project.
+
 # EcoScan application
 
 Repository for the mobile application, EcoScan. 
